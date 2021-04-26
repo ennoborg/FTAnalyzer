@@ -935,6 +935,10 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GeneGenie.Gedcom\GeneGenie.Gedcom.csproj">
+      <Project>{B7091B49-BB2B-44F0-8617-014A7486BC3A}</Project>
+      <Name>GeneGenie.Gedcom</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpMap.Extensions\SharpMap.Extensions.csproj">
       <Project>{a4140c12-53f5-438c-8d24-9e48c504fecf}</Project>
       <Name>SharpMap.Extensions</Name>

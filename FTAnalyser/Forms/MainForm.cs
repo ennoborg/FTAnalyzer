@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Controls;
+using FTAnalyzer.Controls;
 using FTAnalyzer.Exports;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
@@ -25,6 +25,8 @@ using System.Xml;
 using HtmlAgilityPack;
 using System.Net;
 using System.Diagnostics;
+using GeneGenie.Gedcom;
+using GeneGenie.Gedcom.Parser;
 
 namespace FTAnalyzer
 {
@@ -241,18 +243,10 @@ namespace FTAnalyzer
         async Task<bool> LoadTreeAsync(string filename)
         {
             var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
-            XmlDocument doc;
+            GedcomDatabase db;
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText)).ConfigureAwait(true);
-            }
-            if (doc == null)
-            {
-                timer.Stop();
-                return false;
-            }
+            db = await Task.Run(() => LoadGedcomFromFile(filename)).ConfigureAwait(true);
             timer.Stop();
             WriteTime("File Loaded", outputText, timer);
             timer.Start();
@@ -261,12 +255,11 @@ namespace FTAnalyzer
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
             var RelationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
-            await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.LoadTreeSources(db, sourceProgress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.LoadTreeIndividuals(db, individualProgress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.LoadTreeFamilies(db, familyProgress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.LoadTreeRelationships(db, RelationshipProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.CleanUpXML()).ConfigureAwait(true);
-            doc = null;
             ft.DocumentLoaded = false;
             timer.Stop();
             WriteTime("\nFile Loaded and Analysed", outputText, timer);
@@ -419,6 +412,19 @@ namespace FTAnalyzer
             mnuLoadLocationsCSV.Enabled = true;
             mnuCloseGEDCOM.Enabled = false;
             BuildRecentList();
+        }
+
+        private static GedcomDatabase LoadGedcomFromFile(string filename)
+        {
+            var gedcomReader = GedcomRecordReader.CreateReader(filename);
+            if (gedcomReader.Parser.ErrorState != GeneGenie.Gedcom.Enums.GedcomErrorState.NoError)
+            {
+                Console.WriteLine($"Could not read file, encountered error {gedcomReader.Parser.ErrorState} press a key to continue.");
+                Console.ReadKey();
+                return null;
+            }
+
+            return gedcomReader.Database;
         }
         #endregion
 
