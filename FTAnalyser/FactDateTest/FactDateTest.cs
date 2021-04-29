@@ -16,6 +16,8 @@ namespace Testing
     [TestClass()]
     public class FactDateTest
     {
+        private static global::GeneGenie.Gedcom.GedcomIndividualRecord node;
+
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
@@ -352,6 +354,10 @@ namespace Testing
             target = new FactDate("2d 3m 1870");
             Assert.AreEqual(new DateTime(1870, 5, 2), target.StartDate);
             Assert.AreEqual(new DateTime(1870, 5, 2), target.EndDate);
+
+            target = new FactDate("<1870>");
+            Assert.AreEqual(new DateTime(1870, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1870, 12, 31), target.EndDate);
             return target;
         }
 
@@ -596,12 +602,6 @@ namespace Testing
 
         static Individual SetupIndividual(string individual)
         {
-            XmlDocument doc = new XmlDocument() { XmlResolver = null };
-            doc.LoadXml(individual);
-            XmlAttribute attr = doc.CreateAttribute("ID");
-            attr.Value = "2";
-            doc.DocumentElement.SetAttributeNode(attr);
-            XmlNode node = doc.FirstChild;
             Individual ind = new Individual(node, new Progress<string>());
             return ind;
         }

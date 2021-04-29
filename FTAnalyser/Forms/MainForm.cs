@@ -259,7 +259,6 @@ namespace FTAnalyzer
             await Task.Run(() => ft.LoadTreeIndividuals(db, individualProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeFamilies(db, familyProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeRelationships(db, RelationshipProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.CleanUpXML()).ConfigureAwait(true);
             ft.DocumentLoaded = false;
             timer.Stop();
             WriteTime("\nFile Loaded and Analysed", outputText, timer);

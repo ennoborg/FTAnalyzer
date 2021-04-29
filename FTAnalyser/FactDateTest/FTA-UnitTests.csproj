@@ -88,6 +88,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GeneGenie.Gedcom\GeneGenie.Gedcom.csproj">
+      <Project>{B7091B49-BB2B-44F0-8617-014A7486BC3A}</Project>
+      <Name>GeneGenie.Gedcom</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FTAnalyzer.Windows.csproj">
       <Project>{799ECA65-6748-4B7C-BBD5-429C19E02161}</Project>
       <Name>FTAnalyzer.Windows</Name>
