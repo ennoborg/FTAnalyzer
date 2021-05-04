@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Controls;
+﻿using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Exports;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
@@ -78,8 +78,6 @@ namespace FTAnalyzer
             RegisterEventHandlers();
             Text = $"Family Tree Analyzer v{VERSION}";
             SetHeightWidth();
-            dgSurnames.AutoGenerateColumns = false;
-            dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
             ft.LoadStandardisedNames(Application.StartupPath);
             tsCountLabel.Text = string.Empty;
@@ -327,6 +325,7 @@ namespace FTAnalyzer
             databaseToolStripMenuItem.Enabled = false;
             mnuRecent.Enabled = false;
             tabMainListsSelector.SelectedTab = tabIndividuals; // force back to first tab
+            tabErrorFixSelector.SelectedTab = tabDataErrors; //force tab back to data errors tab
             tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
             treeViewLocations.Nodes.Clear();
             Text = "Family Tree Analyzer v" + VERSION;
@@ -618,7 +617,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
+                var occ = (DisplayOccupation)dgOccupations.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
                 DisposeDuplicateForms(frmInd);
@@ -632,7 +631,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRow.DataBoundItem;
+                var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetCustomFacts(customFacts.CustomFactName, ft.AllCustomFactIndividuals(customFacts.CustomFactName));
                 DisposeDuplicateForms(frmInd);
@@ -643,14 +642,14 @@ namespace FTAnalyzer
 
         void DgCustomFacts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            var customFact = (DisplayCustomFact)dgCustomFacts.CurrentRow.DataBoundItem;
+            var customFact = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
             DatabaseHelper.IgnoreCustomFact(customFact.CustomFactName, customFact.Ignore);
         }
 
         void SetAsRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            var ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind != null)
             {
                 var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
@@ -663,7 +662,7 @@ namespace FTAnalyzer
 
         void MnuSetRoot_Opened(object sender, EventArgs e)
         {
-            var ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind != null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
@@ -671,7 +670,7 @@ namespace FTAnalyzer
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            Individual ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind != null)
             {
                 Notes notes = new Notes(ind);
@@ -823,18 +822,17 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
+                DataError error = (DataError)dgDataErrors.CurrentRowDataBoundItem;
                 if (error.IsFamily)
-                    ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
+                    ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
                 else
-                    ShowFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
+                    ShowFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
             }
         }
 
         void SetupDataErrors()
         {
             dgDataErrors.DataSource = DataErrors(ckbDataErrors);
-            dgDataErrors.AllowUserToResizeColumns = true;
             dgDataErrors.Focus();
             mnuPrint.Enabled = true;
             UpdateDataErrorsDisplay();
@@ -1243,7 +1241,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
+                IDisplaySurnames stat = dgSurnames.CurrentRowDataBoundItem;
                 People frmInd = new People();
                 frmInd.SetSurnameStats(stat, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
@@ -1255,26 +1253,14 @@ namespace FTAnalyzer
 
         void DgSurnames_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 && e.RowIndex >= 0)
             {
-                DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells["Surname"];
+                DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells[nameof(IDisplaySurnames.Surname)];
                 if (cell.Value != null)
                 {
                     Statistics.DisplayGOONSpage(cell.Value.ToString());
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.GOONSEvent);
                 }
-            }
-        }
-
-        void DgSurnames_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow r in dgSurnames.Rows)
-            {
-                string surname = r.Cells["Surname"].Value.ToString();
-                r.Cells["Surname"] = new DataGridViewLinkCell();
-                DataGridViewLinkCell c = (DataGridViewLinkCell)r.Cells["Surname"];
-                c.UseColumnTextForLinkValue = true;
-                c.Value = surname;
             }
         }
 
@@ -1429,11 +1415,10 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                 dgFamilies.DataSource = list;
-                dgFamilies.Sort(dgFamilies.Columns["FamilyID"], ListSortDirection.Ascending);
-                dgFamilies.AllowUserToResizeColumns = true;
+                dgFamilies.Sort(dgFamilies.Columns[nameof(IDisplayFamily.FamilyID)], ListSortDirection.Ascending);
                 dgFamilies.Focus();
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count;
+                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Family;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.FamilyTabEvent);
             }
@@ -1441,11 +1426,10 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplaySource> list = ft.AllDisplaySources;
                 dgSources.DataSource = list;
-                dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
-                dgSources.AllowUserToResizeColumns = true;
+                dgSources.Sort(dgSources.Columns[nameof(IDisplaySource.SourceID)], ListSortDirection.Ascending);
                 dgSources.Focus();
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count;
+                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Sources;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.SourcesTabEvent);
             }
@@ -1453,11 +1437,10 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                 dgOccupations.DataSource = list;
-                dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
-                dgOccupations.AllowUserToResizeColumns = true;
+                dgOccupations.Sort(dgOccupations.Columns[nameof(IDisplayOccupation.Occupation)], ListSortDirection.Ascending);
                 dgOccupations.Focus();
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count;
+                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Occupation;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.OccupationsTabEvent);
             }
@@ -1465,13 +1448,12 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayCustomFact> list = ft.AllCustomFacts;
                 dgCustomFacts.DataSource = list;
-                dgCustomFacts.Sort(dgCustomFacts.Columns["CustomFactName"], ListSortDirection.Ascending);
-                dgCustomFacts.AllowUserToResizeColumns = true;
+                dgCustomFacts.Sort(dgCustomFacts.Columns[nameof(IDisplayCustomFact.CustomFactName)], ListSortDirection.Ascending);
                 dgCustomFacts.Focus();
-                dgCustomFacts.Columns["Ignore"].ReadOnly = false;
-                dgCustomFacts.Columns["Ignore"].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
+                dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ReadOnly = false;
+                dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count;
+                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_CustomFacts;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.CustomFactTabEvent);
             }
@@ -1481,11 +1463,11 @@ namespace FTAnalyzer
         {
             SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
             dgIndividuals.DataSource = list;
-            dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
+            dgIndividuals.Sort(dgIndividuals.Columns[nameof(IDisplayIndividual.IndividualID)], ListSortDirection.Ascending);
             dgIndividuals.AllowUserToResizeColumns = true;
             dgIndividuals.Focus();
             mnuPrint.Enabled = true;
-            tsCountLabel.Text = Messages.Count + list.Count;
+            tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
             tsHintsLabel.Text = Messages.Hints_Individual;
         }
 
@@ -1498,7 +1480,6 @@ namespace FTAnalyzer
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
                 await SetPossibleDuplicates().ConfigureAwait(true);
-                ResetDuplicatesTable(); // force a reset on intial load
                 dgDuplicates.Focus();
                 mnuPrint.Enabled = true;
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent).ConfigureAwait(true);
@@ -2170,7 +2151,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
+                string famID = (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
                 Family fam = ft.GetFamily(famID);
                 if (fam != null)
                 {
@@ -2184,32 +2165,32 @@ namespace FTAnalyzer
         void DgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseDeaths.CurrentRow.Cells["IndividualID"].Value);
+                ShowFacts((string)dgLooseDeaths.CurrentRow.Cells[nameof(IDisplayLooseDeath.IndividualID)].Value);
         }
 
         void DgLooseBirths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseBirths.CurrentRow.Cells["IndividualID"].Value);
+                ShowFacts((string)dgLooseBirths.CurrentRow.Cells[nameof(IDisplayLooseBirth.IndividualID)].Value);
         }
 
         void DgLooseInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseInfo.CurrentRow.Cells["IndividualID"].Value);
+                ShowFacts((string)dgLooseInfo.CurrentRow.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value);
         }
 
         void DgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgTreeTops.CurrentRow.Cells["IndividualID"].Value);
+                ShowFacts((string)dgTreeTops.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value);
         }
 
         void DgWorldWars_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgWorldWars.CurrentRow.Cells["IndividualID"].Value;
+                string indID = (string)dgWorldWars.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 if (WWI && ModifierKeys.Equals(Keys.Shift))
                     LivesOfFirstWorldWar(indID);
                 else
@@ -2249,12 +2230,15 @@ namespace FTAnalyzer
                 if (dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].GetType() == typeof(DataGridViewLinkCell))
                 {
                     string familySearchID = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].Value.ToString();
-                    string url = $"https://www.familysearch.org/tree/person/details/{familySearchID}";
-                    SpecialMethods.VisitWebsite(url);
+                    if (!string.IsNullOrEmpty(familySearchID))
+                    {
+                        string url = $"https://www.familysearch.org/tree/person/details/{familySearchID}";
+                        SpecialMethods.VisitWebsite(url);
+                    }
                 }
                 else if (e.Clicks == 2)
                 {
-                    string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                    string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                     ShowFacts(indID);
                 }
             }
@@ -2264,18 +2248,8 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 ShowFacts(indID);
-            }
-        }
-
-        void DgIndividuals_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow r in dgIndividuals.Rows)
-            {
-                string familySearchID = r.Cells["FamilySearchID"].Value.ToString();
-                if (!string.IsNullOrEmpty(familySearchID))
-                    r.Cells["FamilySearchID"] = new DataGridViewLinkCell();
             }
         }
 
@@ -2283,7 +2257,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
+                FactSource source = (FactSource)dgSources.CurrentRowDataBoundItem;
                 Facts factForm = new Facts(source);
                 DisposeDuplicateForms(factForm);
                 factForm.Show();
@@ -2294,8 +2268,8 @@ namespace FTAnalyzer
         {
             if (pbDuplicates.Visible || e.RowIndex < 0 || e.ColumnIndex < 0)
                 return; // do nothing if progress bar still visible
-            string indA_ID = (string)dgDuplicates.CurrentRow.Cells["DuplicateIndividualID"].Value;
-            string indB_ID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;
+            string indA_ID = (string)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.IndividualID)].Value;
+            string indB_ID = (string)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.MatchIndividualID)].Value;
             if (GeneralSettings.Default.MultipleFactForms)
             {
                 ShowFacts(indA_ID);
@@ -2570,6 +2544,7 @@ namespace FTAnalyzer
 
         #region Duplicates Tab
         CancellationTokenSource cts;
+        SortableBindingList<IDisplayDuplicateIndividual> duplicateData;
 
         async Task SetPossibleDuplicates()
         {
@@ -2583,6 +2558,7 @@ namespace FTAnalyzer
                     value = pbDuplicates.Maximum;
                 pbDuplicates.Value = value;
             });
+            var progressText = new Progress<string>(value => labCompletion.Text = value);
             var maxScore = new Progress<int>(value =>
             {
                 tbDuplicateScore.TickFrequency = value / 20;
@@ -2590,14 +2566,17 @@ namespace FTAnalyzer
             });
             cts = new CancellationTokenSource();
             int score = tbDuplicateScore.Value;
-            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, progress, maxScore, cts.Token)).ConfigureAwait(true);
+            labDuplicateSlider.Text = $"Match Quality : {tbDuplicateScore.Value}  ";
+            bool ignoreUnknownTwins = chkIgnoreUnnamedTwins.Checked;
+            tsCountLabel.Text = "Calculating Duplicates this may take some considerable time";
+            tsHintsLabel.Text = string.Empty;
+            duplicateData = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, progressText, maxScore, cts.Token)).ConfigureAwait(true);
             cts = null;
-            if (data != null)
+            if (duplicateData != null)
             {
-                dgDuplicates.DataSource = data;
+                dgDuplicates.DataSource = duplicateData;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
-                labDuplicateSlider.Text = "Duplicates Match Quality : " + tbDuplicateScore.Value;
-                tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount}.  {Messages.Hints_Duplicates}";
+                tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount:N0}.  {Messages.Hints_Duplicates}";
                 dgDuplicates.UseWaitCursor = false;
             }
             SetDuplicateControlsVisibility(false);
@@ -2609,16 +2588,16 @@ namespace FTAnalyzer
             btnCancelDuplicates.Visible = visible;
             labCalcDuplicates.Visible = visible;
             pbDuplicates.Visible = visible;
+            labCompletion.Visible = visible;
         }
 
         void ResetDuplicatesTable()
         {
             if (dgDuplicates.RowCount > 0)
             {
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateBirthDate"], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateForenames"], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateSurname"], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns["Score"], ListSortDirection.Descending);
+                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Forenames)], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Surname)], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Score)], ListSortDirection.Descending);
             }
         }
 
@@ -3085,7 +3064,7 @@ namespace FTAnalyzer
 
         void DgWorldWars_MouseDown(object sender, MouseEventArgs e) => ShowViewNotesMenu(dgWorldWars, e);
 
-        void ShowViewNotesMenu(DataGridView dg, MouseEventArgs e)
+        void ShowViewNotesMenu(VirtualDataGridView<IDisplayIndividual> dg, MouseEventArgs e)
         {
             DataGridView.HitTestInfo hti = dg.HitTest(e.Location.X, e.Location.Y);
             if (e.Button == MouseButtons.Right)
@@ -3099,7 +3078,7 @@ namespace FTAnalyzer
                         // Can leave these here - doesn't hurt
                         dg.Rows[hti.RowIndex].Selected = true;
                         dg.Focus();
-                        ctxViewNotes.Tag = dg.CurrentRow.DataBoundItem;
+                        ctxViewNotes.Tag = dg.CurrentRowDataBoundItem;
                         ctxViewNotes.Show(MousePosition);
                     }
                 }
@@ -3271,9 +3250,9 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            SortableBindingList<SurnameStats> stats;
+            SortableBindingList<IDisplaySurnames> stats;
             if (dgSurnames.DataSource != null)
-                stats = (SortableBindingList<SurnameStats>)dgSurnames.DataSource;
+                stats = dgSurnames.DataSource;
             else
             {
                 tspbTabProgress.Visible = true;
@@ -3281,12 +3260,12 @@ namespace FTAnalyzer
                 Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
                 stats = await Task.Run(() =>
-                    new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
+                    new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
                 tspbTabProgress.Visible = false;
             }
-            List<SurnameStats> list = new List<SurnameStats>(stats);
+            List<IDisplaySurnames> list = new List<IDisplaySurnames>(stats);
             using (DataTable dt = convertor.ToDataTable(list))
-                ExportToExcel.Export(dt);
+                ExportToExcel. Export(dt);
             await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
             HourGlass(false);
         }
@@ -3490,11 +3469,10 @@ namespace FTAnalyzer
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
             var list = await Task.Run(() =>
-                new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
+                new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
             tspbTabProgress.Visible = false;
             dgSurnames.DataSource = list;
-            dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
-            dgSurnames.AllowUserToResizeColumns = true;
+            dgSurnames.Sort(dgSurnames.Columns[nameof(IDisplaySurnames.Surname)], ListSortDirection.Ascending);
             dgSurnames.Focus();
             tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
             tsHintsLabel.Text = Messages.Hints_Surname;
@@ -3672,15 +3650,6 @@ namespace FTAnalyzer
                 Analytics.TrackAction(Analytics.CensusTabAction, Analytics.AliveAtDate);
                 HourGlass(false);
             }
-        }
-
-        void DgIndividuals_Resize(object sender, EventArgs e) => ForceScrollBarVisible(dgIndividuals);
-
-        void ForceScrollBarVisible(DataGridView dataGridView)
-        {
-            var scrollbar = dataGridView.Controls.OfType<VScrollBar>().First();
-            if (!scrollbar.Visible)
-                scrollbar.Visible = true;
         }
     }
 }

@@ -1,7 +1,7 @@
 ## FTAnalyzer Releases  
 
-If you prefer a manual install method, you can download a zip file from the [releases page](https://github.com/ShammyLevva/FTAnalyzer/releases)
+If you prefer a manual install method, you can [download the latest version](https://github.com/ShammyLevva/FTAnalyzer/releases) from the releases page.
 
-This can be installed by simply unzipping the file into any directory that isn't a locked directory. Note that Windows locks program files and program files (x86) directories from use by manual install apps.  
+This file uses the built in Windows Installer from Microsoft to install the application and create a shortcut in the start menu and on the Desktop. 
 
-The program can then be started by creating a shortcut to FTAnalyzer.exe  
+NB. My apologies that this is the default windows installer so it doesn't have much customisability. It does however work, and importantly is free for me to use, so it is easier for me to distribute than paying to buy a proper installer application.

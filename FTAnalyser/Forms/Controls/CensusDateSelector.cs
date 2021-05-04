@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace FTAnalyzer.Controls
+namespace FTAnalyzer.Forms.Controls
 {
     public partial class CensusDateSelector : UserControl
     {
@@ -150,7 +150,7 @@ namespace FTAnalyzer.Controls
             if (CensusChanged != null)
             {
                 CensusChanged(this, e);
-                this.previousDate = (CensusDate)cbCensusDate.SelectedItem;
+                previousDate = (CensusDate)cbCensusDate.SelectedItem;
             }
         }
 
@@ -159,7 +159,5 @@ namespace FTAnalyzer.Controls
             if (!_loading)
                 OnCensusChanged(e);
         }
-
-
     }
 }
