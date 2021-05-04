@@ -2595,8 +2595,6 @@ namespace FTAnalyzer
         {
             if (dgDuplicates.RowCount > 0)
             {
-                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Forenames)], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Surname)], ListSortDirection.Ascending);
                 dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Score)], ListSortDirection.Descending);
             }
         }

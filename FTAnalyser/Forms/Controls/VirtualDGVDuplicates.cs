@@ -10,10 +10,6 @@
                     return dup.IndividualID;
                 case nameof(IDisplayDuplicateIndividual.Name):
                     return dup.Name;
-                case nameof(IDisplayDuplicateIndividual.Forenames):
-                    return dup.Forenames;
-                case nameof(IDisplayDuplicateIndividual.Surname):
-                    return dup.Surname;
                 case nameof(IDisplayDuplicateIndividual.BirthDate):
                     return dup.BirthDate;
                 case nameof(IDisplayDuplicateIndividual.BirthLocation):
