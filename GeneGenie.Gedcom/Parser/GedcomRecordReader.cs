@@ -4660,7 +4660,15 @@ namespace GeneGenie.Gedcom.Parser
                             // Surname part has priority over parsed NAME tag if it is supplied.
                             if (!string.IsNullOrEmpty(lineValue))
                             {
-                                name.Surname = lineValue;
+                                if (!string.IsNullOrEmpty(name.SurnamePrefix) && !string.IsNullOrEmpty(name.Surname))
+                                {
+                                    var fullSurname = name.SurnamePrefix + " " + name.Surname;
+
+                                    if (lineValue != fullSurname)
+                                    {
+                                        name.Surname = lineValue;
+                                    }
+                                }
                             }
                         }
 
