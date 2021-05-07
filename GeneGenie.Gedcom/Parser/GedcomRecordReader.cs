@@ -36,7 +36,6 @@ namespace GeneGenie.Gedcom.Parser
 
         private List<string> removedNotes;
 
-        private int lineNumber = 0; // For reporting errors and warnings.
         private int level;
         private string tag;
         private string xrefId;
@@ -47,7 +46,7 @@ namespace GeneGenie.Gedcom.Parser
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GedcomRecordReader"/> class.
-        /// Create a GedcomRecordReader for reading a GEDCOM file into a GedcomDatabase
+        /// Create a GedcomRecordReader for reading a GEDCOM file into a GedcomDatabase.
         /// </summary>
         public GedcomRecordReader()
         {
@@ -137,9 +136,9 @@ namespace GeneGenie.Gedcom.Parser
         }
 
         /// <summary>
-        /// Starts reading the gedcom file currently set via the GedcomFile property
+        /// Starts reading the gedcom file currently set via the GedcomFile property.
         /// </summary>
-        /// <returns>bool indicating if the file was successfully read</returns>
+        /// <returns>bool indicating if the file was successfully read.</returns>
         public bool ReadGedcom()
         {
             return ReadGedcom(GedcomFile);
@@ -148,7 +147,7 @@ namespace GeneGenie.Gedcom.Parser
         /// <summary>
         /// Starts reading the specified gedcom file.
         /// </summary>
-        /// <param name="gedcomFile">Filename to read</param>
+        /// <param name="gedcomFile">Filename to read.</param>
         /// <returns>bool indicating if the file was successfully read.</returns>
         public bool ReadGedcom(string gedcomFile)
         {
@@ -227,7 +226,6 @@ namespace GeneGenie.Gedcom.Parser
 
                 while (!stream.EndOfStream)
                 {
-                    lineNumber++;
                     string line = stream.ReadLine();
 
                     if (line != null)
@@ -861,7 +859,6 @@ namespace GeneGenie.Gedcom.Parser
             repoCitations = new List<GedcomRepositoryCitation>();
 
             removedNotes = new List<string>();
-            lineNumber = 0;
 
             Database.Loading = true;
         }
