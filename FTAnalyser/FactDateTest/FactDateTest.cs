@@ -558,15 +558,6 @@ namespace Testing
             Assert.IsTrue(first.Overlaps(fourth));
             Assert.IsFalse(fourth.IsBefore(first));
             Assert.IsFalse(fourth.IsAfter(first));
-
-            FactDate census = new FactDate("BET 31 DEC 1910 AND 2 APR 1911");
-            Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
-            census = new FactDate("BET 1 JAN 1911 AND 2 APR 1911");
-            Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
-            census = new FactDate("FROM 31 DEC 1910 TO 2 APR 1911");
-            Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
-            census = new FactDate("FROM 1 JAN 1911 TO 2 APR 1911");
-            Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
         }
 
         [TestMethod()]

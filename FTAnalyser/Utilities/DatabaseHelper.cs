@@ -837,12 +837,6 @@ namespace FTAnalyzer.Utilities
                             string CensusYear = reader["CensusYear"].ToString();
                             string CensusCountry = reader["CensusCountry"].ToString();
                             string CensusRef = reader["CensusRef"].ToString();
-                            if (!ind.IsLostCousinsEntered(CensusDate.GetLostCousinsCensusYear(new FactDate(CensusYear), true)))
-                            {
-                                FactLocation location = FactLocation.GetLocation(CensusCountry);
-                                Fact f = new Fact(CensusRef, Fact.LOSTCOUSINS, new FactDate(CensusYear), location, string.Empty, true, true);
-                                ind?.AddFact(f);
-                            }
                             count++;
                         }
                         else
@@ -888,89 +882,6 @@ namespace FTAnalyzer.Utilities
         //    }
         //}
 
-        public static bool LostCousinsExists(CensusIndividual ind)
-        {
-            if (ind is null) return false;
-            if (InstanceConnection.State != ConnectionState.Open)
-                InstanceConnection.Open();
-            bool result = false;
-            using (SQLiteCommand cmd = new SQLiteCommand("SELECT EXISTS(SELECT 1 FROM LostCousins where CensusYear=? and CensusCountry=? and CensusRef=? and IndID=?)", InstanceConnection))
-            {
-                SQLiteParameter param = cmd.CreateParameter();
-                param.DbType = DbType.Int32;
-                cmd.Parameters.Add(param);
-                param = cmd.CreateParameter();
-                param.DbType = DbType.String;
-                cmd.Parameters.Add(param);
-                param = cmd.CreateParameter();
-                param.DbType = DbType.String;
-                cmd.Parameters.Add(param);
-                param = cmd.CreateParameter();
-                param.DbType = DbType.String;
-                cmd.Parameters.Add(param);
-                param = cmd.CreateParameter();
-                param.DbType = DbType.String;
-                cmd.Parameters.Add(param);
-                cmd.Prepare();
-                cmd.Parameters[0].Value = ind.CensusDate.BestYear;
-                cmd.Parameters[1].Value = ind.CensusCountry;
-                cmd.Parameters[2].Value = ind.CensusReference;
-                cmd.Parameters[3].Value = ind.IndividualID;
-                using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult))
-                {
-                    if (reader.Read())
-                        result = reader[0].ToString() == "1";
-                }
-            }
-            return result;
-        }
-
-        public static void StoreLostCousinsFact(CensusIndividual ind, IProgress<string> outputText)
-        {
-            try
-            {
-                if (InstanceConnection.State != ConnectionState.Open)
-                    InstanceConnection.Open();
-                SQLiteParameter param;
-
-                using (SQLiteCommand cmd = new SQLiteCommand("insert into LostCousins (CensusYear, CensusCountry, CensusRef, IndID, FullName) values(?,?,?,?,?)", InstanceConnection))
-                {
-                    param = cmd.CreateParameter();
-                    param.DbType = DbType.Int32;
-                    cmd.Parameters.Add(param);
-                    param = cmd.CreateParameter();
-                    param.DbType = DbType.String;
-                    cmd.Parameters.Add(param);
-                    param = cmd.CreateParameter();
-                    param.DbType = DbType.String;
-                    cmd.Parameters.Add(param);
-                    param = cmd.CreateParameter();
-                    param.DbType = DbType.String;
-                    cmd.Parameters.Add(param);
-                    param = cmd.CreateParameter();
-                    param.DbType = DbType.String;
-                    cmd.Parameters.Add(param);
-                    cmd.Prepare();
-
-                    if (ind.CensusReference != null)
-                    {
-                        cmd.Parameters[0].Value = ind.CensusDate.BestYear;
-                        cmd.Parameters[1].Value = ind.CensusCountry;
-                        cmd.Parameters[2].Value = ind.CensusReference;
-                        cmd.Parameters[3].Value = ind.IndividualID;
-                        cmd.Parameters[4].Value = ind.Name;
-
-                        int rowsaffected = cmd.ExecuteNonQuery();
-                        if (rowsaffected != 1)
-                            outputText.Report($"\nProblem updating record in database update affected {rowsaffected} records.");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                outputText.Report($"\nFailed to save Lost Cousins record in database error was: {e.Message}");
-            }
-        }
         #endregion
 
         #region Custom Facts

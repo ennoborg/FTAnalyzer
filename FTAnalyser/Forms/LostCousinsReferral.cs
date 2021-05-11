@@ -10,7 +10,6 @@ namespace FTAnalyzer.Forms
 {
     public partial class LostCousinsReferral : Form
     {
-        readonly ReportFormHelper reportFormHelper;
         readonly List<ExportReferrals> referrals;
 
         public LostCousinsReferral(Individual referee, bool onlyInCommon)
@@ -19,10 +18,8 @@ namespace FTAnalyzer.Forms
             Top += NativeMethods.TopTaskbarOffset;
             FamilyTree ft = FamilyTree.Instance;
             Text = $"Lost Cousins Referral for {referee}";
-            reportFormHelper = new ReportFormHelper(this, Text, dgLCReferrals, ResetTable, "Lost Cousins Referrals");
             dgLCReferrals.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgLCReferrals, true);
-            CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
             Predicate<Individual> lostCousinsFact = new Predicate<Individual>(x => x.HasLostCousinsFact);
             List<Individual> lostCousinsFacts = ft.AllIndividuals.Filter(lostCousinsFact).ToList<Individual>();
             referrals = new List<ExportReferrals>();
@@ -37,7 +34,6 @@ namespace FTAnalyzer.Forms
                         referrals.Add(new ExportReferrals(ind, f));
                 }
             }
-            reportFormHelper.LoadColumnLayout("LCReferralsColumns.xml");
             tsRecords.Text = GetCountofRecords();
         }
 
@@ -50,28 +46,6 @@ namespace FTAnalyzer.Forms
             int others = referrals.Count(x => string.IsNullOrEmpty(x.RelationType));
             return total + $" Lost Cousins Records listed made up of {direct} Direct Ancestors, {blood} Blood Relatives, {marriage} Marriage and {others} Others.";
         }
-
-        void ResetTable()
-        {
-            referrals.Sort(new LostCousinsReferralComparer());
-            dgLCReferrals.DataSource = new SortableBindingList<ExportReferrals>(referrals);
-        }
-
-        void RefreshCensusReferences(object sender, EventArgs e) => dgLCReferrals.Refresh();
-
-        void MnuSaveColumnLayout_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.SaveColumnLayout("LCReferralsColumns.xml");
-            MessageBox.Show("Form Settings Saved", "Lost Cousins Referrals");
-        }
-
-        void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("LCReferralsColumns.xml");
-
-        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Lost Cousins Referral Report");
-
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
-
-        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel(referrals.ToList<IExportReferrals>());
 
         void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 

@@ -34,8 +34,6 @@ namespace GeneGenie.Gedcom
         private GedcomRecordList<GedcomIndividualEvent> attributes;
 
         // TODO
-        private object lDSIndividualOrdinances;
-
         private GedcomRecordList<GedcomFamilyLink> childIn;
         private GedcomRecordList<GedcomFamilyLink> spouseIn;
 

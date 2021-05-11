@@ -23,7 +23,6 @@ namespace FTAnalyzer.Forms
         readonly Font linkFont;
         readonly bool allFacts;
         readonly ReportFormHelper reportFormHelper;
-        readonly bool CensusRefReport;
         List<string> IgnoreList;
 
         Facts()
@@ -35,7 +34,6 @@ namespace FTAnalyzer.Forms
                 facts = new SortableBindingList<IDisplayFact>();
                 facts.SortFinished += new EventHandler(Grid_SortFinished);
                 allFacts = false;
-                CensusRefReport = false;
                 dgFacts.AutoGenerateColumns = false;
                 ExtensionMethods.DoubleBuffered(dgFacts, true);
                 reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
@@ -116,30 +114,6 @@ namespace FTAnalyzer.Forms
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsDuplicatesEvent);
         }
 
-        public Facts(CensusReference.ReferenceStatus status, Predicate<Individual> filter, CensusDate censusDate)
-            : this()
-        {
-            allFacts = true;
-            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter);
-            foreach (Individual ind in listToCheck)
-            {
-                foreach (Fact f in ind.AllFacts)
-                    if (f.IsCensusFact && f.FactDate.Overlaps(censusDate) && f.CensusReference != null && f.CensusReference.Status == status)
-                        facts.Add(new DisplayFact(ind, f));
-            }
-            if (status == FTAnalyzer.CensusReference.ReferenceStatus.GOOD)
-                Text = $"Census Reference Report. Facts count: {facts.Count}";
-            else if (status == FTAnalyzer.CensusReference.ReferenceStatus.INCOMPLETE)
-                Text = $"Incomplete Census Reference Report. Facts count: {facts.Count}";
-            else if (status == FTAnalyzer.CensusReference.ReferenceStatus.UNRECOGNISED)
-                Text = $"Unrecognised Census Reference Report. Facts count: {facts.Count}";
-            else if (status == FTAnalyzer.CensusReference.ReferenceStatus.BLANK)
-                Text = $"Blank Census Reference Report. Facts count: {facts.Count}";
-            SetupFacts();
-            //dgFacts.Columns["CensusReference"].Visible = true;
-            Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsCensusRefEvent);
-        }
-
         public Facts(Predicate<Individual> filter, bool errors)
             :this()
         {
@@ -150,15 +124,10 @@ namespace FTAnalyzer.Forms
                 IList<Fact> factsToCheck = errors ? ind.ErrorFacts : ind.Facts;
                 foreach (Fact f in factsToCheck)
                 {
-                    if (errors)
+                    if (!errors)
                     {
-                        if (f.IsCensusFact)
+                        if (f.FactType == Fact.CENSUS_FTA)
                             facts.Add(new DisplayFact(ind, f));
-                    }
-                    else
-                    {
-                        if(f.FactType == Fact.CENSUS_FTA)
-                            facts.Add(new DisplayFact(ind,f));
                     }
                 }
             }
@@ -186,7 +155,6 @@ namespace FTAnalyzer.Forms
                 fact.IgnoreFact = IgnoreList.Contains(fact.FactHash);
                 facts.Add(fact);
             }
-            CensusRefReport = true;
             Text = "Families with the same census ref but different locations.";
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
@@ -253,12 +221,6 @@ namespace FTAnalyzer.Forms
                 else
                     IgnoreList.Remove(ignoreFact.FactHash); // no longer ignoring so remove from list
                 SerializeIgnoreList();
-            }
-            if (e.RowIndex >= 0 && e.ColumnIndex == dgFacts.Columns["CensusReference"].Index)
-            {
-                DisplayFact df = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
-                if (df.CensusReference.URL.Length > 0)
-                    SpecialMethods.VisitWebsite(df.CensusReference.URL);
             }
         }
 
@@ -338,9 +300,6 @@ namespace FTAnalyzer.Forms
             DisplayFact previous = null;
             foreach (DisplayFact fact in facts)
             {
-                if (previous != null)
-                    if ((CensusRefReport && previous.CensusReference != fact.CensusReference) || (!CensusRefReport && previous.IndividualID != fact.IndividualID))
-                        backColourGrey = !backColourGrey;
 #if !__MACOS__
                 fact.BackColour = backColourGrey ? Color.LightGray : Color.White;
 #endif
@@ -403,12 +362,6 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 cell.Style.BackColor = f.BackColour;
-                if (e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference != null && f.CensusReference.URL.Length > 0)
-                {
-                    cell.Style.ForeColor = Color.Blue;
-                    cell.Style.Font = linkFont;
-                    cell.ToolTipText = "Click link to view census records on Find My Past.";
-                }
             }
         }
 

@@ -191,7 +191,6 @@ namespace FTAnalyzer
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
             this.relTypesColoured = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.tabLostCousins = new System.Windows.Forms.TabPage();
             this.LCSubTabs = new System.Windows.Forms.TabControl();
             this.LCReportsTab = new System.Windows.Forms.TabPage();
             this.Referrals = new System.Windows.Forms.GroupBox();
@@ -232,7 +231,6 @@ namespace FTAnalyzer
             this.rtbCheckAncestors = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.btnCheckMyAncestors = new System.Windows.Forms.Button();
             this.lblCheckAncestors = new System.Windows.Forms.Label();
-            this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAliveOnDate = new System.Windows.Forms.Button();
             this.txtAliveDates = new System.Windows.Forms.TextBox();
@@ -254,7 +252,6 @@ namespace FTAnalyzer
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
-            this.cenDate = new FTAnalyzer.Forms.Controls.CensusDateSelector();
             this.relTypesCensus = new FTAnalyzer.Forms.Controls.RelationTypes();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
@@ -398,14 +395,12 @@ namespace FTAnalyzer
             this.tabColourReports.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.tabLostCousins.SuspendLayout();
             this.LCSubTabs.SuspendLayout();
             this.LCReportsTab.SuspendLayout();
             this.Referrals.SuspendLayout();
             this.LCUpdatesTab.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.LCVerifyTab.SuspendLayout();
-            this.tabCensus.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1736,46 +1731,6 @@ namespace FTAnalyzer
             this.ckbIgnoreNoBirthDate.Text = "Ignore Individuals with no birth date";
             this.ckbIgnoreNoBirthDate.UseVisualStyleBackColor = true;
             // 
-            // btnIrishColourCensus
-            // 
-            this.btnIrishColourCensus.Location = new System.Drawing.Point(207, 19);
-            this.btnIrishColourCensus.Name = "btnIrishColourCensus";
-            this.btnIrishColourCensus.Size = new System.Drawing.Size(195, 23);
-            this.btnIrishColourCensus.TabIndex = 39;
-            this.btnIrishColourCensus.Text = "View Irish Colour Census Report";
-            this.btnIrishColourCensus.UseVisualStyleBackColor = true;
-            this.btnIrishColourCensus.Click += new System.EventHandler(this.BtnIrishColourCensus_Click);
-            // 
-            // btnCanadianColourCensus
-            // 
-            this.btnCanadianColourCensus.Location = new System.Drawing.Point(207, 48);
-            this.btnCanadianColourCensus.Name = "btnCanadianColourCensus";
-            this.btnCanadianColourCensus.Size = new System.Drawing.Size(195, 23);
-            this.btnCanadianColourCensus.TabIndex = 41;
-            this.btnCanadianColourCensus.Text = "View Canadian Colour Census Report";
-            this.btnCanadianColourCensus.UseVisualStyleBackColor = true;
-            this.btnCanadianColourCensus.Click += new System.EventHandler(this.BtnCanadianColourCensus_Click);
-            // 
-            // btnUKColourCensus
-            // 
-            this.btnUKColourCensus.Location = new System.Drawing.Point(6, 19);
-            this.btnUKColourCensus.Name = "btnUKColourCensus";
-            this.btnUKColourCensus.Size = new System.Drawing.Size(195, 23);
-            this.btnUKColourCensus.TabIndex = 38;
-            this.btnUKColourCensus.Text = "View UK Colour Census Report";
-            this.btnUKColourCensus.UseVisualStyleBackColor = true;
-            this.btnUKColourCensus.Click += new System.EventHandler(this.BtnUKColourCensus_Click);
-            // 
-            // btnUSColourCensus
-            // 
-            this.btnUSColourCensus.Location = new System.Drawing.Point(6, 48);
-            this.btnUSColourCensus.Name = "btnUSColourCensus";
-            this.btnUSColourCensus.Size = new System.Drawing.Size(195, 23);
-            this.btnUSColourCensus.TabIndex = 40;
-            this.btnUSColourCensus.Text = "View US Colour Census Report";
-            this.btnUSColourCensus.UseVisualStyleBackColor = true;
-            this.btnUSColourCensus.Click += new System.EventHandler(this.BtnUSColourCensus_Click);
-            // 
             // btnColourBMD
             // 
             this.btnColourBMD.Location = new System.Drawing.Point(58, 231);
@@ -1812,17 +1767,6 @@ namespace FTAnalyzer
             this.relTypesColoured.Size = new System.Drawing.Size(325, 102);
             this.relTypesColoured.TabIndex = 26;
             this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
-            // 
-            // tabLostCousins
-            // 
-            this.tabLostCousins.Controls.Add(this.LCSubTabs);
-            this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
-            this.tabLostCousins.Name = "tabLostCousins";
-            this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(1088, 460);
-            this.tabLostCousins.TabIndex = 5;
-            this.tabLostCousins.Text = "Lost Cousins";
-            this.tabLostCousins.UseVisualStyleBackColor = true;
             // 
             // LCSubTabs
             // 
@@ -1914,16 +1858,6 @@ namespace FTAnalyzer
             this.label11.TabIndex = 0;
             this.label11.Text = "Select Individual";
             // 
-            // btnLCnoCensus
-            // 
-            this.btnLCnoCensus.Location = new System.Drawing.Point(342, 246);
-            this.btnLCnoCensus.Name = "btnLCnoCensus";
-            this.btnLCnoCensus.Size = new System.Drawing.Size(162, 27);
-            this.btnLCnoCensus.TabIndex = 39;
-            this.btnLCnoCensus.Text = "Lost Cousins w/bad Census";
-            this.btnLCnoCensus.UseVisualStyleBackColor = true;
-            this.btnLCnoCensus.Click += new System.EventHandler(this.BtnLCnoCensus_Click);
-            // 
             // btnLCDuplicates
             // 
             this.btnLCDuplicates.Location = new System.Drawing.Point(174, 246);
@@ -1933,26 +1867,6 @@ namespace FTAnalyzer
             this.btnLCDuplicates.Text = "Lost Cousins Duplicate Facts";
             this.btnLCDuplicates.UseVisualStyleBackColor = true;
             this.btnLCDuplicates.Click += new System.EventHandler(this.BtnLCDuplicates_Click);
-            // 
-            // btnLCMissingCountry
-            // 
-            this.btnLCMissingCountry.Location = new System.Drawing.Point(6, 246);
-            this.btnLCMissingCountry.Name = "btnLCMissingCountry";
-            this.btnLCMissingCountry.Size = new System.Drawing.Size(162, 27);
-            this.btnLCMissingCountry.TabIndex = 37;
-            this.btnLCMissingCountry.Text = "Lost Cousins with no Country";
-            this.btnLCMissingCountry.UseVisualStyleBackColor = true;
-            this.btnLCMissingCountry.Click += new System.EventHandler(this.BtnLCMissingCountry_Click);
-            // 
-            // btnLC1940USA
-            // 
-            this.btnLC1940USA.Location = new System.Drawing.Point(342, 181);
-            this.btnLC1940USA.Name = "btnLC1940USA";
-            this.btnLC1940USA.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1940USA.TabIndex = 35;
-            this.btnLC1940USA.Text = "1940 US Census";
-            this.btnLC1940USA.UseVisualStyleBackColor = true;
-            this.btnLC1940USA.Click += new System.EventHandler(this.BtnLC1940USA_Click);
             // 
             // rtbLostCousins
             // 
@@ -1979,16 +1893,6 @@ namespace FTAnalyzer
             this.linkLabel2.Text = "Visit the Lost Cousins Forum";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
             // 
-            // btnLC1911EW
-            // 
-            this.btnLC1911EW.Location = new System.Drawing.Point(6, 181);
-            this.btnLC1911EW.Name = "btnLC1911EW";
-            this.btnLC1911EW.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1911EW.TabIndex = 32;
-            this.btnLC1911EW.Text = "1911 England && Wales Census";
-            this.btnLC1911EW.UseVisualStyleBackColor = true;
-            this.btnLC1911EW.Click += new System.EventHandler(this.BtnLC1911EW_Click);
-            // 
             // LabLostCousinsWeb
             // 
             this.LabLostCousinsWeb.AutoSize = true;
@@ -2013,76 +1917,6 @@ namespace FTAnalyzer
     "";
             this.ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
-            // btnLC1841EW
-            // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(6, 148);
-            this.btnLC1841EW.Name = "btnLC1841EW";
-            this.btnLC1841EW.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1841EW.TabIndex = 29;
-            this.btnLC1841EW.Text = "1841 England && Wales Census";
-            this.btnLC1841EW.UseVisualStyleBackColor = true;
-            this.btnLC1841EW.Click += new System.EventHandler(this.BtnLC1841EW_Click);
-            // 
-            // btnLC1911Ireland
-            // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(174, 148);
-            this.btnLC1911Ireland.Name = "btnLC1911Ireland";
-            this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1911Ireland.TabIndex = 28;
-            this.btnLC1911Ireland.Text = "1911 Ireland Census";
-            this.btnLC1911Ireland.UseVisualStyleBackColor = true;
-            this.btnLC1911Ireland.Click += new System.EventHandler(this.BtnLC1911Ireland_Click);
-            // 
-            // btnLC1880USA
-            // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(342, 148);
-            this.btnLC1880USA.Name = "btnLC1880USA";
-            this.btnLC1880USA.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1880USA.TabIndex = 27;
-            this.btnLC1880USA.Text = "1880 US Census";
-            this.btnLC1880USA.UseVisualStyleBackColor = true;
-            this.btnLC1880USA.Click += new System.EventHandler(this.BtnLC1880USA_Click);
-            // 
-            // btnLC1881EW
-            // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(6, 115);
-            this.btnLC1881EW.Name = "btnLC1881EW";
-            this.btnLC1881EW.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1881EW.TabIndex = 26;
-            this.btnLC1881EW.Text = "1881 England && Wales Census";
-            this.btnLC1881EW.UseVisualStyleBackColor = true;
-            this.btnLC1881EW.Click += new System.EventHandler(this.BtnLC1881EW_Click);
-            // 
-            // btnLC1881Canada
-            // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(174, 181);
-            this.btnLC1881Canada.Name = "btnLC1881Canada";
-            this.btnLC1881Canada.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1881Canada.TabIndex = 25;
-            this.btnLC1881Canada.Text = "1881 Canada Census";
-            this.btnLC1881Canada.UseVisualStyleBackColor = true;
-            this.btnLC1881Canada.Click += new System.EventHandler(this.BtnLC1881Canada_Click);
-            // 
-            // btnLC1881Scot
-            // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(174, 115);
-            this.btnLC1881Scot.Name = "btnLC1881Scot";
-            this.btnLC1881Scot.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1881Scot.TabIndex = 24;
-            this.btnLC1881Scot.Text = "1881 Scotland Census";
-            this.btnLC1881Scot.UseVisualStyleBackColor = true;
-            this.btnLC1881Scot.Click += new System.EventHandler(this.BtnLC1881Scot_Click);
-            // 
-            // relTypesLC
-            // 
-            this.relTypesLC.Location = new System.Drawing.Point(6, 6);
-            this.relTypesLC.Margin = new System.Windows.Forms.Padding(6);
-            this.relTypesLC.MarriedToDB = true;
-            this.relTypesLC.Name = "relTypesLC";
-            this.relTypesLC.Size = new System.Drawing.Size(325, 103);
-            this.relTypesLC.TabIndex = 36;
-            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
-            // 
             // LCUpdatesTab
             // 
             this.LCUpdatesTab.Controls.Add(this.btnViewInvalidRefs);
@@ -2100,26 +1934,6 @@ namespace FTAnalyzer
             this.LCUpdatesTab.TabIndex = 1;
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
-            // 
-            // btnViewInvalidRefs
-            // 
-            this.btnViewInvalidRefs.Location = new System.Drawing.Point(152, 174);
-            this.btnViewInvalidRefs.Name = "btnViewInvalidRefs";
-            this.btnViewInvalidRefs.Size = new System.Drawing.Size(138, 23);
-            this.btnViewInvalidRefs.TabIndex = 40;
-            this.btnViewInvalidRefs.Text = "View Invalid Census Refs";
-            this.btnViewInvalidRefs.UseVisualStyleBackColor = true;
-            this.btnViewInvalidRefs.Click += new System.EventHandler(this.BtnViewInvalidRefs_Click);
-            // 
-            // btnLCPotentialUploads
-            // 
-            this.btnLCPotentialUploads.Location = new System.Drawing.Point(6, 174);
-            this.btnLCPotentialUploads.Name = "btnLCPotentialUploads";
-            this.btnLCPotentialUploads.Size = new System.Drawing.Size(138, 23);
-            this.btnLCPotentialUploads.TabIndex = 39;
-            this.btnLCPotentialUploads.Text = "View Potential Uploads";
-            this.btnLCPotentialUploads.UseVisualStyleBackColor = true;
-            this.btnLCPotentialUploads.Click += new System.EventHandler(this.BtnLCPotentialUploads_Click);
             // 
             // label21
             // 
@@ -2160,17 +1974,6 @@ namespace FTAnalyzer
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Lost Cousins Login Details";
             // 
-            // btnLCLogin
-            // 
-            this.btnLCLogin.BackColor = System.Drawing.Color.Red;
-            this.btnLCLogin.Location = new System.Drawing.Point(310, 68);
-            this.btnLCLogin.Name = "btnLCLogin";
-            this.btnLCLogin.Size = new System.Drawing.Size(75, 25);
-            this.btnLCLogin.TabIndex = 3;
-            this.btnLCLogin.Text = "Login";
-            this.btnLCLogin.UseVisualStyleBackColor = false;
-            this.btnLCLogin.Click += new System.EventHandler(this.BtnLCLogin_Click);
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -2191,35 +1994,6 @@ namespace FTAnalyzer
             this.label19.TabIndex = 2;
             this.label19.Text = "Email Address";
             this.label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // txtLCEmail
-            // 
-            this.txtLCEmail.Location = new System.Drawing.Point(108, 28);
-            this.txtLCEmail.Name = "txtLCEmail";
-            this.txtLCEmail.Size = new System.Drawing.Size(277, 22);
-            this.txtLCEmail.TabIndex = 1;
-            this.txtLCEmail.TextChanged += new System.EventHandler(this.TxtLCEmail_TextChanged);
-            // 
-            // txtLCPassword
-            // 
-            this.txtLCPassword.Location = new System.Drawing.Point(108, 69);
-            this.txtLCPassword.Name = "txtLCPassword";
-            this.txtLCPassword.PasswordChar = '*';
-            this.txtLCPassword.Size = new System.Drawing.Size(196, 22);
-            this.txtLCPassword.TabIndex = 2;
-            this.txtLCPassword.TextChanged += new System.EventHandler(this.TxtLCPassword_TextChanged);
-            // 
-            // btnUpdateLostCousinsWebsite
-            // 
-            this.btnUpdateLostCousinsWebsite.Enabled = false;
-            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(299, 174);
-            this.btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
-            this.btnUpdateLostCousinsWebsite.Size = new System.Drawing.Size(138, 23);
-            this.btnUpdateLostCousinsWebsite.TabIndex = 5;
-            this.btnUpdateLostCousinsWebsite.Text = "Update Lost Cousins site";
-            this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = true;
-            this.btnUpdateLostCousinsWebsite.Visible = false;
-            this.btnUpdateLostCousinsWebsite.Click += new System.EventHandler(this.BtnUpdateLostCousinsWebsite_Click);
             // 
             // rtbLCoutput
             // 
@@ -2265,17 +2039,6 @@ namespace FTAnalyzer
             this.rtbCheckAncestors.Text = "Please Login to see data to update";
             this.rtbCheckAncestors.TextChanged += new System.EventHandler(this.RtbCheckAncestors_TextChanged);
             // 
-            // btnCheckMyAncestors
-            // 
-            this.btnCheckMyAncestors.BackColor = System.Drawing.Color.Red;
-            this.btnCheckMyAncestors.Location = new System.Drawing.Point(15, 40);
-            this.btnCheckMyAncestors.Name = "btnCheckMyAncestors";
-            this.btnCheckMyAncestors.Size = new System.Drawing.Size(247, 23);
-            this.btnCheckMyAncestors.TabIndex = 1;
-            this.btnCheckMyAncestors.Text = "Load My Ancestors Page to check for Errors";
-            this.btnCheckMyAncestors.UseVisualStyleBackColor = false;
-            this.btnCheckMyAncestors.Click += new System.EventHandler(this.BtnCheckMyAncestors_Click);
-            // 
             // lblCheckAncestors
             // 
             this.lblCheckAncestors.AutoSize = true;
@@ -2285,18 +2048,6 @@ namespace FTAnalyzer
             this.lblCheckAncestors.Size = new System.Drawing.Size(316, 16);
             this.lblCheckAncestors.TabIndex = 0;
             this.lblCheckAncestors.Text = "Not Currently Logged in Use Updates Page to Login";
-            // 
-            // tabCensus
-            // 
-            this.tabCensus.Controls.Add(this.groupBox2);
-            this.tabCensus.Controls.Add(this.groupBox9);
-            this.tabCensus.Location = new System.Drawing.Point(4, 22);
-            this.tabCensus.Name = "tabCensus";
-            this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCensus.Size = new System.Drawing.Size(1088, 460);
-            this.tabCensus.TabIndex = 0;
-            this.tabCensus.Text = "Census";
-            this.tabCensus.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -2311,7 +2062,6 @@ namespace FTAnalyzer
             this.groupBox2.Controls.Add(this.txtCensusSurname);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.udAgeFilter);
-            this.groupBox2.Controls.Add(this.cenDate);
             this.groupBox2.Controls.Add(this.relTypesCensus);
             this.groupBox2.Location = new System.Drawing.Point(8, 6);
             this.groupBox2.Name = "groupBox2";
@@ -2373,46 +2123,6 @@ namespace FTAnalyzer
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Census Record Reports";
             // 
-            // btnShowCensusMissing
-            // 
-            this.btnShowCensusMissing.Location = new System.Drawing.Point(6, 22);
-            this.btnShowCensusMissing.Name = "btnShowCensusMissing";
-            this.btnShowCensusMissing.Size = new System.Drawing.Size(150, 25);
-            this.btnShowCensusMissing.TabIndex = 39;
-            this.btnShowCensusMissing.Text = "Show Not Found on Census";
-            this.btnShowCensusMissing.UseVisualStyleBackColor = true;
-            this.btnShowCensusMissing.Click += new System.EventHandler(this.BtnShowCensus_Click);
-            // 
-            // btnShowCensusEntered
-            // 
-            this.btnShowCensusEntered.Location = new System.Drawing.Point(162, 22);
-            this.btnShowCensusEntered.Name = "btnShowCensusEntered";
-            this.btnShowCensusEntered.Size = new System.Drawing.Size(154, 25);
-            this.btnShowCensusEntered.TabIndex = 38;
-            this.btnShowCensusEntered.Text = "Show Found on Census";
-            this.btnShowCensusEntered.UseVisualStyleBackColor = true;
-            this.btnShowCensusEntered.Click += new System.EventHandler(this.BtnShowCensus_Click);
-            // 
-            // btnRandomSurnameEntered
-            // 
-            this.btnRandomSurnameEntered.Location = new System.Drawing.Point(322, 22);
-            this.btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
-            this.btnRandomSurnameEntered.Size = new System.Drawing.Size(300, 25);
-            this.btnRandomSurnameEntered.TabIndex = 37;
-            this.btnRandomSurnameEntered.Text = "Show Found Random Surname from Direct Ancestors";
-            this.btnRandomSurnameEntered.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameEntered.Click += new System.EventHandler(this.BtnRandomSurname_Click);
-            // 
-            // btnRandomSurnameMissing
-            // 
-            this.btnRandomSurnameMissing.Location = new System.Drawing.Point(634, 22);
-            this.btnRandomSurnameMissing.Name = "btnRandomSurnameMissing";
-            this.btnRandomSurnameMissing.Size = new System.Drawing.Size(301, 25);
-            this.btnRandomSurnameMissing.TabIndex = 36;
-            this.btnRandomSurnameMissing.Text = "Show Not Found Random Surname from Direct Ancestors";
-            this.btnRandomSurnameMissing.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameMissing.Click += new System.EventHandler(this.BtnRandomSurname_Click);
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.btnInconsistentLocations);
@@ -2436,46 +2146,6 @@ namespace FTAnalyzer
             this.btnInconsistentLocations.Text = "Inconsistent census locations for families with same census ref";
             this.btnInconsistentLocations.UseVisualStyleBackColor = true;
             this.btnInconsistentLocations.Click += new System.EventHandler(this.BtnInconsistentLocations_Click);
-            // 
-            // btnUnrecognisedCensusRef
-            // 
-            this.btnUnrecognisedCensusRef.Location = new System.Drawing.Point(322, 19);
-            this.btnUnrecognisedCensusRef.Name = "btnUnrecognisedCensusRef";
-            this.btnUnrecognisedCensusRef.Size = new System.Drawing.Size(144, 25);
-            this.btnUnrecognisedCensusRef.TabIndex = 8;
-            this.btnUnrecognisedCensusRef.Text = "Unrecognised Census Refs";
-            this.btnUnrecognisedCensusRef.UseVisualStyleBackColor = true;
-            this.btnUnrecognisedCensusRef.Click += new System.EventHandler(this.BtnUnrecognisedCensusRef_Click);
-            // 
-            // btnIncompleteCensusRef
-            // 
-            this.btnIncompleteCensusRef.Location = new System.Drawing.Point(162, 19);
-            this.btnIncompleteCensusRef.Name = "btnIncompleteCensusRef";
-            this.btnIncompleteCensusRef.Size = new System.Drawing.Size(154, 25);
-            this.btnIncompleteCensusRef.TabIndex = 7;
-            this.btnIncompleteCensusRef.Text = "Incomplete Census Refs";
-            this.btnIncompleteCensusRef.UseVisualStyleBackColor = true;
-            this.btnIncompleteCensusRef.Click += new System.EventHandler(this.BtnIncompleteCensusRef_Click);
-            // 
-            // btnMissingCensusRefs
-            // 
-            this.btnMissingCensusRefs.Location = new System.Drawing.Point(472, 19);
-            this.btnMissingCensusRefs.Name = "btnMissingCensusRefs";
-            this.btnMissingCensusRefs.Size = new System.Drawing.Size(150, 25);
-            this.btnMissingCensusRefs.TabIndex = 6;
-            this.btnMissingCensusRefs.Text = "Missing Census Refs";
-            this.btnMissingCensusRefs.UseVisualStyleBackColor = true;
-            this.btnMissingCensusRefs.Click += new System.EventHandler(this.BtnMissingCensusRefs_Click);
-            // 
-            // btnCensusRefs
-            // 
-            this.btnCensusRefs.Location = new System.Drawing.Point(6, 19);
-            this.btnCensusRefs.Name = "btnCensusRefs";
-            this.btnCensusRefs.Size = new System.Drawing.Size(150, 25);
-            this.btnCensusRefs.TabIndex = 5;
-            this.btnCensusRefs.Text = "Good Census Refs";
-            this.btnCensusRefs.UseVisualStyleBackColor = true;
-            this.btnCensusRefs.Click += new System.EventHandler(this.BtnCensusRefs_Click);
             // 
             // chkExcludeUnknownBirths
             // 
@@ -2535,17 +2205,6 @@ namespace FTAnalyzer
             0,
             0});
             // 
-            // cenDate
-            // 
-            this.cenDate.AutoSize = true;
-            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "";
-            this.cenDate.Location = new System.Drawing.Point(8, 122);
-            this.cenDate.Margin = new System.Windows.Forms.Padding(6);
-            this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(234, 27);
-            this.cenDate.TabIndex = 28;
-            // 
             // relTypesCensus
             // 
             this.relTypesCensus.Location = new System.Drawing.Point(9, 19);
@@ -2579,26 +2238,6 @@ namespace FTAnalyzer
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Census Facts";
             // 
-            // BtnAutoCreatedCensusFacts
-            // 
-            this.BtnAutoCreatedCensusFacts.Location = new System.Drawing.Point(164, 21);
-            this.BtnAutoCreatedCensusFacts.Name = "BtnAutoCreatedCensusFacts";
-            this.BtnAutoCreatedCensusFacts.Size = new System.Drawing.Size(150, 23);
-            this.BtnAutoCreatedCensusFacts.TabIndex = 39;
-            this.BtnAutoCreatedCensusFacts.Text = "Auto Created Census Facts";
-            this.BtnAutoCreatedCensusFacts.UseVisualStyleBackColor = true;
-            this.BtnAutoCreatedCensusFacts.Click += new System.EventHandler(this.BtnCensusAutoCreatedFacts_Click);
-            // 
-            // BtnProblemCensusFacts
-            // 
-            this.BtnProblemCensusFacts.Location = new System.Drawing.Point(6, 21);
-            this.BtnProblemCensusFacts.Name = "BtnProblemCensusFacts";
-            this.BtnProblemCensusFacts.Size = new System.Drawing.Size(150, 23);
-            this.BtnProblemCensusFacts.TabIndex = 38;
-            this.BtnProblemCensusFacts.Text = "Problem Census Facts";
-            this.BtnProblemCensusFacts.UseVisualStyleBackColor = true;
-            this.BtnProblemCensusFacts.Click += new System.EventHandler(this.BtnCensusProblemFacts_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnDuplicateCensus);
@@ -2609,26 +2248,6 @@ namespace FTAnalyzer
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Potential Census Fact Problems";
-            // 
-            // btnDuplicateCensus
-            // 
-            this.btnDuplicateCensus.Location = new System.Drawing.Point(165, 19);
-            this.btnDuplicateCensus.Name = "btnDuplicateCensus";
-            this.btnDuplicateCensus.Size = new System.Drawing.Size(150, 25);
-            this.btnDuplicateCensus.TabIndex = 6;
-            this.btnDuplicateCensus.Text = "Duplicate Census Facts";
-            this.btnDuplicateCensus.UseVisualStyleBackColor = true;
-            this.btnDuplicateCensus.Click += new System.EventHandler(this.BtnDuplicateCensus_Click);
-            // 
-            // btnMissingCensusLocation
-            // 
-            this.btnMissingCensusLocation.Location = new System.Drawing.Point(9, 19);
-            this.btnMissingCensusLocation.Name = "btnMissingCensusLocation";
-            this.btnMissingCensusLocation.Size = new System.Drawing.Size(150, 25);
-            this.btnMissingCensusLocation.TabIndex = 5;
-            this.btnMissingCensusLocation.Text = "Missing Census Locations";
-            this.btnMissingCensusLocation.UseVisualStyleBackColor = true;
-            this.btnMissingCensusLocation.Click += new System.EventHandler(this.BtnMissingCensusLocation_Click);
             // 
             // groupBox5
             // 
@@ -2641,26 +2260,6 @@ namespace FTAnalyzer
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "1911 UK Census";
             // 
-            // btnMismatchedChildrenStatus
-            // 
-            this.btnMismatchedChildrenStatus.Location = new System.Drawing.Point(165, 19);
-            this.btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
-            this.btnMismatchedChildrenStatus.Size = new System.Drawing.Size(154, 25);
-            this.btnMismatchedChildrenStatus.TabIndex = 7;
-            this.btnMismatchedChildrenStatus.Text = "Mismatched Children Status";
-            this.btnMismatchedChildrenStatus.UseVisualStyleBackColor = true;
-            this.btnMismatchedChildrenStatus.Click += new System.EventHandler(this.BtnMismatchedChildrenStatus_Click);
-            // 
-            // btnNoChildrenStatus
-            // 
-            this.btnNoChildrenStatus.Location = new System.Drawing.Point(9, 19);
-            this.btnNoChildrenStatus.Name = "btnNoChildrenStatus";
-            this.btnNoChildrenStatus.Size = new System.Drawing.Size(150, 25);
-            this.btnNoChildrenStatus.TabIndex = 6;
-            this.btnNoChildrenStatus.Text = "Missing Children Status";
-            this.btnNoChildrenStatus.UseVisualStyleBackColor = true;
-            this.btnNoChildrenStatus.Click += new System.EventHandler(this.BtnNoChildrenStatus_Click);
-            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.btnReportUnrecognised);
@@ -2670,17 +2269,6 @@ namespace FTAnalyzer
             this.groupBox6.TabIndex = 31;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Export Missing/Unrecognised data to File";
-            // 
-            // btnReportUnrecognised
-            // 
-            this.btnReportUnrecognised.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnReportUnrecognised.Location = new System.Drawing.Point(6, 19);
-            this.btnReportUnrecognised.Name = "btnReportUnrecognised";
-            this.btnReportUnrecognised.Size = new System.Drawing.Size(224, 25);
-            this.btnReportUnrecognised.TabIndex = 30;
-            this.btnReportUnrecognised.Text = "Export Unrecognised/Missing Census Refs";
-            this.btnReportUnrecognised.UseVisualStyleBackColor = true;
-            this.btnReportUnrecognised.Click += new System.EventHandler(this.BtnReportUnrecognised_Click);
             // 
             // tabLocations
             // 
@@ -3063,8 +2651,6 @@ namespace FTAnalyzer
             this.tabSelector.Controls.Add(this.tabSurnames);
             this.tabSelector.Controls.Add(this.tabLocations);
             this.tabSelector.Controls.Add(this.tabFacts);
-            this.tabSelector.Controls.Add(this.tabCensus);
-            this.tabSelector.Controls.Add(this.tabLostCousins);
             this.tabSelector.Controls.Add(this.tabColourReports);
             this.tabSelector.Controls.Add(this.tabTreetops);
             this.tabSelector.Controls.Add(this.tabWorldWars);
@@ -4062,7 +3648,6 @@ namespace FTAnalyzer
             this.groupBox7.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.tabLostCousins.ResumeLayout(false);
             this.LCSubTabs.ResumeLayout(false);
             this.LCReportsTab.ResumeLayout(false);
             this.LCReportsTab.PerformLayout();
@@ -4074,7 +3659,6 @@ namespace FTAnalyzer
             this.groupBox8.PerformLayout();
             this.LCVerifyTab.ResumeLayout(false);
             this.LCVerifyTab.PerformLayout();
-            this.tabCensus.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -4201,8 +3785,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtColouredSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes relTypesColoured;
-        private System.Windows.Forms.TabPage tabLostCousins;
-        private System.Windows.Forms.TabPage tabCensus;
         private System.Windows.Forms.TabPage tabLocations;
         private System.Windows.Forms.Button btnShowMap;
         private System.Windows.Forms.TabControl tabCtrlLocations;
@@ -4278,7 +3860,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.TextBox txtCensusSurname;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown udAgeFilter;
-        private FTAnalyzer.Forms.Controls.CensusDateSelector cenDate;
         private FTAnalyzer.Forms.Controls.RelationTypes relTypesCensus;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cmbColourFamily;

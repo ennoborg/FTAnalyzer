@@ -134,35 +134,6 @@ namespace FTAnalyzer.Forms
             SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
         }
 
-        public void SetupLCnoCensus(Predicate<Individual> relationFilter)
-        {
-            List<Individual> listtoCheck = ft.AllIndividuals.Filter(relationFilter).ToList();
-            List<Individual> individuals = new List<Individual>();
-            Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.HasLostCousinsFactWithNoCensusFact);
-            IEnumerable<Individual> censusMissing = listtoCheck.Filter(lcFacts);
-            individuals.AddRange(censusMissing);
-            individuals = individuals.Distinct<Individual>().ToList();
-            SetIndividuals(individuals, "Lost Cousins facts with no corresponding census entry");
-        }
-
-        public void SetupLCNoCountry(Predicate<Individual> relationFilter)
-        {
-            bool lcFacts(Individual x) => x.LostCousinsFacts > 0;
-            Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, lcFacts);
-            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter).ToList();
-
-            bool missing(Individual x) => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
-                                       && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false)
-                                       && !x.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, false)
-                                       && !x.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, false)
-                                       && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1911, false)
-                                       && !x.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, false)
-                                       && !x.IsLostCousinsEntered(CensusDate.USCENSUS1880, false)
-                                       && !x.IsLostCousinsEntered(CensusDate.USCENSUS1940, false);
-            List<Individual> individuals = listToCheck.Filter(missing).ToList<Individual>();
-            SetIndividuals(individuals, "Lost Cousins facts with no facts found to identify Country");
-        }
-
         public void SetupPossiblyMissingChildrenReport()
         {
             Text = "Families who might be missing a child between marriage date and first child born.";
@@ -334,68 +305,11 @@ namespace FTAnalyzer.Forms
                 Family fam = ft.GetFamily(famID);
                 if (fam != null)
                 {
-                    if ((reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus) && ModifierKeys.Equals(Keys.Shift))
-                    {
-                        List<IDisplayColourCensus> list = fam.Members.ToList<IDisplayColourCensus>();
-                        ColourCensus rs = new ColourCensus(Countries.UNITED_KINGDOM, list);
-                        MainForm.DisposeDuplicateForms(rs);
-                        rs.Show();
-                        rs.Focus();
-                    }
-                    else
-                    {
-                        Facts factForm = new Facts(fam);
-                        MainForm.DisposeDuplicateForms(factForm);
-                        factForm.Show();
-                    }
+                    Facts factForm = new Facts(fam);
+                    MainForm.DisposeDuplicateForms(factForm);
+                    factForm.Show();
                 }
             }
-        }
-
-        public void SetupMissingCensusLocation()
-        {
-            List<Individual> individuals = new List<Individual>();
-            foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
-            {
-                Predicate<Individual> censusFacts = new Predicate<Individual>(x => x.IsCensusDone(censusDate) && !x.HasCensusLocation(censusDate));
-                IEnumerable<Individual> censusMissing = ft.AllIndividuals.Filter(censusFacts);
-                individuals.AddRange(censusMissing);
-            }
-            individuals = individuals.Distinct().ToList();
-            SetIndividuals(individuals, "Individuals with census records with no census location");
-        }
-
-        public void SetupDuplicateCensus()
-        {
-            List<Individual> individuals = new List<Individual>();
-            foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
-            {
-                Predicate<Individual> censusFacts = new Predicate<Individual>(i => i.CensusDateFactCount(censusDate) > 1);
-                IEnumerable<Individual> censusMissing = ft.AllIndividuals.Filter(censusFacts);
-                individuals.AddRange(censusMissing);
-            }
-            individuals = individuals.Distinct().ToList();
-            SetIndividuals(individuals, "Individuals that may have more than one census/residence record for a census year");
-        }
-
-        public void SetupChildrenStatusReport()
-        {
-            SortableBindingList<IDisplayChildrenStatus> results = new SortableBindingList<IDisplayChildrenStatus>();
-            IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
-            foreach (CensusFamily fam in toSearch)
-            {
-                if (fam.On1911Census && fam.HasGoodChildrenStatus && !fam.FamilyType.Equals(Family.SOLOINDIVIDUAL) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE) &&
-                    (fam.ExpectedTotal != fam.ChildrenTotal || fam.ExpectedAlive != fam.ChildrenAlive || fam.ExpectedDead != fam.ChildrenDead))
-                    results.Add(fam);
-            }
-            reportType = ReportType.MismatchedChildrenStatus;
-            dgFamilies.DataSource = results;
-            splitContainer.Panel1Collapsed = true;
-            splitContainer.Panel2Collapsed = false;
-            famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
-            SetSaveButtonsStatus(true);
-            Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
-            UpdateStatusCount();
         }
 
         void People_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
@@ -493,25 +407,6 @@ namespace FTAnalyzer.Forms
         }
 
         void DgIndividuals_MouseDown(object sender, MouseEventArgs e) => ShowViewNotesMenu(dgIndividuals, e);
-
-        public void SetupNoChildrenStatus()
-        {
-            SortableBindingList<IDisplayFamily> results = new SortableBindingList<IDisplayFamily>();
-            IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
-            foreach (Family fam in toSearch)
-            {
-                if (fam.On1911Census && !fam.HasAnyChildrenStatus && fam.BothParentsAlive(CensusDate.UKCENSUS1911) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE))
-                    results.Add(fam);
-            }
-            reportType = ReportType.MissingChildrenStatus;
-            dgFamilies.DataSource = results;
-            splitContainer.Panel1Collapsed = true;
-            splitContainer.Panel2Collapsed = false;
-            famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
-            SetSaveButtonsStatus(true);
-            Text = "Families with a 1911 census record but no Children Status record showing Children Alive/Dead";
-            UpdateStatusCount();
-        }
 
         void DgFamilies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {

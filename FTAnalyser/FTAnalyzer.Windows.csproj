@@ -519,12 +519,6 @@
     <Compile Include="Forms\Chart.Designer.cs">
       <DependentUpon>Chart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ColourCensus.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ColourCensus.Designer.cs">
-      <DependentUpon>ColourCensus.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\GoogleMap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -761,20 +755,11 @@
     <EmbeddedResource Include="Forms\Chart.resx">
       <DependentUpon>Chart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ColourCensus.resx">
-      <DependentUpon>ColourCensus.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GoogleMap.resx">
       <DependentUpon>GoogleMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Census.resx">
-      <DependentUpon>Census.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\CensusDateSelector.resx">
-      <DependentUpon>CensusDateSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\People.resx">
       <DependentUpon>People.cs</DependentUpon>
@@ -843,18 +828,6 @@
     </Compile>
     <Compile Include="Forms\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Census.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Census.Designer.cs">
-      <DependentUpon>Census.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Controls\CensusDateSelector.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\CensusDateSelector.Designer.cs">
-      <DependentUpon>CensusDateSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\People.cs">
       <SubType>Form</SubType>

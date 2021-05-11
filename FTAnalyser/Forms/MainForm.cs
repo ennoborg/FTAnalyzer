@@ -1335,13 +1335,6 @@ namespace FTAnalyzer
                         // show empty form click button to load
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.SurnamesTabEvent);
                     }
-                    else if (tabSelector.SelectedTab == tabCensus)
-                    {
-                        cenDate.RevertToDefaultDate();
-                        btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
-                        cenDate.AddAllCensusItems();
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.CensusTabEvent);
-                    }
                     else if (tabSelector.SelectedTab == tabTreetops)
                     {
                         dgTreeTops.DataSource = null;
@@ -1353,20 +1346,6 @@ namespace FTAnalyzer
                         dgWorldWars.DataSource = null;
                         wardeadCountry.Enabled = !ckbWDIgnoreLocations.Checked;
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.WorldWarsTabEvent);
-                    }
-                    else if (tabSelector.SelectedTab == tabLostCousins)
-                    {
-                        HourGlass(true);
-                        btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
-                            btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
-                            btnLC1911EW.Enabled = ft.IndividualCount > 0;
-                        LCSubTabs.TabPages.Remove(LCVerifyTab); // hide verification tab as it does nothing
-                        UpdateLCReports();
-                        txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
-                        chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
-                        tabLostCousins.Refresh();
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
-                        HourGlass(false);
                     }
                     else if (tabSelector.SelectedTab == tabToday)
                     {
@@ -1538,59 +1517,6 @@ namespace FTAnalyzer
             return filter;
         }
 
-        Predicate<CensusIndividual> CreateCensusIndividualFilter(CensusDate censusDate, bool censusDone, string surname)
-        {
-            var relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
-            var dateFilter = censusDone ?
-                new Predicate<CensusIndividual>(x => x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate)) :
-                new Predicate<CensusIndividual>(x => !x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate));
-            Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
-            if (!censusDone && GeneralSettings.Default.HidePeopleWithMissingTag)
-            {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
-                Predicate<CensusIndividual> missingTag = new Predicate<CensusIndividual>(x => !x.IsTaggedMissingCensus(censusDate));
-                filter = FilterUtils.AndFilter(filter, missingTag);
-            }
-            if (surname.Length > 0)
-            {
-                Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, surname);
-                filter = FilterUtils.AndFilter(filter, surnameFilter);
-            }
-            if (chkExcludeUnknownBirths.Checked)
-                filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
-            filter = FilterUtils.AndFilter(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
-            return filter;
-        }
-        Predicate<Individual> CreateIndividualCensusFilter(bool censusDone, string surname, bool anyCensus)
-        {
-            Predicate<Individual> filter;
-            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
-            if (anyCensus) // only filter on date if not selecting any date
-            {
-                filter = relationFilter;
-            }
-            else
-            {
-                var dateFilter = censusDone ?
-                    new Predicate<Individual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
-                    new Predicate<Individual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
-                filter = FilterUtils.AndFilter(relationFilter, dateFilter);
-            }
-            if (!censusDone && GeneralSettings.Default.HidePeopleWithMissingTag)
-            {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
-                Predicate<Individual> missingTag = new Predicate<Individual>(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
-                filter = FilterUtils.AndFilter(filter, missingTag);
-            }
-            if (surname.Length > 0)
-            {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
-                filter = FilterUtils.AndFilter(filter, surnameFilter);
-            }
-            if (chkExcludeUnknownBirths.Checked)
-                filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
-            filter = FilterUtils.AndFilter(x => x.GetMinAge(cenDate.SelectedDate) < (int)udAgeFilter.Value, filter);
-            return filter;
-        }
-
         Predicate<Individual> CreateTreeTopsIndividualFilter()
         {
             Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ?
@@ -1635,156 +1561,6 @@ namespace FTAnalyzer
         #endregion
 
         #region Lost Cousins
-        void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => UpdateLCReports();
-
-        void LostCousinsCensus(CensusDate censusDate, string reportTitle)
-        {
-            HourGlass(true);
-            Census census = new Census(censusDate, true);
-            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
-            Predicate<Individual> individualRelationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            census.SetupLCCensus(relationFilter, ckbShowLCEntered.Checked, individualRelationFilter);
-            if (ckbShowLCEntered.Checked)
-                census.Text = $"{reportTitle} already entered into Lost Cousins website (includes entries with no country)";
-            else
-                census.Text = $"{reportTitle} to enter into Lost Cousins website";
-            DisposeDuplicateForms(census);
-            census.Show();
-            Task.Run(() => Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.LCReportYearEvent, censusDate.BestYear.ToString()));
-            HourGlass(false);
-        }
-
-        void BtnLCLogin_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            try
-            {
-                Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
-            }
-            catch (IOException)
-            {
-                UIHelpers.ShowMessage("Error unable to save Lost Cousins email address preference. Please check App has rights to save user preferences to registry.");
-            }
-            bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
-            btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
-            btnLCLogin.Enabled = !websiteAvailable;
-            btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
-            btnCheckMyAncestors.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
-            lblCheckAncestors.Text = websiteAvailable ? "Logged into Lost Cousins" : "Not Currently Logged in Use Updates Page to Login";
-            HourGlass(false);
-            if (websiteAvailable)
-                UIHelpers.ShowMessage("Lost Cousins login succeeded.");
-            else
-                UIHelpers.ShowMessage("Unable to login to Lost Cousins website. Check email/password and try again.");
-        }
-
-        List<CensusIndividual> LCUpdates;
-        List<CensusIndividual> LCInvalidReferences;
-
-        void BtnLCPotentialUploads_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Census census = new Census(CensusDate.ANYCENSUS, true);
-            census.SetupLCupdateList(LCUpdates);
-            census.Text = $"Potential Records to upload to Lost Cousins Website";
-            DisposeDuplicateForms(census);
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
-            census.Show();
-            HourGlass(false);
-        }
-
-        void BtnViewInvalidRefs_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Census census = new Census(CensusDate.ANYCENSUS, true);
-            census.SetupLCupdateList(LCInvalidReferences);
-            census.Text = $"Incompatible Census References in Records to upload to Lost Cousins Website";
-            DisposeDuplicateForms(census);
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
-            census.Show();
-            HourGlass(false);
-        }
-
-        async void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
-        {
-            btnUpdateLostCousinsWebsite.Enabled = false;
-            if (LCUpdates?.Count > 0)
-            {
-                rtbLCoutput.Text = string.Empty;
-                int response = UIHelpers.ShowYesNo($"You have {LCUpdates.Count} possible records to add to Lost Cousins. Proceed?");
-                if (response == UIHelpers.Yes)
-                {
-                    rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
-                    Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
-                    int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText)).ConfigureAwait(true);
-                    string resultText = $"{DateTime.Now.ToUniversalTime():yyyy-MM-dd HH:mm}: uploaded {count} records";
-                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText).ConfigureAwait(true);
-                    SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
-                    UpdateLCReports();
-                }
-            }
-            else
-                UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census, or enter/update missing or incomplete census references.");
-            btnUpdateLostCousinsWebsite.Enabled = true;
-        }
-
-        void UpdateLCReports()
-        {
-            HourGlass(true);
-            UpdateLostCousinsReport();
-            UpdateLCOutput();
-            HourGlass(false);
-        }
-
-        void UpdateLCOutput()
-        {
-            rtbLCUpdateData.ForeColor = Color.Black;
-            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
-            LCUpdates = new List<CensusIndividual>();
-            LCInvalidReferences = new List<CensusIndividual>();
-            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter);
-        }
-
-        void BtnCheckMyAncestors_Click(object sender, EventArgs e)
-        {
-            if (btnCheckMyAncestors.BackColor == Color.LightGreen)
-            {
-                Progress<string> outputText = new Progress<string>(value => { rtbCheckAncestors.AppendText(value); });
-                dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestors(outputText);
-                dgCheckAncestors.Refresh();
-
-            }
-        }
-
-        void BtnLCMissingCountry_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            People people = new People();
-            people.SetupLCNoCountry(relationFilter);
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.NoLCCountryEvent);
-            HourGlass(false);
-        }
-
-        void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLCReports();
-
-        void TxtLCEmail_TextChanged(object sender, EventArgs e) => ClearLogin();
-
-        void TxtLCPassword_TextChanged(object sender, EventArgs e) => ClearLogin();
-
-        void ClearLogin()
-        {
-            if (btnUpdateLostCousinsWebsite.Visible) // if we can login clear cookies to reset session
-                ExportToLostCousins.EmptyCookieJar();
-            btnLCLogin.BackColor = Color.Red;
-            btnLCLogin.Enabled = true;
-            btnUpdateLostCousinsWebsite.Visible = false;
-        }
-
-        void UpdateLostCousinsReport() => rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType));
-
         void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -1797,39 +1573,11 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void BtnLCnoCensus_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            People people = new People();
-            people.SetupLCnoCensus(relationFilter);
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.NoLCCensusEvent);
-            HourGlass(false);
-        }
-
         void ChkLCRootPersonConfirm_CheckedChanged(object sender, EventArgs e)
         {
             btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm.Checked;
             btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm.Checked ? Color.LightGreen : Color.LightGray;
         }
-
-        void BtnLC1881EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1881, "1881 England & Wales Census Records on file");
-
-        void BtnLC1881Scot_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.SCOTCENSUS1881, "1881 Scotland Census Records on file");
-
-        void BtnLC1881Canada_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.CANADACENSUS1881, "1881 Canada Census Records on file");
-
-        void BtnLC1841EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1841, "1841 England & Wales Census Records on file");
-
-        void BtnLC1911EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1911, "1911 England & Wales Census Records on file");
-
-        void BtnLC1880USA_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.USCENSUS1880, "1880 US Census Records on file");
-
-        void BtnLC1911Ireland_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.IRELANDCENSUS1911, "1911 Ireland Census Records on file");
-
-        void BtnLC1940USA_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.USCENSUS1940, "1940 US Census Records on file");
 
         void LabLostCousinsWeb_Click(object sender, EventArgs e)
         {
@@ -1983,14 +1731,7 @@ namespace FTAnalyzer
                 foreach (Form f in Application.OpenForms)
                 {
                     if (!ReferenceEquals(f, form) && f.GetType() == form.GetType())
-                        if (form is Census)
-                        {
-                            Census newForm = form as Census;
-                            Census oldForm = f as Census;
-                            if (oldForm.CensusDate.Equals(newForm.CensusDate) && oldForm.LostCousins == newForm.LostCousins)
-                                toDispose.Add(f);
-                        }
-                        else if (form is Facts)
+                        if (form is Facts)
                         {
                             Facts newForm = form as Facts;
                             Facts oldForm = f as Facts;
@@ -2649,53 +2390,6 @@ namespace FTAnalyzer
         #endregion
 
         #region Census Tab
-        void BtnShowCensus_Click(object sender, EventArgs e)
-        {
-            bool censusDone = sender == btnShowCensusEntered;
-            ShowCensus(cenDate.SelectedDate, censusDone, txtCensusSurname.Text, false);
-            Analytics.TrackAction(Analytics.CensusTabAction, censusDone ? Analytics.ShowCensusEvent : Analytics.MissingCensusEvent);
-        }
-
-        void ShowCensus(CensusDate censusDate, bool censusDone, string surname, bool random)
-        {
-            Predicate<CensusIndividual> filter;
-            Census census = new Census(censusDate, censusDone);
-            if (random)
-                census.Text = $"People with surname {surname}";
-            else
-                census.Text = "People";
-            if (censusDone)
-                census.Text += $" entered with a {censusDate} record";
-            else
-                census.Text += $" missing a {censusDate} record that you can search for";
-
-            if (random)
-            {
-                int tries = 0;
-                while (random && census.RecordCount == 0 && tries < 5)
-                {
-                    surname = GetRandomSurname();
-                    filter = CreateCensusIndividualFilter(censusDate, censusDone, surname);
-                    census.SetupCensus(filter);
-                    tries++;
-                }
-            }
-            else
-            {
-                filter = CreateCensusIndividualFilter(censusDate, censusDone, surname);
-                census.SetupCensus(filter);
-            }
-            DisposeDuplicateForms(census);
-            census.Show();
-        }
-
-        void BtnRandomSurname_Click(object sender, EventArgs e)
-        {
-            string surname = GetRandomSurname();
-            bool censusDone = sender == btnRandomSurnameEntered;
-            ShowCensus(cenDate.SelectedDate, censusDone, surname, true);
-        }
-
         string GetRandomSurname()
         {
             IEnumerable<Individual> directs = ft.AllIndividuals.Filter(x => x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT);
@@ -2708,84 +2402,6 @@ namespace FTAnalyzer
                 surname = surnames[selection];
             } while (surname == "UNKNOWN" && surnames.Count > 10);
             return surname;
-        }
-
-        void BtnMissingCensusLocation_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SetupMissingCensusLocation();
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MissingCensusLocationEvent);
-            HourGlass(false);
-        }
-
-        void BtnDuplicateCensus_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SetupDuplicateCensus();
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.CensusTabAction, Analytics.DuplicateCensusEvent);
-            HourGlass(false);
-        }
-
-        void BtnNoChildrenStatus_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SetupNoChildrenStatus();
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.CensusTabAction, Analytics.NoChildrenStatusEvent);
-            HourGlass(false);
-        }
-
-        void BtnMismatchedChildrenStatus_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SetupChildrenStatusReport();
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MisMatchedEvent);
-            HourGlass(false);
-        }
-
-        void ShowCensusRefFacts(CensusReference.ReferenceStatus status, Predicate<Individual> filter)
-        {
-            HourGlass(true);
-            CensusDate date = chkAnyCensusYear.Checked ? CensusDate.ANYCENSUS : cenDate.SelectedDate;
-            Facts facts = new Facts(status, filter, date);
-            facts.Show();
-            HourGlass(false);
-        }
-
-        void BtnCensusRefs_Click(object sender, EventArgs e) =>
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.GOOD, CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked));
-
-        void BtnMissingCensusRefs_Click(object sender, EventArgs e) =>
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.BLANK, CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked));
-
-        void BtnIncompleteCensusRef_Click(object sender, EventArgs e) =>
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.INCOMPLETE, CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked));
-
-        void BtnUnrecognisedCensusRef_Click(object sender, EventArgs e) =>
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED, CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked));
-
-        void BtnReportUnrecognised_Click(object sender, EventArgs e)
-        {
-            IEnumerable<string> unrecognisedResults = ft.UnrecognisedCensusReferences();
-            IEnumerable<string> missingResults = ft.MissingCensusReferences();
-            IEnumerable<string> notesResults = ft.UnrecognisedCensusReferencesNotes();
-
-            if (unrecognisedResults.Any() || missingResults.Any() || notesResults.Any())
-                SaveUnrecognisedDataFile(unrecognisedResults, missingResults, notesResults, $"Unrecognised & Missing Census References for {Path.GetFileNameWithoutExtension(filename)}.txt",
-                    "\n\nPlease check the file and remove any private notes information before posting");
-            else
-                MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
         }
 
         void SaveUnrecognisedDataFile(IEnumerable<string> unrecognisedResults, IEnumerable<string> missingResults, IEnumerable<string> notesResults,
@@ -2822,46 +2438,13 @@ namespace FTAnalyzer
             HourGlass(true);
             List<DisplayFact> results = new List<DisplayFact>();
             List<DisplayFact> censusRefs = new List<DisplayFact>();
-            Predicate<Individual> filter = CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked);
-            foreach (Individual ind in ft.AllIndividuals.Filter(filter))
-                foreach (Fact f in ind.AllFacts)
-                    if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Reference.Length > 0)
-                        censusRefs.Add(new DisplayFact(ind, f));
-            IEnumerable<string> distinctRefs = censusRefs.Select(x => x.FactDate.StartDate.Year + x.CensusReference.ToString()).Distinct();
-            tspbTabProgress.Maximum = distinctRefs.Count() + 1;
             tspbTabProgress.Value = 0;
             tspbTabProgress.Visible = true;
-            foreach (string censusref in distinctRefs)
-            {
-                IEnumerable<DisplayFact> result = censusRefs.Filter(x => censusref == x.FactDate.StartDate.Year + x.CensusReference.ToString());
-                int count = result.Select(x => x.Location).Distinct().Count();
-                if (count > 1)
-                    results.AddRange(result);
-                tspbTabProgress.Value++;
-                Application.DoEvents();
-            }
             tspbTabProgress.Visible = false;
             Facts factForm = new Facts(results);
             DisposeDuplicateForms(factForm);
             factForm.Show();
             factForm.ShowHideFactRows();
-            HourGlass(false);
-        }
-        void BtnCensusProblemFacts_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> filter = new Predicate<Individual>(x => x.ErrorFacts.Count > 0);
-            Facts facts = new Facts(filter, true);
-            facts.Show();
-            HourGlass(false);
-        }
-
-        void BtnCensusAutoCreatedFacts_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> filter = new Predicate<Individual>(x => x.FactCount(Fact.CENSUS_FTA) > 0);
-            Facts facts = new Facts(filter, false);
-            facts.Show();
             HourGlass(false);
         }
         #endregion
@@ -2878,27 +2461,6 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
             HourGlass(false);
         }
-
-        async void DisplayColourCensus(string country)
-        {
-            HourGlass(true);
-            List<IDisplayColourCensus> list =
-                ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
-            ColourCensus rs = new ColourCensus(country, list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
-            HourGlass(false);
-        }
-
-        void BtnUKColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_KINGDOM);
-
-        void BtnIrishColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.IRELAND);
-
-        void BtnUSColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_STATES);
-
-        void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA);
 
         void BtnStandardMissingData_Click(object sender, EventArgs e)
         {
@@ -3125,7 +2687,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
+            using (DataTable dt = convertor.ToDataTable(new List<IExportIndividual>((IEnumerable<IExportIndividual>)ft.AllIndividuals)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
             HourGlass(false);
