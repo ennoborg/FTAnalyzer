@@ -21,7 +21,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 using HtmlAgilityPack;
 using System.Net;
 using System.Diagnostics;
@@ -35,8 +34,7 @@ namespace FTAnalyzer
         public static string VERSION = "8.4.0.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        Cursor storedCursor = Cursors.Default;
+        readonly Cursor storedCursor = Cursors.Default;
         readonly FamilyTree ft = FamilyTree.Instance;
         bool stopProcessing;
         string filename;
@@ -298,8 +296,6 @@ namespace FTAnalyzer
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
             tsStatusLabel.Text = string.Empty;
-            rtbLCoutput.Text = string.Empty;
-            rtbLCUpdateData.Text = string.Empty;
             rtbCheckAncestors.Text = string.Empty;
             rtbToday.Text = string.Empty;
             pbSources.Value = 0;
@@ -309,7 +305,6 @@ namespace FTAnalyzer
             SetupGridControls();
             cmbReferrals.Items.Clear();
             cmbReferrals.Text = string.Empty;
-            ClearColourFamilyCombo();
             Statistics.Instance.Clear();
             btnReferrals.Enabled = false;
             openToolStripMenuItem.Enabled = false;
@@ -331,8 +326,6 @@ namespace FTAnalyzer
             dgCountries.DataSource = null;
             dgIndividuals.DataSource = null;
             dgFamilies.DataSource = null;
-            dgTreeTops.DataSource = null;
-            dgWorldWars.DataSource = null;
             dgLooseBirths.DataSource = null;
             dgLooseDeaths.DataSource = null;
             dgLooseInfo.DataSource = null;
@@ -348,8 +341,6 @@ namespace FTAnalyzer
             ExtensionMethods.DoubleBuffered(dgCountries, true);
             ExtensionMethods.DoubleBuffered(dgIndividuals, true);
             ExtensionMethods.DoubleBuffered(dgFamilies, true);
-            ExtensionMethods.DoubleBuffered(dgTreeTops, true);
-            ExtensionMethods.DoubleBuffered(dgWorldWars, true);
             ExtensionMethods.DoubleBuffered(dgLooseBirths, true);
             ExtensionMethods.DoubleBuffered(dgLooseDeaths, true);
             ExtensionMethods.DoubleBuffered(dgLooseInfo, true);
@@ -536,7 +527,6 @@ namespace FTAnalyzer
         }
 
         void RtbOutput_TextChanged(object sender, EventArgs e) => rtbOutput.ScrollToBottom();
-        void RtbLCoutput_TextChanged(object sender, EventArgs e) => rtbLCoutput.ScrollToBottom();
         void RtbCheckAncestors_TextChanged(object sender, EventArgs e) => rtbCheckAncestors.ScrollToBottom();
 
         bool shutdown;
@@ -1270,11 +1260,6 @@ namespace FTAnalyzer
                         // show empty form click button to load
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.SurnamesTabEvent);
                     }
-                    else if (tabSelector.SelectedTab == tabWorldWars)
-                    {
-                        dgWorldWars.DataSource = null;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.WorldWarsTabEvent);
-                    }
                     else if (tabSelector.SelectedTab == tabToday)
                     {
                         bool todaysMonth = Application.UserAppDataRegistry.GetValue("Todays Events Month", "False").Equals("True");
@@ -1446,40 +1431,6 @@ namespace FTAnalyzer
         }
         #endregion
 
-        #region Lost Cousins
-        void BtnLCDuplicates_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            People people = new People();
-            people.SetupLCDuplicates(relationFilter);
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCDuplicatesEvent);
-            HourGlass(false);
-        }
-
-        void ChkLCRootPersonConfirm_CheckedChanged(object sender, EventArgs e)
-        {
-            btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm.Checked;
-            btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm.Checked ? Color.LightGreen : Color.LightGray;
-        }
-
-        void LabLostCousinsWeb_Click(object sender, EventArgs e)
-        {
-            SpecialMethods.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCWebLinkEvent);
-        }
-
-        void LabLostCousinsWeb_MouseEnter(object sender, EventArgs e)
-        {
-            storedCursor = Cursor;
-            Cursor = Cursors.Hand;
-        }
-
-        void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e) => Cursor = storedCursor;
-        #endregion
-
         #region ToolStrip Clicks
         void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show($"This is Family Tree Analyzer version {VERSION}", "FTAnalyzer");
 
@@ -1557,10 +1508,6 @@ namespace FTAnalyzer
                         PrintDataGrid(Orientation.Portrait, dgAddresses, "List of Addresses");
                     if (tabCtrlLocations.SelectedTab == tabPlaces)
                         PrintDataGrid(Orientation.Portrait, dgPlaces, "List of Places");
-                }
-                else if (tabSelector.SelectedTab == tabWorldWars)
-                {
-                    PrintDataGrid(Orientation.Landscape, dgWorldWars, "List of Individuals who may have served in the World Wars");
                 }
             }
             catch (Exception ex)
@@ -1806,30 +1753,6 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 ShowFacts((string)dgLooseInfo.CurrentRow.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value);
-        }
-
-        void DgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgTreeTops.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value);
-        }
-
-        void DgWorldWars_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                string indID = (string)dgWorldWars.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                ShowFacts(indID);
-            }
-        }
-
-        void LivesOfFirstWorldWar(string indID)
-        {
-            Individual ind = ft.GetIndividual(indID);
-            string searchtext = ind.Forename + "+" + ind.Surname;
-            if (ind.ServiceNumber.Length > 0)
-                searchtext += "+" + ind.ServiceNumber;
-            SpecialMethods.VisitWebsite("https://www.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
         }
 
         void DgIndividuals_MouseDown(object sender, MouseEventArgs e)
@@ -2192,10 +2115,9 @@ namespace FTAnalyzer
             cts = new CancellationTokenSource();
             int score = tbDuplicateScore.Value;
             labDuplicateSlider.Text = $"Match Quality : {tbDuplicateScore.Value}  ";
-            bool ignoreUnknownTwins = chkIgnoreUnnamedTwins.Checked;
             tsCountLabel.Text = "Calculating Duplicates this may take some considerable time";
             tsHintsLabel.Text = string.Empty;
-            duplicateData = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, progressText, maxScore, cts.Token)).ConfigureAwait(true);
+            duplicateData = await Task.Run(() => ft.GenerateDuplicatesList(score, progress, progressText, maxScore, cts.Token)).ConfigureAwait(true);
             cts = null;
             if (duplicateData != null)
             {
@@ -2266,145 +2188,7 @@ namespace FTAnalyzer
             GeneralSettings.Default.Save();
             await SetPossibleDuplicates().ConfigureAwait(true);
         }
-        #endregion
 
-        #region Census Tab
-        string GetRandomSurname()
-        {
-            IEnumerable<Individual> directs = ft.AllIndividuals.Filter(x => x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT);
-            List<string> surnames = directs.Select(x => x.Surname).Distinct().ToList();
-            Random rnd = new Random();
-            string surname;
-            do
-            {
-                int selection = rnd.Next(surnames.Count);
-                surname = surnames[selection];
-            } while (surname == "UNKNOWN" && surnames.Count > 10);
-            return surname;
-        }
-
-        void SaveUnrecognisedDataFile(IEnumerable<string> unrecognisedResults, IEnumerable<string> missingResults, IEnumerable<string> notesResults,
-                                      string unrecognisedFilename, string privateWarning)
-        {
-            try
-            {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-                {
-                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
-                    saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                    saveFileDialog.FileName = unrecognisedFilename;
-                    saveFileDialog.Filter = "Report File (*.txt)|*.txt";
-                    saveFileDialog.FilterIndex = 1;
-
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                        Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
-                        FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
-                        Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
-                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
-            }
-        }
-
-        void BtnInconsistentLocations_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            List<DisplayFact> results = new List<DisplayFact>();
-            tspbTabProgress.Value = 0;
-            tspbTabProgress.Visible = true;
-            tspbTabProgress.Visible = false;
-            Facts factForm = new Facts(results);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
-            factForm.ShowHideFactRows();
-            HourGlass(false);
-        }
-        #endregion
-
-        #region Colour Reports Tab
-        void BtnColourBMD_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
-            ColourBMD rs = new ColourBMD(list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
-            HourGlass(false);
-        }
-
-        void BtnStandardMissingData_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not Implemented Yet", "FTAnalyzer");
-        }
-
-        void BtnAdvancedMissingData_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            //List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
-            MissingData rs = new MissingData();
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            HourGlass(false);
-        }
-
-        void CmbColourFamily_Click(object sender, EventArgs e) => UpdateColourFamilyComboBox(null);
-
-        void RelTypesColoured_RelationTypesChanged(object sender, EventArgs e) => RefreshColourFamilyComboBox();
-
-        void TxtColouredSurname_TextChanged(object sender, EventArgs e) => RefreshColourFamilyComboBox();
-
-        void RefreshColourFamilyComboBox()
-        {
-            ComboBoxFamily f = null;
-            if (cmbColourFamily.Text != "All Families")
-                f = cmbColourFamily.SelectedItem as ComboBoxFamily; // store the previous value to set it again after
-            ClearColourFamilyCombo();
-            bool stillThere = UpdateColourFamilyComboBox(f);
-            if (f != null && stillThere)  // the previously selected value is still present so select it
-                cmbColourFamily.SelectedItem = f;
-        }
-
-        void ClearColourFamilyCombo()
-        {
-            cmbColourFamily.Items.Clear();
-            cmbColourFamily.Text = "All Families";
-        }
-
-        bool UpdateColourFamilyComboBox(ComboBoxFamily f)
-        {
-            bool stillThere = false;
-            if (cmbColourFamily.Items.Count == 0)
-            {
-                HourGlass(true);
-                IEnumerable<Family> candidates = ft.AllFamilies;
-                Predicate<Family> relationFilter = relTypesColoured.BuildFamilyFilter<Family>(x => x.RelationTypes);
-                if (txtColouredSurname.Text.Length > 0)
-                    candidates = candidates.Filter(x => x.ContainsSurname(txtColouredSurname.Text, true));
-                List<Family> list = candidates.Filter(relationFilter).ToList();
-                list.Sort(new DefaultFamilyComparer());
-                foreach (Family family in list)
-                {
-                    ComboBoxFamily cbf = new ComboBoxFamily(family);
-                    cmbColourFamily.Items.Add(cbf);
-                    if (cbf.Equals(f))
-                        stillThere = true;
-                }
-                btnReferrals.Enabled = true;
-                HourGlass(false);
-            }
-            return stillThere;
-        }
-
-        void BtnRandomSurnameColour_Click(object sender, EventArgs e) => txtColouredSurname.Text = GetRandomSurname();
         #endregion
 
         #region Loose Birth/Death Tabs
@@ -2502,10 +2286,6 @@ namespace FTAnalyzer
             }
             HourGlass(false);
         }
-
-        void DgTreeTops_MouseDown(object sender, MouseEventArgs e) => ShowViewNotesMenu(dgTreeTops, e);
-
-        void DgWorldWars_MouseDown(object sender, MouseEventArgs e) => ShowViewNotesMenu(dgWorldWars, e);
 
         void ShowViewNotesMenu(VirtualDataGridView<IDisplayIndividual> dg, MouseEventArgs e)
         {

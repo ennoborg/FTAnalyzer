@@ -138,118 +138,46 @@ namespace FTAnalyzer
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.dgRegions = new System.Windows.Forms.DataGridView();
             this.dgCountries = new System.Windows.Forms.DataGridView();
-            this.cmbColourFamily = new System.Windows.Forms.ComboBox();
-            this.btnRandomSurnameColour = new System.Windows.Forms.Button();
             this.ckbFactExclude = new System.Windows.Forms.CheckedListBox();
             this.btnShowExclusions = new System.Windows.Forms.Button();
             this.dgDataErrors = new FTAnalyzer.Forms.Controls.VirtualDGVDataErrors();
             this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
-            this.chkLCRootPersonConfirm = new System.Windows.Forms.CheckBox();
             this.dgCheckAncestors = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.chkIgnoreUnnamedTwins = new System.Windows.Forms.CheckBox();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.tabWorldWars = new System.Windows.Forms.TabPage();
-            this.ckbMilitaryOnly = new System.Windows.Forms.CheckBox();
-            this.dgWorldWars = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
-            this.wardeadRelation = new FTAnalyzer.Forms.Controls.RelationTypes();
             this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.ckbTTIncludeOnlyOneParent = new System.Windows.Forms.CheckBox();
-            this.dgTreeTops = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
             this.treetopsRelation = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.tabColourReports = new System.Windows.Forms.TabPage();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.btnAdvancedMissingData = new System.Windows.Forms.Button();
-            this.btnStandardMissingData = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.ckbIgnoreNoDeathDate = new System.Windows.Forms.CheckBox();
-            this.ckbIgnoreNoBirthDate = new System.Windows.Forms.CheckBox();
-            this.btnIrishColourCensus = new System.Windows.Forms.Button();
-            this.btnCanadianColourCensus = new System.Windows.Forms.Button();
-            this.btnUKColourCensus = new System.Windows.Forms.Button();
-            this.btnUSColourCensus = new System.Windows.Forms.Button();
-            this.btnColourBMD = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtColouredSurname = new System.Windows.Forms.TextBox();
-            this.relTypesColoured = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.LCSubTabs = new System.Windows.Forms.TabControl();
-            this.LCReportsTab = new System.Windows.Forms.TabPage();
             this.Referrals = new System.Windows.Forms.GroupBox();
             this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
             this.btnReferrals = new System.Windows.Forms.Button();
             this.cmbReferrals = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.btnLCnoCensus = new System.Windows.Forms.Button();
-            this.btnLCDuplicates = new System.Windows.Forms.Button();
-            this.btnLCMissingCountry = new System.Windows.Forms.Button();
-            this.btnLC1940USA = new System.Windows.Forms.Button();
-            this.rtbLostCousins = new System.Windows.Forms.RichTextBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.btnLC1911EW = new System.Windows.Forms.Button();
-            this.LabLostCousinsWeb = new System.Windows.Forms.LinkLabel();
-            this.ckbShowLCEntered = new System.Windows.Forms.CheckBox();
-            this.btnLC1841EW = new System.Windows.Forms.Button();
-            this.btnLC1911Ireland = new System.Windows.Forms.Button();
-            this.btnLC1880USA = new System.Windows.Forms.Button();
-            this.btnLC1881EW = new System.Windows.Forms.Button();
-            this.btnLC1881Canada = new System.Windows.Forms.Button();
-            this.btnLC1881Scot = new System.Windows.Forms.Button();
-            this.relTypesLC = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.LCUpdatesTab = new System.Windows.Forms.TabPage();
             this.btnViewInvalidRefs = new System.Windows.Forms.Button();
-            this.btnLCPotentialUploads = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
-            this.rtbLCUpdateData = new System.Windows.Forms.RichTextBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.btnLCLogin = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.txtLCEmail = new System.Windows.Forms.TextBox();
-            this.txtLCPassword = new System.Windows.Forms.MaskedTextBox();
-            this.btnUpdateLostCousinsWebsite = new System.Windows.Forms.Button();
-            this.rtbLCoutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.LCVerifyTab = new System.Windows.Forms.TabPage();
             this.rtbCheckAncestors = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.btnCheckMyAncestors = new System.Windows.Forms.Button();
             this.lblCheckAncestors = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAliveOnDate = new System.Windows.Forms.Button();
             this.txtAliveDates = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.chkAnyCensusYear = new System.Windows.Forms.CheckBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.btnShowCensusMissing = new System.Windows.Forms.Button();
-            this.btnShowCensusEntered = new System.Windows.Forms.Button();
             this.btnRandomSurnameEntered = new System.Windows.Forms.Button();
             this.btnRandomSurnameMissing = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnInconsistentLocations = new System.Windows.Forms.Button();
-            this.btnUnrecognisedCensusRef = new System.Windows.Forms.Button();
-            this.btnIncompleteCensusRef = new System.Windows.Forms.Button();
-            this.btnMissingCensusRefs = new System.Windows.Forms.Button();
-            this.btnCensusRefs = new System.Windows.Forms.Button();
             this.chkExcludeUnknownBirths = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.relTypesCensus = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.BtnAutoCreatedCensusFacts = new System.Windows.Forms.Button();
-            this.BtnProblemCensusFacts = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnDuplicateCensus = new System.Windows.Forms.Button();
-            this.btnMissingCensusLocation = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btnMismatchedChildrenStatus = new System.Windows.Forms.Button();
             this.btnNoChildrenStatus = new System.Windows.Forms.Button();
@@ -377,26 +305,9 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCheckAncestors)).BeginInit();
-            this.tabWorldWars.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).BeginInit();
             this.ctxViewNotes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
-            this.tabColourReports.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.LCSubTabs.SuspendLayout();
-            this.LCReportsTab.SuspendLayout();
             this.Referrals.SuspendLayout();
-            this.LCUpdatesTab.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.LCVerifyTab.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox10.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
-            this.groupBox9.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabLocations.SuspendLayout();
@@ -755,103 +666,103 @@ namespace FTAnalyzer
             // mnuIndividualsToExcel
             // 
             this.mnuIndividualsToExcel.Name = "mnuIndividualsToExcel";
-            this.mnuIndividualsToExcel.Size = new System.Drawing.Size(222, 22);
+            this.mnuIndividualsToExcel.Size = new System.Drawing.Size(211, 22);
             this.mnuIndividualsToExcel.Text = "Individuals to Excel";
             this.mnuIndividualsToExcel.Click += new System.EventHandler(this.IndividualsToExcelToolStripMenuItem_Click);
             // 
             // mnuFamiliesToExcel
             // 
             this.mnuFamiliesToExcel.Name = "mnuFamiliesToExcel";
-            this.mnuFamiliesToExcel.Size = new System.Drawing.Size(222, 22);
+            this.mnuFamiliesToExcel.Size = new System.Drawing.Size(211, 22);
             this.mnuFamiliesToExcel.Text = "Families to Excel";
             this.mnuFamiliesToExcel.Click += new System.EventHandler(this.FamiliesToExcelToolStripMenuItem_Click);
             // 
             // mnuFactsToExcel
             // 
             this.mnuFactsToExcel.Name = "mnuFactsToExcel";
-            this.mnuFactsToExcel.Size = new System.Drawing.Size(222, 22);
+            this.mnuFactsToExcel.Size = new System.Drawing.Size(211, 22);
             this.mnuFactsToExcel.Text = "Facts to Excel";
             this.mnuFactsToExcel.Click += new System.EventHandler(this.FactsToExcelToolStripMenuItem_Click);
             // 
             // MnuExportLocations
             // 
             this.MnuExportLocations.Name = "MnuExportLocations";
-            this.MnuExportLocations.Size = new System.Drawing.Size(222, 22);
+            this.MnuExportLocations.Size = new System.Drawing.Size(211, 22);
             this.MnuExportLocations.Text = "Locations to Excel";
             this.MnuExportLocations.Click += new System.EventHandler(this.MnuExportLocations_Click);
             // 
             // mnuSourcesToExcel
             // 
             this.mnuSourcesToExcel.Name = "mnuSourcesToExcel";
-            this.mnuSourcesToExcel.Size = new System.Drawing.Size(222, 22);
+            this.mnuSourcesToExcel.Size = new System.Drawing.Size(211, 22);
             this.mnuSourcesToExcel.Text = "Sources to Excel";
             this.mnuSourcesToExcel.Click += new System.EventHandler(this.MnuSourcesToExcel_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(219, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(208, 6);
             // 
             // mnuDataErrorsToExcel
             // 
             this.mnuDataErrorsToExcel.Name = "mnuDataErrorsToExcel";
-            this.mnuDataErrorsToExcel.Size = new System.Drawing.Size(222, 22);
+            this.mnuDataErrorsToExcel.Size = new System.Drawing.Size(211, 22);
             this.mnuDataErrorsToExcel.Text = "Data Errors to Excel";
             this.mnuDataErrorsToExcel.Click += new System.EventHandler(this.MnuDataErrorsToExcel_Click);
             // 
             // mnuSurnamesToExcel
             // 
             this.mnuSurnamesToExcel.Name = "mnuSurnamesToExcel";
-            this.mnuSurnamesToExcel.Size = new System.Drawing.Size(222, 22);
+            this.mnuSurnamesToExcel.Size = new System.Drawing.Size(211, 22);
             this.mnuSurnamesToExcel.Text = "Surnames to Excel";
             this.mnuSurnamesToExcel.Click += new System.EventHandler(this.MnuSurnamesToExcel_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(219, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(208, 6);
             // 
             // mnuLooseBirthsToExcel
             // 
             this.mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
-            this.mnuLooseBirthsToExcel.Size = new System.Drawing.Size(222, 22);
+            this.mnuLooseBirthsToExcel.Size = new System.Drawing.Size(211, 22);
             this.mnuLooseBirthsToExcel.Text = "Loose Births to Excel";
             this.mnuLooseBirthsToExcel.Click += new System.EventHandler(this.LooseBirthsToExcelToolStripMenuItem_Click);
             // 
             // mnuLooseDeathsToExcel
             // 
             this.mnuLooseDeathsToExcel.Name = "mnuLooseDeathsToExcel";
-            this.mnuLooseDeathsToExcel.Size = new System.Drawing.Size(222, 22);
+            this.mnuLooseDeathsToExcel.Size = new System.Drawing.Size(211, 22);
             this.mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
             this.mnuLooseDeathsToExcel.Click += new System.EventHandler(this.LooseDeathsToExcelToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(219, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(208, 6);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(219, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(208, 6);
             // 
             // mnuDNA_GEDCOM
             // 
             this.mnuDNA_GEDCOM.Name = "mnuDNA_GEDCOM";
-            this.mnuDNA_GEDCOM.Size = new System.Drawing.Size(222, 22);
+            this.mnuDNA_GEDCOM.Size = new System.Drawing.Size(211, 22);
             this.mnuDNA_GEDCOM.Text = "Minimalist DNA GEDCOM";
             this.mnuDNA_GEDCOM.Click += new System.EventHandler(this.MnuDNA_GEDCOM_Click);
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(219, 6);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(208, 6);
             this.toolStripSeparator15.Visible = false;
             // 
             // mnuJSON
             // 
             this.mnuJSON.Name = "mnuJSON";
-            this.mnuJSON.Size = new System.Drawing.Size(222, 22);
+            this.mnuJSON.Size = new System.Drawing.Size(211, 22);
             this.mnuJSON.Text = "JSON for Visualisations";
             this.mnuJSON.Visible = false;
             this.mnuJSON.Click += new System.EventHandler(this.MnuJSON_Click);
@@ -1177,30 +1088,6 @@ namespace FTAnalyzer
             this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCountries_CellDoubleClick);
             this.dgCountries.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgCountries_CellFormatting);
             // 
-            // cmbColourFamily
-            // 
-            this.cmbColourFamily.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbColourFamily.FormattingEnabled = true;
-            this.cmbColourFamily.Location = new System.Drawing.Point(406, 49);
-            this.cmbColourFamily.Name = "cmbColourFamily";
-            this.cmbColourFamily.Size = new System.Drawing.Size(509, 21);
-            this.cmbColourFamily.TabIndex = 60;
-            this.toolTips.SetToolTip(this.cmbColourFamily, "Select a family to limit the reports to just that family");
-            this.cmbColourFamily.Click += new System.EventHandler(this.CmbColourFamily_Click);
-            // 
-            // btnRandomSurnameColour
-            // 
-            this.btnRandomSurnameColour.Location = new System.Drawing.Point(622, 13);
-            this.btnRandomSurnameColour.Name = "btnRandomSurnameColour";
-            this.btnRandomSurnameColour.Size = new System.Drawing.Size(293, 25);
-            this.btnRandomSurnameColour.TabIndex = 62;
-            this.btnRandomSurnameColour.Text = "Select Random Surname from Direct Ancestor\'s Surnames";
-            this.toolTips.SetToolTip(this.btnRandomSurnameColour, "Once selected click the appropriate report button to view the report. eg: UK Colo" +
-        "ur Census Report.");
-            this.btnRandomSurnameColour.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameColour.Click += new System.EventHandler(this.BtnRandomSurnameColour_Click);
-            // 
             // ckbFactExclude
             // 
             this.ckbFactExclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1247,6 +1134,7 @@ namespace FTAnalyzer
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(6, 166);
+            this.dgDataErrors.MultiSelect = false;
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
             this.dgDataErrors.RowHeadersWidth = 82;
@@ -1273,21 +1161,6 @@ namespace FTAnalyzer
             this.toolTips.SetToolTip(this.tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
             this.tbDuplicateScore.Value = 1;
             this.tbDuplicateScore.Scroll += new System.EventHandler(this.TbDuplicateScore_Scroll);
-            // 
-            // chkLCRootPersonConfirm
-            // 
-            this.chkLCRootPersonConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLCRootPersonConfirm.Location = new System.Drawing.Point(30, 147);
-            this.chkLCRootPersonConfirm.Name = "chkLCRootPersonConfirm";
-            this.chkLCRootPersonConfirm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkLCRootPersonConfirm.Size = new System.Drawing.Size(407, 24);
-            this.chkLCRootPersonConfirm.TabIndex = 4;
-            this.chkLCRootPersonConfirm.Text = "rootperson";
-            this.chkLCRootPersonConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm, "The Lost Cousins Data includes a relationship field please make sure the root per" +
-        "son relates to the root person on the Lost Cousins website.");
-            this.chkLCRootPersonConfirm.UseVisualStyleBackColor = true;
-            this.chkLCRootPersonConfirm.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm_CheckedChanged);
             // 
             // dgCheckAncestors
             // 
@@ -1340,20 +1213,6 @@ namespace FTAnalyzer
             this.toolTips.SetToolTip(this.label12, "Will produce duplicates in list when the two individuals decent but vague match t" +
         "o each other - Lowest duplicate match score");
             // 
-            // chkIgnoreUnnamedTwins
-            // 
-            this.chkIgnoreUnnamedTwins.AutoSize = true;
-            this.chkIgnoreUnnamedTwins.Checked = true;
-            this.chkIgnoreUnnamedTwins.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIgnoreUnnamedTwins.Location = new System.Drawing.Point(246, 64);
-            this.chkIgnoreUnnamedTwins.Name = "chkIgnoreUnnamedTwins";
-            this.chkIgnoreUnnamedTwins.Size = new System.Drawing.Size(87, 17);
-            this.chkIgnoreUnnamedTwins.TabIndex = 29;
-            this.chkIgnoreUnnamedTwins.Text = "Ignore Twins";
-            this.toolTips.SetToolTip(this.chkIgnoreUnnamedTwins, "Ignores duplicates where forename is unknown");
-            this.chkIgnoreUnnamedTwins.UseVisualStyleBackColor = true;
-            this.chkIgnoreUnnamedTwins.Visible = false;
-            // 
             // printPreviewDialog
             // 
             this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -1369,76 +1228,6 @@ namespace FTAnalyzer
             this.printDialog.AllowSelection = true;
             this.printDialog.AllowSomePages = true;
             this.printDialog.UseEXDialog = true;
-            // 
-            // tabWorldWars
-            // 
-            this.tabWorldWars.Controls.Add(this.ckbMilitaryOnly);
-            this.tabWorldWars.Controls.Add(this.dgWorldWars);
-            this.tabWorldWars.Controls.Add(this.label9);
-            this.tabWorldWars.Controls.Add(this.txtWorldWarsSurname);
-            this.tabWorldWars.Controls.Add(this.wardeadRelation);
-            this.tabWorldWars.Location = new System.Drawing.Point(4, 22);
-            this.tabWorldWars.Name = "tabWorldWars";
-            this.tabWorldWars.Size = new System.Drawing.Size(1088, 460);
-            this.tabWorldWars.TabIndex = 8;
-            this.tabWorldWars.Text = "World Wars";
-            this.tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
-            this.tabWorldWars.UseVisualStyleBackColor = true;
-            // 
-            // ckbMilitaryOnly
-            // 
-            this.ckbMilitaryOnly.AutoSize = true;
-            this.ckbMilitaryOnly.Location = new System.Drawing.Point(279, 105);
-            this.ckbMilitaryOnly.Name = "ckbMilitaryOnly";
-            this.ckbMilitaryOnly.Size = new System.Drawing.Size(257, 17);
-            this.ckbMilitaryOnly.TabIndex = 33;
-            this.ckbMilitaryOnly.Text = "Limit Results to only those men with Military Facts";
-            this.ckbMilitaryOnly.UseVisualStyleBackColor = true;
-            // 
-            // dgWorldWars
-            // 
-            this.dgWorldWars.AllowUserToAddRows = false;
-            this.dgWorldWars.AllowUserToDeleteRows = false;
-            this.dgWorldWars.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgWorldWars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgWorldWars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWorldWars.Location = new System.Drawing.Point(0, 128);
-            this.dgWorldWars.MultiSelect = false;
-            this.dgWorldWars.Name = "dgWorldWars";
-            this.dgWorldWars.ReadOnly = true;
-            this.dgWorldWars.RowHeadersWidth = 82;
-            this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgWorldWars.Size = new System.Drawing.Size(1082, 312);
-            this.dgWorldWars.TabIndex = 29;
-            this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgWorldWars_CellDoubleClick);
-            this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgWorldWars_MouseDown);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(595, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(49, 13);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Surname";
-            // 
-            // txtWorldWarsSurname
-            // 
-            this.txtWorldWarsSurname.Location = new System.Drawing.Point(650, 22);
-            this.txtWorldWarsSurname.Name = "txtWorldWarsSurname";
-            this.txtWorldWarsSurname.Size = new System.Drawing.Size(201, 20);
-            this.txtWorldWarsSurname.TabIndex = 27;
-            // 
-            // wardeadRelation
-            // 
-            this.wardeadRelation.Location = new System.Drawing.Point(270, 3);
-            this.wardeadRelation.Margin = new System.Windows.Forms.Padding(6);
-            this.wardeadRelation.MarriedToDB = true;
-            this.wardeadRelation.Name = "wardeadRelation";
-            this.wardeadRelation.Size = new System.Drawing.Size(322, 100);
-            this.wardeadRelation.TabIndex = 26;
             // 
             // ctxViewNotes
             // 
@@ -1468,26 +1257,6 @@ namespace FTAnalyzer
             this.ckbTTIncludeOnlyOneParent.Text = "Include Individuals that have only one parent known";
             this.ckbTTIncludeOnlyOneParent.UseVisualStyleBackColor = true;
             // 
-            // dgTreeTops
-            // 
-            this.dgTreeTops.AllowUserToAddRows = false;
-            this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTreeTops.Location = new System.Drawing.Point(0, 128);
-            this.dgTreeTops.MultiSelect = false;
-            this.dgTreeTops.Name = "dgTreeTops";
-            this.dgTreeTops.ReadOnly = true;
-            this.dgTreeTops.RowHeadersWidth = 82;
-            this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTreeTops.Size = new System.Drawing.Size(1082, 312);
-            this.dgTreeTops.TabIndex = 28;
-            this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
-            this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgTreeTops_MouseDown);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -1512,176 +1281,6 @@ namespace FTAnalyzer
             this.treetopsRelation.Name = "treetopsRelation";
             this.treetopsRelation.Size = new System.Drawing.Size(322, 96);
             this.treetopsRelation.TabIndex = 12;
-            // 
-            // tabColourReports
-            // 
-            this.tabColourReports.Controls.Add(this.groupBox7);
-            this.tabColourReports.Controls.Add(this.btnRandomSurnameColour);
-            this.tabColourReports.Controls.Add(this.label14);
-            this.tabColourReports.Controls.Add(this.cmbColourFamily);
-            this.tabColourReports.Controls.Add(this.groupBox3);
-            this.tabColourReports.Controls.Add(this.btnColourBMD);
-            this.tabColourReports.Controls.Add(this.label10);
-            this.tabColourReports.Controls.Add(this.txtColouredSurname);
-            this.tabColourReports.Controls.Add(this.relTypesColoured);
-            this.tabColourReports.Location = new System.Drawing.Point(4, 22);
-            this.tabColourReports.Name = "tabColourReports";
-            this.tabColourReports.Size = new System.Drawing.Size(1088, 460);
-            this.tabColourReports.TabIndex = 12;
-            this.tabColourReports.Text = "Research Suggestions";
-            this.tabColourReports.UseVisualStyleBackColor = true;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.btnAdvancedMissingData);
-            this.groupBox7.Controls.Add(this.btnStandardMissingData);
-            this.groupBox7.Location = new System.Drawing.Point(423, 116);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(409, 109);
-            this.groupBox7.TabIndex = 63;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Missing Data Reports";
-            this.groupBox7.Visible = false;
-            // 
-            // btnAdvancedMissingData
-            // 
-            this.btnAdvancedMissingData.Location = new System.Drawing.Point(207, 19);
-            this.btnAdvancedMissingData.Name = "btnAdvancedMissingData";
-            this.btnAdvancedMissingData.Size = new System.Drawing.Size(195, 23);
-            this.btnAdvancedMissingData.TabIndex = 40;
-            this.btnAdvancedMissingData.Text = "Advanced Missing Data Report";
-            this.btnAdvancedMissingData.UseVisualStyleBackColor = true;
-            this.btnAdvancedMissingData.Click += new System.EventHandler(this.BtnAdvancedMissingData_Click);
-            // 
-            // btnStandardMissingData
-            // 
-            this.btnStandardMissingData.Location = new System.Drawing.Point(6, 19);
-            this.btnStandardMissingData.Name = "btnStandardMissingData";
-            this.btnStandardMissingData.Size = new System.Drawing.Size(195, 23);
-            this.btnStandardMissingData.TabIndex = 39;
-            this.btnStandardMissingData.Text = "Standard Missing Data Report";
-            this.btnStandardMissingData.UseVisualStyleBackColor = true;
-            this.btnStandardMissingData.Click += new System.EventHandler(this.BtnStandardMissingData_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(339, 52);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(61, 13);
-            this.label14.TabIndex = 61;
-            this.label14.Text = "Family Filter";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.ckbIgnoreNoDeathDate);
-            this.groupBox3.Controls.Add(this.ckbIgnoreNoBirthDate);
-            this.groupBox3.Controls.Add(this.btnIrishColourCensus);
-            this.groupBox3.Controls.Add(this.btnCanadianColourCensus);
-            this.groupBox3.Controls.Add(this.btnUKColourCensus);
-            this.groupBox3.Controls.Add(this.btnUSColourCensus);
-            this.groupBox3.Location = new System.Drawing.Point(8, 116);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(409, 109);
-            this.groupBox3.TabIndex = 36;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Census Suggestions Reports";
-            // 
-            // ckbIgnoreNoDeathDate
-            // 
-            this.ckbIgnoreNoDeathDate.AutoSize = true;
-            this.ckbIgnoreNoDeathDate.Location = new System.Drawing.Point(208, 77);
-            this.ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
-            this.ckbIgnoreNoDeathDate.Size = new System.Drawing.Size(200, 17);
-            this.ckbIgnoreNoDeathDate.TabIndex = 67;
-            this.ckbIgnoreNoDeathDate.Text = "Ignore Individuals with no death date";
-            this.ckbIgnoreNoDeathDate.UseVisualStyleBackColor = true;
-            // 
-            // ckbIgnoreNoBirthDate
-            // 
-            this.ckbIgnoreNoBirthDate.AutoSize = true;
-            this.ckbIgnoreNoBirthDate.Location = new System.Drawing.Point(6, 77);
-            this.ckbIgnoreNoBirthDate.Name = "ckbIgnoreNoBirthDate";
-            this.ckbIgnoreNoBirthDate.Size = new System.Drawing.Size(193, 17);
-            this.ckbIgnoreNoBirthDate.TabIndex = 66;
-            this.ckbIgnoreNoBirthDate.Text = "Ignore Individuals with no birth date";
-            this.ckbIgnoreNoBirthDate.UseVisualStyleBackColor = true;
-            // 
-            // btnColourBMD
-            // 
-            this.btnColourBMD.Location = new System.Drawing.Point(58, 231);
-            this.btnColourBMD.Name = "btnColourBMD";
-            this.btnColourBMD.Size = new System.Drawing.Size(307, 23);
-            this.btnColourBMD.TabIndex = 42;
-            this.btnColourBMD.Text = "View Colour Birth/Marriage/Death Report";
-            this.btnColourBMD.UseVisualStyleBackColor = true;
-            this.btnColourBMD.Click += new System.EventHandler(this.BtnColourBMD_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(339, 19);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(49, 13);
-            this.label10.TabIndex = 59;
-            this.label10.Text = "Surname";
-            // 
-            // txtColouredSurname
-            // 
-            this.txtColouredSurname.Location = new System.Drawing.Point(406, 16);
-            this.txtColouredSurname.Name = "txtColouredSurname";
-            this.txtColouredSurname.Size = new System.Drawing.Size(201, 20);
-            this.txtColouredSurname.TabIndex = 30;
-            this.txtColouredSurname.TextChanged += new System.EventHandler(this.TxtColouredSurname_TextChanged);
-            // 
-            // relTypesColoured
-            // 
-            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
-            this.relTypesColoured.Margin = new System.Windows.Forms.Padding(6);
-            this.relTypesColoured.MarriedToDB = true;
-            this.relTypesColoured.Name = "relTypesColoured";
-            this.relTypesColoured.Size = new System.Drawing.Size(325, 102);
-            this.relTypesColoured.TabIndex = 26;
-            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
-            // 
-            // LCSubTabs
-            // 
-            this.LCSubTabs.Controls.Add(this.LCReportsTab);
-            this.LCSubTabs.Controls.Add(this.LCUpdatesTab);
-            this.LCSubTabs.Controls.Add(this.LCVerifyTab);
-            this.LCSubTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LCSubTabs.Location = new System.Drawing.Point(3, 3);
-            this.LCSubTabs.Name = "LCSubTabs";
-            this.LCSubTabs.SelectedIndex = 0;
-            this.LCSubTabs.Size = new System.Drawing.Size(1082, 454);
-            this.LCSubTabs.TabIndex = 0;
-            // 
-            // LCReportsTab
-            // 
-            this.LCReportsTab.Controls.Add(this.Referrals);
-            this.LCReportsTab.Controls.Add(this.btnLCnoCensus);
-            this.LCReportsTab.Controls.Add(this.btnLCDuplicates);
-            this.LCReportsTab.Controls.Add(this.btnLCMissingCountry);
-            this.LCReportsTab.Controls.Add(this.btnLC1940USA);
-            this.LCReportsTab.Controls.Add(this.rtbLostCousins);
-            this.LCReportsTab.Controls.Add(this.linkLabel2);
-            this.LCReportsTab.Controls.Add(this.btnLC1911EW);
-            this.LCReportsTab.Controls.Add(this.LabLostCousinsWeb);
-            this.LCReportsTab.Controls.Add(this.ckbShowLCEntered);
-            this.LCReportsTab.Controls.Add(this.btnLC1841EW);
-            this.LCReportsTab.Controls.Add(this.btnLC1911Ireland);
-            this.LCReportsTab.Controls.Add(this.btnLC1880USA);
-            this.LCReportsTab.Controls.Add(this.btnLC1881EW);
-            this.LCReportsTab.Controls.Add(this.btnLC1881Canada);
-            this.LCReportsTab.Controls.Add(this.btnLC1881Scot);
-            this.LCReportsTab.Controls.Add(this.relTypesLC);
-            this.LCReportsTab.Location = new System.Drawing.Point(4, 22);
-            this.LCReportsTab.Name = "LCReportsTab";
-            this.LCReportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LCReportsTab.Size = new System.Drawing.Size(1074, 428);
-            this.LCReportsTab.TabIndex = 0;
-            this.LCReportsTab.Text = "Reports";
-            this.LCReportsTab.UseVisualStyleBackColor = true;
             // 
             // Referrals
             // 
@@ -1734,29 +1333,6 @@ namespace FTAnalyzer
             this.label11.TabIndex = 0;
             this.label11.Text = "Select Individual";
             // 
-            // btnLCDuplicates
-            // 
-            this.btnLCDuplicates.Location = new System.Drawing.Point(174, 246);
-            this.btnLCDuplicates.Name = "btnLCDuplicates";
-            this.btnLCDuplicates.Size = new System.Drawing.Size(162, 27);
-            this.btnLCDuplicates.TabIndex = 38;
-            this.btnLCDuplicates.Text = "Lost Cousins Duplicate Facts";
-            this.btnLCDuplicates.UseVisualStyleBackColor = true;
-            this.btnLCDuplicates.Click += new System.EventHandler(this.BtnLCDuplicates_Click);
-            // 
-            // rtbLostCousins
-            // 
-            this.rtbLostCousins.BackColor = System.Drawing.SystemColors.Window;
-            this.rtbLostCousins.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbLostCousins.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbLostCousins.Location = new System.Drawing.Point(536, 6);
-            this.rtbLostCousins.Name = "rtbLostCousins";
-            this.rtbLostCousins.ReadOnly = true;
-            this.rtbLostCousins.Size = new System.Drawing.Size(528, 362);
-            this.rtbLostCousins.TabIndex = 34;
-            this.rtbLostCousins.TabStop = false;
-            this.rtbLostCousins.Text = "";
-            // 
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
@@ -1769,47 +1345,12 @@ namespace FTAnalyzer
             this.linkLabel2.Text = "Visit the Lost Cousins Forum";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
             // 
-            // LabLostCousinsWeb
+            // btnViewInvalidRefs
             // 
-            this.LabLostCousinsWeb.AutoSize = true;
-            this.LabLostCousinsWeb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabLostCousinsWeb.Location = new System.Drawing.Point(534, 371);
-            this.LabLostCousinsWeb.Name = "LabLostCousinsWeb";
-            this.LabLostCousinsWeb.Size = new System.Drawing.Size(186, 16);
-            this.LabLostCousinsWeb.TabIndex = 31;
-            this.LabLostCousinsWeb.TabStop = true;
-            this.LabLostCousinsWeb.Text = "Visit the Lost Cousins Website";
-            this.LabLostCousinsWeb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LabLostCousinsWeb_Click);
-            this.LabLostCousinsWeb.Click += new System.EventHandler(this.LabLostCousinsWeb_Click);
-            // 
-            // ckbShowLCEntered
-            // 
-            this.ckbShowLCEntered.AutoSize = true;
-            this.ckbShowLCEntered.Location = new System.Drawing.Point(6, 214);
-            this.ckbShowLCEntered.Name = "ckbShowLCEntered";
-            this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
-            this.ckbShowLCEntered.TabIndex = 30;
-            this.ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)" +
-    "";
-            this.ckbShowLCEntered.UseVisualStyleBackColor = true;
-            // 
-            // LCUpdatesTab
-            // 
-            this.LCUpdatesTab.Controls.Add(this.btnViewInvalidRefs);
-            this.LCUpdatesTab.Controls.Add(this.btnLCPotentialUploads);
-            this.LCUpdatesTab.Controls.Add(this.chkLCRootPersonConfirm);
-            this.LCUpdatesTab.Controls.Add(this.label21);
-            this.LCUpdatesTab.Controls.Add(this.rtbLCUpdateData);
-            this.LCUpdatesTab.Controls.Add(this.groupBox8);
-            this.LCUpdatesTab.Controls.Add(this.btnUpdateLostCousinsWebsite);
-            this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
-            this.LCUpdatesTab.Location = new System.Drawing.Point(4, 22);
-            this.LCUpdatesTab.Name = "LCUpdatesTab";
-            this.LCUpdatesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LCUpdatesTab.Size = new System.Drawing.Size(1074, 428);
-            this.LCUpdatesTab.TabIndex = 1;
-            this.LCUpdatesTab.Text = "Updates";
-            this.LCUpdatesTab.UseVisualStyleBackColor = true;
+            this.btnViewInvalidRefs.Location = new System.Drawing.Point(0, 0);
+            this.btnViewInvalidRefs.Name = "btnViewInvalidRefs";
+            this.btnViewInvalidRefs.Size = new System.Drawing.Size(75, 23);
+            this.btnViewInvalidRefs.TabIndex = 0;
             // 
             // label21
             // 
@@ -1820,35 +1361,6 @@ namespace FTAnalyzer
             this.label21.Size = new System.Drawing.Size(383, 16);
             this.label21.TabIndex = 37;
             this.label21.Text = "Census Records with valid Reference to upload to Lost Cousins";
-            // 
-            // rtbLCUpdateData
-            // 
-            this.rtbLCUpdateData.BackColor = System.Drawing.SystemColors.Window;
-            this.rtbLCUpdateData.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbLCUpdateData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbLCUpdateData.ForeColor = System.Drawing.Color.Red;
-            this.rtbLCUpdateData.Location = new System.Drawing.Point(471, 31);
-            this.rtbLCUpdateData.Name = "rtbLCUpdateData";
-            this.rtbLCUpdateData.ReadOnly = true;
-            this.rtbLCUpdateData.Size = new System.Drawing.Size(391, 169);
-            this.rtbLCUpdateData.TabIndex = 36;
-            this.rtbLCUpdateData.TabStop = false;
-            this.rtbLCUpdateData.Text = "Please Login to see data to update";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.btnLCLogin);
-            this.groupBox8.Controls.Add(this.label20);
-            this.groupBox8.Controls.Add(this.label19);
-            this.groupBox8.Controls.Add(this.txtLCEmail);
-            this.groupBox8.Controls.Add(this.txtLCPassword);
-            this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox8.Location = new System.Drawing.Point(30, 22);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(407, 118);
-            this.groupBox8.TabIndex = 1;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Lost Cousins Login Details";
             // 
             // label20
             // 
@@ -1871,35 +1383,6 @@ namespace FTAnalyzer
             this.label19.Text = "Email Address";
             this.label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // rtbLCoutput
-            // 
-            this.rtbLCoutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbLCoutput.BackColor = System.Drawing.SystemColors.Control;
-            this.rtbLCoutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbLCoutput.Location = new System.Drawing.Point(3, 203);
-            this.rtbLCoutput.Name = "rtbLCoutput";
-            this.rtbLCoutput.ReadOnly = true;
-            this.rtbLCoutput.Size = new System.Drawing.Size(1056, 180);
-            this.rtbLCoutput.TabIndex = 38;
-            this.rtbLCoutput.TabStop = false;
-            this.rtbLCoutput.Text = "";
-            this.rtbLCoutput.TextChanged += new System.EventHandler(this.RtbLCoutput_TextChanged);
-            // 
-            // LCVerifyTab
-            // 
-            this.LCVerifyTab.Controls.Add(this.rtbCheckAncestors);
-            this.LCVerifyTab.Controls.Add(this.dgCheckAncestors);
-            this.LCVerifyTab.Controls.Add(this.btnCheckMyAncestors);
-            this.LCVerifyTab.Controls.Add(this.lblCheckAncestors);
-            this.LCVerifyTab.Location = new System.Drawing.Point(4, 22);
-            this.LCVerifyTab.Name = "LCVerifyTab";
-            this.LCVerifyTab.Size = new System.Drawing.Size(1074, 428);
-            this.LCVerifyTab.TabIndex = 2;
-            this.LCVerifyTab.Text = "Verification";
-            this.LCVerifyTab.UseVisualStyleBackColor = true;
-            // 
             // rtbCheckAncestors
             // 
             this.rtbCheckAncestors.BackColor = System.Drawing.SystemColors.Window;
@@ -1915,6 +1398,13 @@ namespace FTAnalyzer
             this.rtbCheckAncestors.Text = "Please Login to see data to update";
             this.rtbCheckAncestors.TextChanged += new System.EventHandler(this.RtbCheckAncestors_TextChanged);
             // 
+            // btnCheckMyAncestors
+            // 
+            this.btnCheckMyAncestors.Location = new System.Drawing.Point(0, 0);
+            this.btnCheckMyAncestors.Name = "btnCheckMyAncestors";
+            this.btnCheckMyAncestors.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckMyAncestors.TabIndex = 38;
+            // 
             // lblCheckAncestors
             // 
             this.lblCheckAncestors.AutoSize = true;
@@ -1924,27 +1414,6 @@ namespace FTAnalyzer
             this.lblCheckAncestors.Size = new System.Drawing.Size(316, 16);
             this.lblCheckAncestors.TabIndex = 0;
             this.lblCheckAncestors.Text = "Not Currently Logged in Use Updates Page to Login";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnAliveOnDate);
-            this.groupBox2.Controls.Add(this.txtAliveDates);
-            this.groupBox2.Controls.Add(this.label22);
-            this.groupBox2.Controls.Add(this.chkAnyCensusYear);
-            this.groupBox2.Controls.Add(this.groupBox10);
-            this.groupBox2.Controls.Add(this.groupBox4);
-            this.groupBox2.Controls.Add(this.chkExcludeUnknownBirths);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.txtCensusSurname);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.udAgeFilter);
-            this.groupBox2.Controls.Add(this.relTypesCensus);
-            this.groupBox2.Location = new System.Drawing.Point(8, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(963, 290);
-            this.groupBox2.TabIndex = 23;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Census Search Reports";
             // 
             // btnAliveOnDate
             // 
@@ -1975,53 +1444,19 @@ namespace FTAnalyzer
             this.label22.TabIndex = 39;
             this.label22.Text = "Alive Dates: ";
             // 
-            // chkAnyCensusYear
+            // btnRandomSurnameEntered
             // 
-            this.chkAnyCensusYear.AutoSize = true;
-            this.chkAnyCensusYear.Location = new System.Drawing.Point(339, 129);
-            this.chkAnyCensusYear.Name = "chkAnyCensusYear";
-            this.chkAnyCensusYear.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkAnyCensusYear.Size = new System.Drawing.Size(292, 17);
-            this.chkAnyCensusYear.TabIndex = 36;
-            this.chkAnyCensusYear.Text = "Include ALL census years for Census Reference reports ";
-            this.chkAnyCensusYear.UseVisualStyleBackColor = true;
+            this.btnRandomSurnameEntered.Location = new System.Drawing.Point(0, 0);
+            this.btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
+            this.btnRandomSurnameEntered.Size = new System.Drawing.Size(75, 23);
+            this.btnRandomSurnameEntered.TabIndex = 2;
             // 
-            // groupBox10
+            // btnRandomSurnameMissing
             // 
-            this.groupBox10.Controls.Add(this.btnShowCensusMissing);
-            this.groupBox10.Controls.Add(this.btnShowCensusEntered);
-            this.groupBox10.Controls.Add(this.btnRandomSurnameEntered);
-            this.groupBox10.Controls.Add(this.btnRandomSurnameMissing);
-            this.groupBox10.Location = new System.Drawing.Point(9, 157);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(948, 63);
-            this.groupBox10.TabIndex = 35;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Census Record Reports";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.btnInconsistentLocations);
-            this.groupBox4.Controls.Add(this.btnUnrecognisedCensusRef);
-            this.groupBox4.Controls.Add(this.btnIncompleteCensusRef);
-            this.groupBox4.Controls.Add(this.btnMissingCensusRefs);
-            this.groupBox4.Controls.Add(this.btnCensusRefs);
-            this.groupBox4.Location = new System.Drawing.Point(9, 226);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(948, 53);
-            this.groupBox4.TabIndex = 34;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Census Reference Reports";
-            // 
-            // btnInconsistentLocations
-            // 
-            this.btnInconsistentLocations.Location = new System.Drawing.Point(634, 19);
-            this.btnInconsistentLocations.Name = "btnInconsistentLocations";
-            this.btnInconsistentLocations.Size = new System.Drawing.Size(301, 25);
-            this.btnInconsistentLocations.TabIndex = 29;
-            this.btnInconsistentLocations.Text = "Inconsistent census locations for families with same census ref";
-            this.btnInconsistentLocations.UseVisualStyleBackColor = true;
-            this.btnInconsistentLocations.Click += new System.EventHandler(this.BtnInconsistentLocations_Click);
+            this.btnRandomSurnameMissing.Location = new System.Drawing.Point(0, 0);
+            this.btnRandomSurnameMissing.Name = "btnRandomSurnameMissing";
+            this.btnRandomSurnameMissing.Size = new System.Drawing.Size(75, 23);
+            this.btnRandomSurnameMissing.TabIndex = 3;
             // 
             // chkExcludeUnknownBirths
             // 
@@ -2090,41 +1525,6 @@ namespace FTAnalyzer
             this.relTypesCensus.Size = new System.Drawing.Size(325, 99);
             this.relTypesCensus.TabIndex = 27;
             // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.groupBox11);
-            this.groupBox9.Controls.Add(this.groupBox1);
-            this.groupBox9.Controls.Add(this.groupBox5);
-            this.groupBox9.Controls.Add(this.groupBox6);
-            this.groupBox9.Location = new System.Drawing.Point(8, 320);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(963, 93);
-            this.groupBox9.TabIndex = 32;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Census Reports that don\'t use filters above";
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Controls.Add(this.BtnAutoCreatedCensusFacts);
-            this.groupBox11.Controls.Add(this.BtnProblemCensusFacts);
-            this.groupBox11.Location = new System.Drawing.Point(637, 19);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(320, 59);
-            this.groupBox11.TabIndex = 33;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Census Facts";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnDuplicateCensus);
-            this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
-            this.groupBox1.Location = new System.Drawing.Point(8, 207);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(325, 88);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Potential Census Fact Problems";
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.btnMismatchedChildrenStatus);
@@ -2136,6 +1536,20 @@ namespace FTAnalyzer
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "1911 UK Census";
             // 
+            // btnMismatchedChildrenStatus
+            // 
+            this.btnMismatchedChildrenStatus.Location = new System.Drawing.Point(0, 0);
+            this.btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
+            this.btnMismatchedChildrenStatus.Size = new System.Drawing.Size(75, 23);
+            this.btnMismatchedChildrenStatus.TabIndex = 0;
+            // 
+            // btnNoChildrenStatus
+            // 
+            this.btnNoChildrenStatus.Location = new System.Drawing.Point(0, 0);
+            this.btnNoChildrenStatus.Name = "btnNoChildrenStatus";
+            this.btnNoChildrenStatus.Size = new System.Drawing.Size(75, 23);
+            this.btnNoChildrenStatus.TabIndex = 1;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.btnReportUnrecognised);
@@ -2145,6 +1559,13 @@ namespace FTAnalyzer
             this.groupBox6.TabIndex = 31;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Export Missing/Unrecognised data to File";
+            // 
+            // btnReportUnrecognised
+            // 
+            this.btnReportUnrecognised.Location = new System.Drawing.Point(0, 0);
+            this.btnReportUnrecognised.Name = "btnReportUnrecognised";
+            this.btnReportUnrecognised.Size = new System.Drawing.Size(75, 23);
+            this.btnReportUnrecognised.TabIndex = 0;
             // 
             // tabLocations
             // 
@@ -2434,10 +1855,10 @@ namespace FTAnalyzer
             // LbProgramName
             // 
             this.LbProgramName.AutoSize = true;
-            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
+            this.LbProgramName.Font = new System.Drawing.Font("Microsoft Sans Serif", 52F, System.Drawing.FontStyle.Bold);
             this.LbProgramName.Location = new System.Drawing.Point(415, 13);
             this.LbProgramName.Name = "LbProgramName";
-            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
+            this.LbProgramName.Size = new System.Drawing.Size(716, 79);
             this.LbProgramName.TabIndex = 17;
             this.LbProgramName.Text = "Family Tree Analyzer";
             // 
@@ -2527,8 +1948,6 @@ namespace FTAnalyzer
             this.tabSelector.Controls.Add(this.tabSurnames);
             this.tabSelector.Controls.Add(this.tabLocations);
             this.tabSelector.Controls.Add(this.tabFacts);
-            this.tabSelector.Controls.Add(this.tabColourReports);
-            this.tabSelector.Controls.Add(this.tabWorldWars);
             this.tabSelector.Controls.Add(this.tabToday);
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
             this.tabSelector.Name = "tabSelector";
@@ -2576,14 +1995,21 @@ namespace FTAnalyzer
             // 
             // dgIndividuals
             // 
+            this.dgIndividuals.AllowUserToAddRows = false;
+            this.dgIndividuals.AllowUserToDeleteRows = false;
+            this.dgIndividuals.AllowUserToOrderColumns = true;
             this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgIndividuals.Location = new System.Drawing.Point(3, 3);
+            this.dgIndividuals.MultiSelect = false;
             this.dgIndividuals.Name = "dgIndividuals";
+            this.dgIndividuals.ReadOnly = true;
+            this.dgIndividuals.RowHeadersWidth = 50;
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(1068, 422);
             this.dgIndividuals.TabIndex = 1;
+            this.dgIndividuals.VirtualMode = true;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
             // 
@@ -2600,14 +2026,21 @@ namespace FTAnalyzer
             // 
             // dgFamilies
             // 
+            this.dgFamilies.AllowUserToAddRows = false;
+            this.dgFamilies.AllowUserToDeleteRows = false;
+            this.dgFamilies.AllowUserToOrderColumns = true;
             this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFamilies.Location = new System.Drawing.Point(3, 3);
+            this.dgFamilies.MultiSelect = false;
             this.dgFamilies.Name = "dgFamilies";
+            this.dgFamilies.ReadOnly = true;
+            this.dgFamilies.RowHeadersWidth = 50;
             this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFamilies.Size = new System.Drawing.Size(1068, 422);
             this.dgFamilies.TabIndex = 2;
+            this.dgFamilies.VirtualMode = true;
             this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
             // 
             // tabSources
@@ -2622,14 +2055,21 @@ namespace FTAnalyzer
             // 
             // dgSources
             // 
+            this.dgSources.AllowUserToAddRows = false;
+            this.dgSources.AllowUserToDeleteRows = false;
+            this.dgSources.AllowUserToOrderColumns = true;
             this.dgSources.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgSources.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSources.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgSources.Location = new System.Drawing.Point(0, 0);
+            this.dgSources.MultiSelect = false;
             this.dgSources.Name = "dgSources";
+            this.dgSources.ReadOnly = true;
+            this.dgSources.RowHeadersWidth = 50;
             this.dgSources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSources.Size = new System.Drawing.Size(1074, 428);
             this.dgSources.TabIndex = 2;
+            this.dgSources.VirtualMode = true;
             this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSources_CellDoubleClick);
             // 
             // tabOccupations
@@ -2644,14 +2084,21 @@ namespace FTAnalyzer
             // 
             // dgOccupations
             // 
+            this.dgOccupations.AllowUserToAddRows = false;
+            this.dgOccupations.AllowUserToDeleteRows = false;
+            this.dgOccupations.AllowUserToOrderColumns = true;
             this.dgOccupations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgOccupations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgOccupations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgOccupations.Location = new System.Drawing.Point(0, 0);
+            this.dgOccupations.MultiSelect = false;
             this.dgOccupations.Name = "dgOccupations";
+            this.dgOccupations.ReadOnly = true;
+            this.dgOccupations.RowHeadersWidth = 50;
             this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgOccupations.Size = new System.Drawing.Size(1074, 428);
             this.dgOccupations.TabIndex = 3;
+            this.dgOccupations.VirtualMode = true;
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgOccupations_CellDoubleClick);
             // 
             // tabCustomFacts
@@ -2666,14 +2113,21 @@ namespace FTAnalyzer
             // 
             // dgCustomFacts
             // 
+            this.dgCustomFacts.AllowUserToAddRows = false;
+            this.dgCustomFacts.AllowUserToDeleteRows = false;
+            this.dgCustomFacts.AllowUserToOrderColumns = true;
             this.dgCustomFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCustomFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCustomFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgCustomFacts.Location = new System.Drawing.Point(0, 0);
+            this.dgCustomFacts.MultiSelect = false;
             this.dgCustomFacts.Name = "dgCustomFacts";
+            this.dgCustomFacts.ReadOnly = true;
+            this.dgCustomFacts.RowHeadersWidth = 50;
             this.dgCustomFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCustomFacts.Size = new System.Drawing.Size(1074, 428);
             this.dgCustomFacts.TabIndex = 4;
+            this.dgCustomFacts.VirtualMode = true;
             this.dgCustomFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellDoubleClick);
             this.dgCustomFacts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellValueChanged);
             // 
@@ -2768,7 +2222,6 @@ namespace FTAnalyzer
             // 
             this.tabDuplicates.Controls.Add(this.labDuplicateSlider);
             this.tabDuplicates.Controls.Add(this.labCompletion);
-            this.tabDuplicates.Controls.Add(this.chkIgnoreUnnamedTwins);
             this.tabDuplicates.Controls.Add(this.ckbHideIgnoredDuplicates);
             this.tabDuplicates.Controls.Add(this.label16);
             this.tabDuplicates.Controls.Add(this.label13);
@@ -2849,12 +2302,14 @@ namespace FTAnalyzer
             // dgDuplicates
             // 
             this.dgDuplicates.AllowUserToAddRows = false;
+            this.dgDuplicates.AllowUserToDeleteRows = false;
             this.dgDuplicates.AllowUserToOrderColumns = true;
             this.dgDuplicates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDuplicates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDuplicates.Location = new System.Drawing.Point(-1, 87);
+            this.dgDuplicates.MultiSelect = false;
             this.dgDuplicates.Name = "dgDuplicates";
             this.dgDuplicates.ReadOnly = true;
             this.dgDuplicates.RowHeadersWidth = 15;
@@ -2998,6 +2453,7 @@ namespace FTAnalyzer
             // 
             this.dgSurnames.AllowUserToAddRows = false;
             this.dgSurnames.AllowUserToDeleteRows = false;
+            this.dgSurnames.AllowUserToOrderColumns = true;
             this.dgSurnames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -3016,6 +2472,7 @@ namespace FTAnalyzer
             this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSurnames.Size = new System.Drawing.Size(1079, 337);
             this.dgSurnames.TabIndex = 1;
+            this.dgSurnames.VirtualMode = true;
             this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
             this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellDoubleClick);
             // 
@@ -3511,35 +2968,10 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCheckAncestors)).EndInit();
-            this.tabWorldWars.ResumeLayout(false);
-            this.tabWorldWars.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).EndInit();
             this.ctxViewNotes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
-            this.tabColourReports.ResumeLayout(false);
-            this.tabColourReports.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.LCSubTabs.ResumeLayout(false);
-            this.LCReportsTab.ResumeLayout(false);
-            this.LCReportsTab.PerformLayout();
             this.Referrals.ResumeLayout(false);
             this.Referrals.PerformLayout();
-            this.LCUpdatesTab.ResumeLayout(false);
-            this.LCUpdatesTab.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.LCVerifyTab.ResumeLayout(false);
-            this.LCVerifyTab.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.tabLocations.ResumeLayout(false);
@@ -3637,19 +3069,9 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem reportAnIssueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuReload;
         private System.Windows.Forms.ToolStripStatusLabel tsHintsLabel;
-        private System.Windows.Forms.TabPage tabWorldWars;
-        private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgWorldWars;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtWorldWarsSurname;
-        private FTAnalyzer.Forms.Controls.RelationTypes wardeadRelation;
-        private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgTreeTops;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtTreetopsSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes treetopsRelation;
-        private System.Windows.Forms.TabPage tabColourReports;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtColouredSurname;
-        private FTAnalyzer.Forms.Controls.RelationTypes relTypesColoured;
         private System.Windows.Forms.TabPage tabLocations;
         private System.Windows.Forms.Button btnShowMap;
         private System.Windows.Forms.TabControl tabCtrlLocations;
@@ -3690,7 +3112,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuRecent3;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent4;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent5;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
         private System.Windows.Forms.TabPage tabFacts;
@@ -3724,15 +3145,11 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown udAgeFilter;
         private FTAnalyzer.Forms.Controls.RelationTypes relTypesCensus;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox cmbColourFamily;
         private System.Windows.Forms.ToolStripMenuItem onlineGuidesToUsingFTAnalyzerToolStripMenuItem;
         private System.Windows.Forms.ToolStripProgressBar tspbTabProgress;
         private System.Windows.Forms.ToolStripMenuItem mnuOSGeocoder;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem mnuLookupBlankFoundLocations;
-        private System.Windows.Forms.CheckBox ckbMilitaryOnly;
-        private System.Windows.Forms.Button btnRandomSurnameColour;
         private System.Windows.Forms.CheckedListBox ckbFactExclude;
         private System.Windows.Forms.Button btnShowExclusions;
         private System.Windows.Forms.Label lblExclude;
@@ -3791,17 +3208,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.DataGridView dgLooseBirths;
         private System.Windows.Forms.TabPage tabLooseDeaths;
         private System.Windows.Forms.DataGridView dgLooseDeaths;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Button btnAdvancedMissingData;
-        private System.Windows.Forms.Button btnStandardMissingData;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnIrishColourCensus;
-        private System.Windows.Forms.Button btnCanadianColourCensus;
-        private System.Windows.Forms.Button btnUKColourCensus;
-        private System.Windows.Forms.Button btnUSColourCensus;
-        private System.Windows.Forms.Button btnColourBMD;
-        private System.Windows.Forms.CheckBox ckbIgnoreNoDeathDate;
-        private System.Windows.Forms.CheckBox ckbIgnoreNoBirthDate;
         private System.Windows.Forms.CheckBox ckbTTIncludeOnlyOneParent;
         private System.Windows.Forms.ToolStripMenuItem privacyPolicyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuHowManyGreats;
@@ -3816,41 +3222,15 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem getGoogleAPIKeyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem googleAPISetupGuideToolStripMenuItem;
-        private System.Windows.Forms.TabControl LCSubTabs;
-        private System.Windows.Forms.TabPage LCReportsTab;
         private System.Windows.Forms.GroupBox Referrals;
         private System.Windows.Forms.CheckBox ckbReferralInCommon;
         private System.Windows.Forms.Button btnReferrals;
         private System.Windows.Forms.ComboBox cmbReferrals;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnLCnoCensus;
-        private System.Windows.Forms.Button btnLCDuplicates;
-        private System.Windows.Forms.Button btnLCMissingCountry;
-        private System.Windows.Forms.Button btnLC1940USA;
-        private System.Windows.Forms.RichTextBox rtbLostCousins;
         private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Button btnLC1911EW;
-        private System.Windows.Forms.LinkLabel LabLostCousinsWeb;
-        private System.Windows.Forms.CheckBox ckbShowLCEntered;
-        private System.Windows.Forms.Button btnLC1841EW;
-        private System.Windows.Forms.Button btnLC1911Ireland;
-        private System.Windows.Forms.Button btnLC1880USA;
-        private System.Windows.Forms.Button btnLC1881EW;
-        private System.Windows.Forms.Button btnLC1881Canada;
-        private System.Windows.Forms.Button btnLC1881Scot;
-        private FTAnalyzer.Forms.Controls.RelationTypes relTypesLC;
-        private System.Windows.Forms.TabPage LCUpdatesTab;
-        private System.Windows.Forms.Button btnUpdateLostCousinsWebsite;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Button btnLCLogin;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox txtLCEmail;
-        private System.Windows.Forms.MaskedTextBox txtLCPassword;
-        private System.Windows.Forms.CheckBox chkLCRootPersonConfirm;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.RichTextBox rtbLCUpdateData;
-        private Utilities.ScrollingRichTextBox rtbLCoutput;
         private System.Windows.Forms.SplitContainer splitGedcom;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -3865,43 +3245,24 @@ namespace FTAnalyzer
         private System.Windows.Forms.ProgressBar pbSources;
         private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;
-        private System.Windows.Forms.Button btnLCPotentialUploads;
         private System.Windows.Forms.Button btnViewInvalidRefs;
         private System.Windows.Forms.TabPage tabLooseInfo;
         private System.Windows.Forms.DataGridView dgLooseInfo;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnDuplicateCensus;
-        private System.Windows.Forms.Button btnMissingCensusLocation;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnMismatchedChildrenStatus;
         private System.Windows.Forms.Button btnNoChildrenStatus;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnReportUnrecognised;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button btnInconsistentLocations;
-        private System.Windows.Forms.Button btnUnrecognisedCensusRef;
-        private System.Windows.Forms.Button btnIncompleteCensusRef;
-        private System.Windows.Forms.Button btnMissingCensusRefs;
-        private System.Windows.Forms.Button btnCensusRefs;
-        private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button btnRandomSurnameEntered;
         private System.Windows.Forms.Button btnRandomSurnameMissing;
-        private System.Windows.Forms.CheckBox chkAnyCensusYear;
-        private System.Windows.Forms.TabPage LCVerifyTab;
         private System.Windows.Forms.DataGridView dgCheckAncestors;
         private System.Windows.Forms.Button btnCheckMyAncestors;
         private System.Windows.Forms.Label lblCheckAncestors;
         private Utilities.ScrollingRichTextBox rtbCheckAncestors;
-        private System.Windows.Forms.Button btnShowCensusMissing;
-        private System.Windows.Forms.Button btnShowCensusEntered;
         private System.Windows.Forms.ToolStripMenuItem mnuBirthdayEffect;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripMenuItem mnuJSON;
         private System.Windows.Forms.ToolStripMenuItem mnuPossiblyMissingChildReport;
-        private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.Button BtnProblemCensusFacts;
-        private System.Windows.Forms.Button BtnAutoCreatedCensusFacts;
         private System.Windows.Forms.ToolStripMenuItem MnuAgedOver99Report;
         private System.Windows.Forms.ToolStripMenuItem MnuSingleParentsReport;
         private System.Windows.Forms.TabPage tabCustomFacts;
@@ -3911,7 +3272,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button btnAliveOnDate;
         private System.Windows.Forms.ToolStripMenuItem mnuSurnamesToExcel;
-        private System.Windows.Forms.CheckBox chkIgnoreUnnamedTwins;
         private System.Windows.Forms.Label labCompletion;
         private System.Windows.Forms.Label labDuplicateSlider;
         private System.Windows.Forms.DataGridViewCheckBoxColumn NonDuplicate;
