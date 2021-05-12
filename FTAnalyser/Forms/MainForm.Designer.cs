@@ -94,8 +94,6 @@ namespace FTAnalyzer
             this.mnuLooseBirthsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLooseDeathsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuTreetopsToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuWorldWarsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuDNA_GEDCOM = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
@@ -156,25 +154,17 @@ namespace FTAnalyzer
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.tabWorldWars = new System.Windows.Forms.TabPage();
             this.ckbMilitaryOnly = new System.Windows.Forms.CheckBox();
-            this.ckbWDIgnoreLocations = new System.Windows.Forms.CheckBox();
-            this.btnWWII = new System.Windows.Forms.Button();
-            this.btnWWI = new System.Windows.Forms.Button();
             this.dgWorldWars = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
             this.wardeadRelation = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.wardeadCountry = new FTAnalyzer.Forms.Controls.CensusCountry();
             this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabTreetops = new System.Windows.Forms.TabPage();
             this.ckbTTIncludeOnlyOneParent = new System.Windows.Forms.CheckBox();
             this.dgTreeTops = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
-            this.ckbTTIgnoreLocations = new System.Windows.Forms.CheckBox();
-            this.btnTreeTops = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
             this.treetopsRelation = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.treetopsCountry = new FTAnalyzer.Forms.Controls.CensusCountry();
             this.tabColourReports = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnAdvancedMissingData = new System.Windows.Forms.Button();
@@ -390,7 +380,6 @@ namespace FTAnalyzer
             this.tabWorldWars.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).BeginInit();
             this.ctxViewNotes.SuspendLayout();
-            this.tabTreetops.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
             this.tabColourReports.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -755,8 +744,6 @@ namespace FTAnalyzer
             this.mnuLooseBirthsToExcel,
             this.mnuLooseDeathsToExcel,
             this.toolStripSeparator9,
-            this.mnuTreetopsToExcel,
-            this.mnuWorldWarsToExcel,
             this.toolStripSeparator13,
             this.mnuDNA_GEDCOM,
             this.toolStripSeparator15,
@@ -842,20 +829,6 @@ namespace FTAnalyzer
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(219, 6);
-            // 
-            // mnuTreetopsToExcel
-            // 
-            this.mnuTreetopsToExcel.Name = "mnuTreetopsToExcel";
-            this.mnuTreetopsToExcel.Size = new System.Drawing.Size(222, 22);
-            this.mnuTreetopsToExcel.Text = "Current Treetops to Excel";
-            this.mnuTreetopsToExcel.Click += new System.EventHandler(this.MnuTreetopsToExcel_Click);
-            // 
-            // mnuWorldWarsToExcel
-            // 
-            this.mnuWorldWarsToExcel.Name = "mnuWorldWarsToExcel";
-            this.mnuWorldWarsToExcel.Size = new System.Drawing.Size(222, 22);
-            this.mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
-            this.mnuWorldWarsToExcel.Click += new System.EventHandler(this.MnuWorldWarsToExcel_Click);
             // 
             // toolStripSeparator13
             // 
@@ -1400,14 +1373,10 @@ namespace FTAnalyzer
             // tabWorldWars
             // 
             this.tabWorldWars.Controls.Add(this.ckbMilitaryOnly);
-            this.tabWorldWars.Controls.Add(this.ckbWDIgnoreLocations);
-            this.tabWorldWars.Controls.Add(this.btnWWII);
-            this.tabWorldWars.Controls.Add(this.btnWWI);
             this.tabWorldWars.Controls.Add(this.dgWorldWars);
             this.tabWorldWars.Controls.Add(this.label9);
             this.tabWorldWars.Controls.Add(this.txtWorldWarsSurname);
             this.tabWorldWars.Controls.Add(this.wardeadRelation);
-            this.tabWorldWars.Controls.Add(this.wardeadCountry);
             this.tabWorldWars.Location = new System.Drawing.Point(4, 22);
             this.tabWorldWars.Name = "tabWorldWars";
             this.tabWorldWars.Size = new System.Drawing.Size(1088, 460);
@@ -1425,39 +1394,6 @@ namespace FTAnalyzer
             this.ckbMilitaryOnly.TabIndex = 33;
             this.ckbMilitaryOnly.Text = "Limit Results to only those men with Military Facts";
             this.ckbMilitaryOnly.UseVisualStyleBackColor = true;
-            // 
-            // ckbWDIgnoreLocations
-            // 
-            this.ckbWDIgnoreLocations.AutoSize = true;
-            this.ckbWDIgnoreLocations.Checked = true;
-            this.ckbWDIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbWDIgnoreLocations.Location = new System.Drawing.Point(8, 105);
-            this.ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
-            this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(252, 17);
-            this.ckbWDIgnoreLocations.TabIndex = 32;
-            this.ckbWDIgnoreLocations.Text = "Include Unknown Countries in World Wars Filter";
-            this.ckbWDIgnoreLocations.UseVisualStyleBackColor = true;
-            this.ckbWDIgnoreLocations.CheckedChanged += new System.EventHandler(this.CkbWDIgnoreLocations_CheckedChanged);
-            // 
-            // btnWWII
-            // 
-            this.btnWWII.Location = new System.Drawing.Point(758, 58);
-            this.btnWWII.Name = "btnWWII";
-            this.btnWWII.Size = new System.Drawing.Size(95, 25);
-            this.btnWWII.TabIndex = 31;
-            this.btnWWII.Text = "World War II";
-            this.btnWWII.UseVisualStyleBackColor = true;
-            this.btnWWII.Click += new System.EventHandler(this.BtnWWII_Click);
-            // 
-            // btnWWI
-            // 
-            this.btnWWI.Location = new System.Drawing.Point(650, 58);
-            this.btnWWI.Name = "btnWWI";
-            this.btnWWI.Size = new System.Drawing.Size(95, 25);
-            this.btnWWI.TabIndex = 30;
-            this.btnWWI.Text = "World War I";
-            this.btnWWI.UseVisualStyleBackColor = true;
-            this.btnWWI.Click += new System.EventHandler(this.BtnWWI_Click);
             // 
             // dgWorldWars
             // 
@@ -1504,16 +1440,6 @@ namespace FTAnalyzer
             this.wardeadRelation.Size = new System.Drawing.Size(322, 100);
             this.wardeadRelation.TabIndex = 26;
             // 
-            // wardeadCountry
-            // 
-            this.wardeadCountry.Location = new System.Drawing.Point(8, 25);
-            this.wardeadCountry.Margin = new System.Windows.Forms.Padding(6);
-            this.wardeadCountry.Name = "wardeadCountry";
-            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
-            this.wardeadCountry.TabIndex = 25;
-            this.wardeadCountry.Title = "Default Country";
-            this.wardeadCountry.UKEnabled = true;
-            // 
             // ctxViewNotes
             // 
             this.ctxViewNotes.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -1529,23 +1455,6 @@ namespace FTAnalyzer
             this.mnuViewNotes.Size = new System.Drawing.Size(133, 22);
             this.mnuViewNotes.Text = "View Notes";
             this.mnuViewNotes.Click += new System.EventHandler(this.MnuViewNotes_Click);
-            // 
-            // tabTreetops
-            // 
-            this.tabTreetops.Controls.Add(this.ckbTTIncludeOnlyOneParent);
-            this.tabTreetops.Controls.Add(this.dgTreeTops);
-            this.tabTreetops.Controls.Add(this.ckbTTIgnoreLocations);
-            this.tabTreetops.Controls.Add(this.btnTreeTops);
-            this.tabTreetops.Controls.Add(this.label8);
-            this.tabTreetops.Controls.Add(this.txtTreetopsSurname);
-            this.tabTreetops.Controls.Add(this.treetopsRelation);
-            this.tabTreetops.Controls.Add(this.treetopsCountry);
-            this.tabTreetops.Location = new System.Drawing.Point(4, 22);
-            this.tabTreetops.Name = "tabTreetops";
-            this.tabTreetops.Size = new System.Drawing.Size(1088, 460);
-            this.tabTreetops.TabIndex = 7;
-            this.tabTreetops.Text = "Treetops";
-            this.tabTreetops.UseVisualStyleBackColor = true;
             // 
             // ckbTTIncludeOnlyOneParent
             // 
@@ -1579,29 +1488,6 @@ namespace FTAnalyzer
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
             this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgTreeTops_MouseDown);
             // 
-            // ckbTTIgnoreLocations
-            // 
-            this.ckbTTIgnoreLocations.AutoSize = true;
-            this.ckbTTIgnoreLocations.Checked = true;
-            this.ckbTTIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbTTIgnoreLocations.Location = new System.Drawing.Point(8, 105);
-            this.ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
-            this.ckbTTIgnoreLocations.Size = new System.Drawing.Size(238, 17);
-            this.ckbTTIgnoreLocations.TabIndex = 27;
-            this.ckbTTIgnoreLocations.Text = "Include Unknown Countries in Treetops Filter";
-            this.ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
-            this.ckbTTIgnoreLocations.CheckedChanged += new System.EventHandler(this.CkbTTIgnoreLocations_CheckedChanged);
-            // 
-            // btnTreeTops
-            // 
-            this.btnTreeTops.Location = new System.Drawing.Point(650, 58);
-            this.btnTreeTops.Name = "btnTreeTops";
-            this.btnTreeTops.Size = new System.Drawing.Size(201, 25);
-            this.btnTreeTops.TabIndex = 25;
-            this.btnTreeTops.Text = "Show People at top of tree";
-            this.btnTreeTops.UseVisualStyleBackColor = true;
-            this.btnTreeTops.Click += new System.EventHandler(this.BtnTreeTops_Click);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -1626,16 +1512,6 @@ namespace FTAnalyzer
             this.treetopsRelation.Name = "treetopsRelation";
             this.treetopsRelation.Size = new System.Drawing.Size(322, 96);
             this.treetopsRelation.TabIndex = 12;
-            // 
-            // treetopsCountry
-            // 
-            this.treetopsCountry.Location = new System.Drawing.Point(8, 25);
-            this.treetopsCountry.Margin = new System.Windows.Forms.Padding(6);
-            this.treetopsCountry.Name = "treetopsCountry";
-            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
-            this.treetopsCountry.TabIndex = 11;
-            this.treetopsCountry.Title = "Default Country";
-            this.treetopsCountry.UKEnabled = true;
             // 
             // tabColourReports
             // 
@@ -2652,7 +2528,6 @@ namespace FTAnalyzer
             this.tabSelector.Controls.Add(this.tabLocations);
             this.tabSelector.Controls.Add(this.tabFacts);
             this.tabSelector.Controls.Add(this.tabColourReports);
-            this.tabSelector.Controls.Add(this.tabTreetops);
             this.tabSelector.Controls.Add(this.tabWorldWars);
             this.tabSelector.Controls.Add(this.tabToday);
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
@@ -3640,8 +3515,6 @@ namespace FTAnalyzer
             this.tabWorldWars.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).EndInit();
             this.ctxViewNotes.ResumeLayout(false);
-            this.tabTreetops.ResumeLayout(false);
-            this.tabTreetops.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
             this.tabColourReports.ResumeLayout(false);
             this.tabColourReports.PerformLayout();
@@ -3765,22 +3638,14 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuReload;
         private System.Windows.Forms.ToolStripStatusLabel tsHintsLabel;
         private System.Windows.Forms.TabPage tabWorldWars;
-        private System.Windows.Forms.CheckBox ckbWDIgnoreLocations;
-        private System.Windows.Forms.Button btnWWII;
-        private System.Windows.Forms.Button btnWWI;
         private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgWorldWars;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtWorldWarsSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes wardeadRelation;
-        private FTAnalyzer.Forms.Controls.CensusCountry wardeadCountry;
-        private System.Windows.Forms.TabPage tabTreetops;
         private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgTreeTops;
-        private System.Windows.Forms.CheckBox ckbTTIgnoreLocations;
-        private System.Windows.Forms.Button btnTreeTops;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtTreetopsSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes treetopsRelation;
-        private FTAnalyzer.Forms.Controls.CensusCountry treetopsCountry;
         private System.Windows.Forms.TabPage tabColourReports;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtColouredSurname;
@@ -3853,8 +3718,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuSourcesToExcel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem mnuTreetopsToExcel;
-        private System.Windows.Forms.ToolStripMenuItem mnuWorldWarsToExcel;
         private System.Windows.Forms.CheckBox chkExcludeUnknownBirths;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCensusSurname;

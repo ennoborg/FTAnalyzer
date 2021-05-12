@@ -17,7 +17,6 @@ namespace FTAnalyzer.Forms
         public Individual Individual { get; private set; }
         public Family Family { get; private set; }
 
-        readonly FamilyTree ft = FamilyTree.Instance;
         readonly SortableBindingList<IDisplayFact> facts;
         readonly Font italicFont;
         readonly Font linkFont;
@@ -40,7 +39,6 @@ namespace FTAnalyzer.Forms
                 italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
                 linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
                 dgFacts.Columns["IndividualID"].Visible = true;
-                dgFacts.Columns["CensusReference"].Visible = true;
                 dgFacts.Columns["IgnoreFact"].Visible = false;
                 dgFacts.ReadOnly = true;
                 sep1.Visible = false;
@@ -114,27 +112,6 @@ namespace FTAnalyzer.Forms
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsDuplicatesEvent);
         }
 
-        public Facts(Predicate<Individual> filter, bool errors)
-            :this()
-        {
-            allFacts = true;
-            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter);
-            foreach (Individual ind in listToCheck)
-            {
-                IList<Fact> factsToCheck = errors ? ind.ErrorFacts : ind.Facts;
-                foreach (Fact f in factsToCheck)
-                {
-                    if (!errors)
-                    {
-                        if (f.FactType == Fact.CENSUS_FTA)
-                            facts.Add(new DisplayFact(ind, f));
-                    }
-                }
-            }
-            SetupFacts();
-            //Analytics.TrackAction();
-        }
-
         public Facts(FactSource source)
             : this()
         {
@@ -142,7 +119,6 @@ namespace FTAnalyzer.Forms
             facts = FamilyTree.GetSourceDisplayFacts(source);
             Text = $"Facts Report for source: {source}. Facts count: {facts.Count}";
             SetupFacts();
-            //dgFacts.Columns["CensusReference"].Visible = true;
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsSourceEvent);
         }
 
@@ -157,10 +133,8 @@ namespace FTAnalyzer.Forms
             }
             Text = "Families with the same census ref but different locations.";
             SetupFacts();
-            //dgFacts.Columns["CensusReference"].Visible = true;
             dgFacts.Columns["IgnoreFact"].Visible = true;
             dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
-            dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
             dgFacts.ReadOnly = false;
             sep1.Visible = true;
             btnShowHideFacts.Visible = true;

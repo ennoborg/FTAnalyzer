@@ -66,8 +66,6 @@ namespace FTAnalyzer.Forms
             this.DateofBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusRefYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Preferred = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.SourcesCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -194,8 +192,6 @@ namespace FTAnalyzer.Forms
             this.DateofBirth,
             this.FactLocation,
             this.Comment,
-            this.CensusRefYear,
-            this.CensusReference,
             this.AgeAtFact,
             this.Preferred,
             this.SourcesCount,
@@ -365,24 +361,6 @@ namespace FTAnalyzer.Forms
             this.Comment.ReadOnly = true;
             this.Comment.Width = 250;
             // 
-            // CensusRefYear
-            // 
-            this.CensusRefYear.DataPropertyName = "CensusRefYear";
-            this.CensusRefYear.HeaderText = "Census Ref Year";
-            this.CensusRefYear.Name = "CensusRefYear";
-            this.CensusRefYear.ReadOnly = true;
-            // 
-            // CensusReference
-            // 
-            this.CensusReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CensusReference.DataPropertyName = "CensusReference";
-            this.CensusReference.HeaderText = "Census Reference";
-            this.CensusReference.MinimumWidth = 25;
-            this.CensusReference.Name = "CensusReference";
-            this.CensusReference.ReadOnly = true;
-            this.CensusReference.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.CensusReference.Width = 250;
-            // 
             // AgeAtFact
             // 
             this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -471,8 +449,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn DateofBirth;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CensusRefYear;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Preferred;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourcesCount;

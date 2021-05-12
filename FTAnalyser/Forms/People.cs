@@ -20,7 +20,7 @@ namespace FTAnalyzer.Forms
         readonly FamilyTree ft = FamilyTree.Instance;
         readonly ReportFormHelper indReportFormHelper;
         readonly ReportFormHelper famReportFormHelper;
-        ReportType reportType = ReportType.People;
+        readonly ReportType reportType = ReportType.People;
 
         public People()
         {

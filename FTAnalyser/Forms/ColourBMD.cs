@@ -265,16 +265,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string provider = cbBMDSearchProvider.SelectedItem.ToString();
-            if (provider.Equals("FreeBMD"))
-                provider = "FreeCen";
-            Application.UserAppDataRegistry.SetValue("Default Search Provider", provider);
-            dgBMDReportSheet.Refresh(); // forces refresh of tooltips
-            dgBMDReportSheet.Focus();
-        }
-
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString());
@@ -391,14 +381,6 @@ namespace FTAnalyzer.Forms
         }
 
         void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayColourBMD>();
-
-        void MnuResetCensusColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("ColourBMDColumns.xml");
-
-        void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.SaveColumnLayout("ColourBMDColumns.xml");
-            MessageBox.Show("Form Settings Saved", "BMD Colour");
-        }
 
         void MnuViewFacts_Click(object sender, EventArgs e)
         {

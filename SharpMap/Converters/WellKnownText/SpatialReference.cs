@@ -38,8 +38,7 @@ namespace SharpMap.Converters.WellKnownText
         /// <returns>Well-known text</returns>
         public static string SridToWkt(int srid)
         {
-            string wkt;
-            if (_wkts.TryGetValue(srid, out wkt))
+            if (_wkts.TryGetValue(srid, out string wkt))
             {
                 return wkt;
             }
@@ -54,8 +53,7 @@ namespace SharpMap.Converters.WellKnownText
         /// <returns>Well-known text</returns>
         public static string SridToProj4(int srid)
         {
-            string proj4;
-            if (_proj4s.TryGetValue(srid, out proj4))
+            if (_proj4s.TryGetValue(srid, out string proj4))
             {
                 return proj4;
             }

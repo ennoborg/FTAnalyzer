@@ -45,7 +45,6 @@ namespace FTAnalyzer
         Font boldFont;
         Font normalFont;
         bool loading;
-        bool WWI;
         ReportFormHelper rfhDuplicates;
 
         public MainForm()
@@ -456,8 +455,6 @@ namespace FTAnalyzer
             MnuAgedOver99Report.Enabled = enabled;
             mnuLookupBlankFoundLocations.Enabled = enabled;
             MnuSingleParentsReport.Enabled = enabled;
-            mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
-            mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
             mnuDNA_GEDCOM.Enabled = enabled;
             mnuJSON.Enabled = enabled;
         }
@@ -555,64 +552,6 @@ namespace FTAnalyzer
             }
             DatabaseHelper.Instance.Dispose();
             stopProcessing = true;
-        }
-
-        void BtnTreeTops_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
-            List<IDisplayIndividual> treeTopsList = ft.GetTreeTops(filter).ToList();
-            treeTopsList.Sort(new BirthDateComparer());
-            dgTreeTops.DataSource = new SortableBindingList<IDisplayIndividual>(treeTopsList);
-            dgTreeTops.Focus();
-            foreach (DataGridViewColumn c in dgTreeTops.Columns)
-                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = Messages.Count + treeTopsList.Count;
-            tsHintsLabel.Text = Messages.Hints_Individual;
-            mnuPrint.Enabled = true;
-            ShowMenus(true);
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.TreetopsEvent);
-        }
-
-        Predicate<Individual> warDeadFilter;
-
-        void BtnWWI_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            WWI = true;
-            warDeadFilter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("FROM 28 JUL 1914"));
-            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(warDeadFilter).ToList();
-            warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-            dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
-            dgWorldWars.Focus();
-            foreach (DataGridViewColumn c in dgWorldWars.Columns)
-                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = Messages.Count + warDeadList.Count;
-            tsHintsLabel.Text = $"{Messages.Hints_Individual}  {Messages.Hints_LivesOfFirstWorldWar}";
-            mnuPrint.Enabled = true;
-            ShowMenus(true);
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.WWIReportEvent);
-        }
-
-        void BtnWWII_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            WWI = false;
-            warDeadFilter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("FROM 1 SEP 1939"));
-            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(warDeadFilter).ToList();
-            warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-            dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
-            dgWorldWars.Focus();
-            foreach (DataGridViewColumn c in dgWorldWars.Columns)
-                c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = Messages.Count + warDeadList.Count;
-            tsHintsLabel.Text = Messages.Hints_Individual;
-            mnuPrint.Enabled = true;
-            ShowMenus(true);
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.WWIIReportEvent);
         }
 
         void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite("http://forums.lc");
@@ -918,10 +857,6 @@ namespace FTAnalyzer
             }
             HourGlass(false);
         }
-
-        void CkbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e) => treetopsCountry.Enabled = !ckbTTIgnoreLocations.Checked;
-
-        void CkbWDIgnoreLocations_CheckedChanged(object sender, EventArgs e) => wardeadCountry.Enabled = !ckbWDIgnoreLocations.Checked;
 
         void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1335,16 +1270,9 @@ namespace FTAnalyzer
                         // show empty form click button to load
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.SurnamesTabEvent);
                     }
-                    else if (tabSelector.SelectedTab == tabTreetops)
-                    {
-                        dgTreeTops.DataSource = null;
-                        treetopsCountry.Enabled = !ckbTTIgnoreLocations.Checked;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.TreetopsTabEvent);
-                    }
                     else if (tabSelector.SelectedTab == tabWorldWars)
                     {
                         dgWorldWars.DataSource = null;
-                        wardeadCountry.Enabled = !ckbWDIgnoreLocations.Checked;
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.WorldWarsTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabToday)
@@ -1516,48 +1444,6 @@ namespace FTAnalyzer
                 filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
             return filter;
         }
-
-        Predicate<Individual> CreateTreeTopsIndividualFilter()
-        {
-            Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ?
-                new Predicate<Individual>(ind => ind.HasOnlyOneParent || !ind.HasParents) : new Predicate<Individual>(ind => !ind.HasParents);
-            Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
-            Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
-            Predicate<Individual> filter = FilterUtils.AndFilter(locationFilter, relationFilter);
-            filter = ckbTTIgnoreLocations.Checked ? relationFilter : FilterUtils.AndFilter(locationFilter, relationFilter);
-
-            if (txtTreetopsSurname.Text.Length > 0)
-            {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtTreetopsSurname.Text);
-                filter = FilterUtils.AndFilter(filter, surnameFilter);
-            }
-            filter = FilterUtils.AndFilter(filter, treetopFilter);
-            return filter;
-        }
-
-        Predicate<Individual> CreateWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
-        {
-            Predicate<Individual> filter;
-            Predicate<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
-            Predicate<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>(x => x.RelationType);
-            Predicate<Individual> birthFilter = FilterUtils.DateFilter<Individual>(x => x.BirthDate, birthRange);
-            Predicate<Individual> deathFilter = FilterUtils.DateFilter<Individual>(x => x.DeathDate, deathRange);
-
-            if (ckbWDIgnoreLocations.Checked)
-                filter = FilterUtils.AndFilter(FilterUtils.AndFilter(birthFilter, deathFilter), relationFilter);
-            else
-                filter = FilterUtils.AndFilter(FilterUtils.AndFilter(birthFilter, deathFilter), FilterUtils.AndFilter(locationFilter, relationFilter));
-
-            if (txtWorldWarsSurname.Text.Length > 0)
-            {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtWorldWarsSurname.Text);
-                filter = FilterUtils.AndFilter(filter, surnameFilter);
-            }
-            if (ckbMilitaryOnly.Checked)
-                filter = FilterUtils.AndFilter(filter, x => x.HasMilitaryFacts);
-
-            return filter;
-        }
         #endregion
 
         #region Lost Cousins
@@ -1671,10 +1557,6 @@ namespace FTAnalyzer
                         PrintDataGrid(Orientation.Portrait, dgAddresses, "List of Addresses");
                     if (tabCtrlLocations.SelectedTab == tabPlaces)
                         PrintDataGrid(Orientation.Portrait, dgPlaces, "List of Places");
-                }
-                else if (tabSelector.SelectedTab == tabTreetops)
-                {
-                    PrintDataGrid(Orientation.Landscape, dgTreeTops, "List of People at Top of Tree");
                 }
                 else if (tabSelector.SelectedTab == tabWorldWars)
                 {
@@ -1937,10 +1819,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string indID = (string)dgWorldWars.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                if (WWI && ModifierKeys.Equals(Keys.Shift))
-                    LivesOfFirstWorldWar(indID);
-                else
-                    ShowFacts(indID);
+                ShowFacts(indID);
             }
         }
 
@@ -2437,7 +2316,6 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             List<DisplayFact> results = new List<DisplayFact>();
-            List<DisplayFact> censusRefs = new List<DisplayFact>();
             tspbTabProgress.Value = 0;
             tspbTabProgress.Visible = true;
             tspbTabProgress.Visible = false;
@@ -2673,9 +2551,6 @@ namespace FTAnalyzer
                 HourGlass(true);
                 Individual root = ft.RootPerson;
                 ft.SetRelations(selected.IndividualID, null);
-                LostCousinsReferral lcr = new LostCousinsReferral(selected, ckbReferralInCommon.Checked);
-                DisposeDuplicateForms(lcr);
-                lcr.Show();
                 ft.SetRelations(root.IndividualID, null);
                 HourGlass(false);
             }
@@ -2778,36 +2653,6 @@ namespace FTAnalyzer
             using (DataTable dt = convertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
-            HourGlass(false);
-        }
-
-        void MnuTreetopsToExcel_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
-            List<IExportIndividual> treeTopsList = ft.GetExportTreeTops(filter).ToList();
-            treeTopsList.Sort(new BirthDateComparer());
-            SortableBindingList<IExportIndividual> list = new SortableBindingList<IExportIndividual>(treeTopsList);
-            using (DataTable dt = convertor.ToDataTable(list.ToList()))
-                ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportTreeTopsEvent);
-            HourGlass(false);
-        }
-
-        void MnuWorldWarsToExcel_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            if (warDeadFilter != null)
-            {
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                List<IExportIndividual> warDeadList = ft.GetExportWorldWars(warDeadFilter).ToList();
-                warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-                SortableBindingList<IExportIndividual> list = new SortableBindingList<IExportIndividual>(warDeadList);
-                using (DataTable dt = convertor.ToDataTable(list.ToList()))
-                    ExportToExcel.Export(dt);
-                Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportWorldWarsEvent);
-            }
             HourGlass(false);
         }
 

@@ -515,10 +515,6 @@ namespace Testing
             Assert.AreEqual(new DateTime(1966, 11, 20), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);
 
-            target = new FactDate("1881 census");
-            Assert.AreEqual(new DateTime(1881, 1, 1), target.StartDate);
-            Assert.AreEqual(new DateTime(1881, 12, 31), target.EndDate);
-
             return target;
         }
 
@@ -528,10 +524,6 @@ namespace Testing
             FactDate target = new FactDate("INT 17 APR 1917 (Easter Sunday 1917)");
             Assert.AreEqual(new DateTime(1917, 4, 17), target.StartDate);
             Assert.AreEqual(new DateTime(1917, 4, 17), target.EndDate);
-
-            target = new FactDate("(1881 Census)");
-            Assert.AreEqual(new DateTime(1881, 1, 1), target.StartDate);
-            Assert.AreEqual(new DateTime(1881, 12, 31), target.EndDate);
 
             //target = new FactDate("(Easter Sunday 1917)");
             //Assert.AreEqual(UNKNOWN_DATE, target.StartDate);

@@ -817,73 +817,6 @@ namespace FTAnalyzer.Utilities
         }
         #endregion
 
-        #region LostCousins
-        public static int AddLostCousinsFacts()
-        {
-            int count = 0;
-            if (InstanceConnection.State != ConnectionState.Open)
-                InstanceConnection.Open();
-            using (SQLiteCommand cmd = new SQLiteCommand("select CensusYear, CensusCountry, CensusRef, IndID, FullName from LostCousins", InstanceConnection))
-            {
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        string indID = reader["IndID"].ToString();
-                        string fullName = reader["FullName"].ToString();
-                        Individual ind = FamilyTree.Instance.GetIndividual(indID);
-                        if (ind?.Name == fullName) // only load if individual exists in this tree.
-                        {
-                            string CensusYear = reader["CensusYear"].ToString();
-                            string CensusCountry = reader["CensusCountry"].ToString();
-                            string CensusRef = reader["CensusRef"].ToString();
-                            count++;
-                        }
-                        else
-                        {
-                            Console.Write("name wrong");
-                            // UpdateFullName(reader, ind.Name); needed during testing
-                        }
-                    }
-                }
-            }
-            return count;
-        }
-
-        //void UpdateFullName(SQLiteDataReader reader, string name)
-        //{
-        //    using (SQLiteCommand updateCmd = new SQLiteCommand("update LostCousins set FullName=? Where CensusYear=? and CensusCountry=? and CensusRef=? and IndID=?", InstanceConnection))
-        //    {
-        //        SQLiteParameter param = updateCmd.CreateParameter();
-        //        param.DbType = DbType.String;
-        //        updateCmd.Parameters.Add(param);
-        //        param = updateCmd.CreateParameter();
-        //        param.DbType = DbType.Int32;
-        //        updateCmd.Parameters.Add(param);
-        //        param = updateCmd.CreateParameter();
-        //        param.DbType = DbType.String;
-        //        updateCmd.Parameters.Add(param);
-        //        param = updateCmd.CreateParameter();
-        //        param.DbType = DbType.String;
-        //        updateCmd.Parameters.Add(param);
-        //        param = updateCmd.CreateParameter();
-        //        param.DbType = DbType.String;
-        //        updateCmd.Parameters.Add(param);
-        //        updateCmd.Prepare();
-
-        //        updateCmd.Parameters[0].Value = name;
-        //        updateCmd.Parameters[1].Value = reader["CensusYear"];
-        //        updateCmd.Parameters[2].Value = reader["CensusCountry"];
-        //        updateCmd.Parameters[3].Value = reader["CensusRef"];
-        //        updateCmd.Parameters[4].Value = reader["IndID"];
-        //        int rowsaffected = updateCmd.ExecuteNonQuery();
-        //        if (rowsaffected != 1)
-        //            Console.WriteLine("Problem updating");
-        //    }
-        //}
-
-        #endregion
-
         #region Custom Facts
 
         public static bool IgnoreCustomFact(string factType)
@@ -928,7 +861,7 @@ namespace FTAnalyzer.Utilities
 
             #endregion
 
-            #region Cursor Queries
+        #region Cursor Queries
 
             public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {

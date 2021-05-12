@@ -62,30 +62,6 @@ namespace FTAnalyzer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UseResidenceAsCensus {
-            get {
-                return ((bool)(this["UseResidenceAsCensus"]));
-            }
-            set {
-                this["UseResidenceAsCensus"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool TolerateInaccurateCensusDate {
-            get {
-                return ((bool)(this["TolerateInaccurateCensusDate"]));
-            }
-            set {
-                this["TolerateInaccurateCensusDate"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ReloadRequired {
             get {
                 return ((bool)(this["ReloadRequired"]));
@@ -116,18 +92,6 @@ namespace FTAnalyzer.Properties {
             }
             set {
                 this["MinParentalAge"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool OnlyCensusParents {
-            get {
-                return ((bool)(this["OnlyCensusParents"]));
-            }
-            set {
-                this["OnlyCensusParents"] = value;
             }
         }
         
@@ -170,18 +134,6 @@ namespace FTAnalyzer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool UseCompactCensusRef {
-            get {
-                return ((bool)(this["UseCompactCensusRef"]));
-            }
-            set {
-                this["UseCompactCensusRef"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ShowAliasInName {
             get {
                 return ((bool)(this["ShowAliasInName"]));
@@ -212,18 +164,6 @@ namespace FTAnalyzer.Properties {
             }
             set {
                 this["ReverseLocations"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool AutoCreateCensusFacts {
-            get {
-                return ((bool)(this["AutoCreateCensusFacts"]));
-            }
-            set {
-                this["AutoCreateCensusFacts"] = value;
             }
         }
         
@@ -296,18 +236,6 @@ namespace FTAnalyzer.Properties {
             }
             set {
                 this["ShowMultiAncestors"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SkipCensusReferences {
-            get {
-                return ((bool)(this["SkipCensusReferences"]));
-            }
-            set {
-                this["SkipCensusReferences"] = value;
             }
         }
         
