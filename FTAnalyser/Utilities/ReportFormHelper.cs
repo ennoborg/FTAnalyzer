@@ -84,29 +84,6 @@ namespace FTAnalyzer
             printPreviewDialog.ShowDialog(parent);
         }
 
-        public void DoExportToExcel<T>(DataGridViewColumnCollection shown = null)
-        {
-            if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
-                return;
-            parent.Cursor = Cursors.WaitCursor;
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
-            using (DataTable dt = convertor.ToDataTable(gridDatasource.ToList(), shown))
-                ExportToExcel.Export(dt);
-            parent.Cursor = Cursors.Default;
-        }
-
-        public void DoExportToExcel(List<IExportReferrals> list)
-        {
-            if (list == null || list.Count == 0)
-                return;
-            parent.Cursor = Cursors.WaitCursor;
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(list))
-                ExportToExcel.Export(dt);
-            parent.Cursor = Cursors.Default;
-        }
-
         public void SaveColumnLayout(string filename)
         {
             using (DataTable dt = new DataTable("table"))

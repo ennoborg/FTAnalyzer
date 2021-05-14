@@ -66,7 +66,6 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cbBMDSearchProvider = new System.Windows.Forms.ToolStripComboBox();
@@ -356,7 +355,6 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton,
             this.printPreviewToolStripButton,
             this.toolStripSeparator1,
-            this.mnuExportToExcel,
             this.toolStripSeparator2,
             this.toolStripLabel1,
             this.cbBMDSearchProvider,
@@ -401,16 +399,6 @@ namespace FTAnalyzer.Forms
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // mnuExportToExcel
-            // 
-            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
-            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
-            this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // toolStripSeparator2
             // 
@@ -568,7 +556,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripComboBox cbBMDSearchProvider;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripComboBox cbFilter;
-        private System.Windows.Forms.ToolStripButton mnuExportToExcel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;

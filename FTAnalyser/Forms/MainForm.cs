@@ -40,8 +40,6 @@ namespace FTAnalyzer
         string filename;
         readonly PrivateFontCollection fonts = new PrivateFontCollection();
         Font handwritingFont;
-        Font boldFont;
-        Font normalFont;
         bool loading;
         ReportFormHelper rfhDuplicates;
 
@@ -132,8 +130,6 @@ namespace FTAnalyzer
             try
             {
                 SpecialMethods.SetFonts(this);
-                boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
-                normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
                 byte[] fontData = Resources.KUNSTLER;
                 IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
                 System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
@@ -205,7 +201,6 @@ namespace FTAnalyzer
                     if (await LoadTreeAsync(filename).ConfigureAwait(true))
                     {
                         SetDataErrorsCheckedDefaults(ckbDataErrors);
-                        SetupFactsCheckboxes();
                         AddFileToRecentList(filename);
                         Text = $"Family Tree Analyzer v{VERSION}. Analysing: {filename}";
                         Application.UseWaitCursor = false;
@@ -297,7 +292,6 @@ namespace FTAnalyzer
             tsHintsLabel.Text = string.Empty;
             tsStatusLabel.Text = string.Empty;
             rtbCheckAncestors.Text = string.Empty;
-            rtbToday.Text = string.Empty;
             pbSources.Value = 0;
             pbIndividuals.Value = 0;
             pbFamilies.Value = 0;
@@ -312,41 +306,25 @@ namespace FTAnalyzer
             mnuRecent.Enabled = false;
             tabMainListsSelector.SelectedTab = tabIndividuals; // force back to first tab
             tabErrorFixSelector.SelectedTab = tabDataErrors; //force tab back to data errors tab
-            tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
-            treeViewLocations.Nodes.Clear();
             Text = "Family Tree Analyzer v" + VERSION;
         }
 
         void SetupGridControls()
         {
-            dgPlaces.DataSource = null; // set datasources for locations in reverse order to avoid null pointer cell formatting race condition
-            dgAddresses.DataSource = null;
-            dgSubRegions.DataSource = null;
-            dgRegions.DataSource = null;
-            dgCountries.DataSource = null;
             dgIndividuals.DataSource = null;
             dgFamilies.DataSource = null;
             dgLooseBirths.DataSource = null;
             dgLooseDeaths.DataSource = null;
             dgLooseInfo.DataSource = null;
             dgDataErrors.DataSource = null;
-            dgOccupations.DataSource = null;
-            dgSurnames.DataSource = null;
             dgDuplicates.DataSource = null;
             dgSources.DataSource = null;
-            ExtensionMethods.DoubleBuffered(dgPlaces, true);
-            ExtensionMethods.DoubleBuffered(dgAddresses, true);
-            ExtensionMethods.DoubleBuffered(dgSubRegions, true);
-            ExtensionMethods.DoubleBuffered(dgRegions, true);
-            ExtensionMethods.DoubleBuffered(dgCountries, true);
             ExtensionMethods.DoubleBuffered(dgIndividuals, true);
             ExtensionMethods.DoubleBuffered(dgFamilies, true);
             ExtensionMethods.DoubleBuffered(dgLooseBirths, true);
             ExtensionMethods.DoubleBuffered(dgLooseDeaths, true);
             ExtensionMethods.DoubleBuffered(dgLooseInfo, true);
             ExtensionMethods.DoubleBuffered(dgDataErrors, true);
-            ExtensionMethods.DoubleBuffered(dgOccupations, true);
-            ExtensionMethods.DoubleBuffered(dgSurnames, true);
             ExtensionMethods.DoubleBuffered(dgDuplicates, true);
             ExtensionMethods.DoubleBuffered(dgSources, true);
         }
@@ -421,109 +399,12 @@ namespace FTAnalyzer
             mnuPrint.Enabled = enabled;
             mnuReload.Enabled = enabled;
             mnuCloseGEDCOM.Enabled = enabled;
-            mnuFactsToExcel.Enabled = enabled;
-            mnuIndividualsToExcel.Enabled = enabled;
-            mnuFamiliesToExcel.Enabled = enabled;
-            MnuExportLocations.Enabled = enabled;
-            mnuSourcesToExcel.Enabled = enabled;
-            mnuDataErrorsToExcel.Enabled = enabled;
-            mnuSurnamesToExcel.Enabled = enabled;
-            mnuLooseBirthsToExcel.Enabled = enabled;
-            mnuLooseDeathsToExcel.Enabled = enabled;
-            mnuChildAgeProfiles.Enabled = enabled;
-            mnuOlderParents.Enabled = enabled;
-            mnuBirthdayEffect.Enabled = enabled;
-            mnuPossibleCensusFacts.Enabled = enabled;
-            mnuPossiblyMissingChildReport.Enabled = enabled;
-            mnuShowTimeline.Enabled = enabled;
-            mnuGeocodeLocations.Enabled = enabled;
-            mnuOSGeocoder.Enabled = enabled;
-            mnuLocationsGeocodeReport.Enabled = enabled;
-            mnuLifelines.Enabled = enabled;
-            mnuPlaces.Enabled = enabled;
-            mnuCousinsCountReport.Enabled = enabled;
-            mnuHowManyGreats.Enabled = enabled;
-            MnuAgedOver99Report.Enabled = enabled;
-            mnuLookupBlankFoundLocations.Enabled = enabled;
-            MnuSingleParentsReport.Enabled = enabled;
-            mnuDNA_GEDCOM.Enabled = enabled;
-            mnuJSON.Enabled = enabled;
         }
 
         void HourGlass(bool on)
         {
             Cursor = on ? Cursors.WaitCursor : Cursors.Default;
             Application.DoEvents();
-        }
-
-        void DgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                var loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
-                var frmInd = new People();
-                frmInd.SetLocation(loc, FactLocation.COUNTRY);
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-            }
-        }
-
-        void DgRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                var loc = dgRegions.CurrentRow == null ? FactLocation.BLANK_LOCATION : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-                var frmInd = new People();
-                frmInd.SetLocation(loc, FactLocation.REGION);
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-            }
-        }
-
-        void DgSubRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                var loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
-                var frmInd = new People();
-                frmInd.SetLocation(loc, FactLocation.SUBREGION);
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-            }
-        }
-
-        void DgAddresses_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                var loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
-                var frmInd = new People();
-                frmInd.SetLocation(loc, FactLocation.ADDRESS);
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-            }
-        }
-
-        void DgPlaces_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                var loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
-                var frmInd = new People();
-                frmInd.SetLocation(loc, FactLocation.PLACE);
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-            }
         }
 
         void RtbOutput_TextChanged(object sender, EventArgs e) => rtbOutput.ScrollToBottom();
@@ -545,40 +426,6 @@ namespace FTAnalyzer
         }
 
         void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite("http://forums.lc");
-
-        void DgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                var occ = (DisplayOccupation)dgOccupations.CurrentRowDataBoundItem;
-                var frmInd = new People();
-                frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-            }
-        }
-
-        void DgCustomFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
-                var frmInd = new People();
-                frmInd.SetCustomFacts(customFacts.CustomFactName, ft.AllCustomFactIndividuals(customFacts.CustomFactName));
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-            }
-        }
-
-        void DgCustomFacts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            var customFact = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
-            DatabaseHelper.IgnoreCustomFact(customFact.CustomFactName, customFact.Ignore);
-        }
 
         void SetAsRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -611,86 +458,6 @@ namespace FTAnalyzer
                 notes.Show();
             }
             HourGlass(false);
-        }
-
-        void BtnShowMap_Click(object sender, EventArgs e)
-        {
-            float zoom = GetMapZoomLevel(out FactLocation loc);
-            if (loc != null && loc.IsGeoCoded(false))
-            {
-                string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{zoom}z";
-                SpecialMethods.VisitWebsite(URL);
-            }
-            else
-                MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
-        }
-
-        void BtnOSMap_Click(object sender, EventArgs e)
-        {
-            bool oldOSMap = (sender as Button).Name == "btnOldOSMap";
-            {
-                float zoom = GetMapZoomLevel(out FactLocation loc);
-                if (loc != null && loc.IsGeoCoded(false))
-                {
-                    if (loc.IsWithinUKBounds)
-                    {
-                        if (oldOSMap)
-                        {
-                            string URL = $"https://maps.nls.uk/geo/explore/#zoom={zoom}&lat={loc.Latitude}&lon={loc.Longitude}&layers=1&b=1";
-                            SpecialMethods.VisitWebsite(URL);
-                        }
-                    }
-                    else
-                        MessageBox.Show($"{loc} is outwith the UK so cannot be shown on a UK OS Map.");
-                }
-                else
-                    MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
-            }
-        }
-
-        float GetMapZoomLevel(out FactLocation loc)
-        {
-            // get the tab
-            loc = null;
-            try
-            {
-                switch (tabCtrlLocations.SelectedTab.Text)
-                {
-                    case "Tree View":
-                        TreeNode node = treeViewLocations.SelectedNode;
-                        if (node != null)
-                            loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
-                        break;
-                    case "Countries":
-                        loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
-                        break;
-                    case "Regions":
-                        loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-                        break;
-                    case "SubRegions":
-                        loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
-                        break;
-                    case "Addresses":
-                        loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
-                        break;
-                    case "Places":
-                        loc = dgPlaces.CurrentRow == null ? null : (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
-                        break;
-                }
-                if (loc == null)
-                {
-                    if (tabCtrlLocations.SelectedTab.Text == "Tree View")
-                        MessageBox.Show("Location selected isn't valid to show on the map.", "FTAnalyzer");
-                    else
-                        MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
-                    return 0f;
-                }
-                return loc.ZoomLevel;
-            }
-            catch (NullReferenceException)
-            {
-                return 0f;
-            }
         }
 
         #region DataErrors
@@ -814,40 +581,6 @@ namespace FTAnalyzer
             SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/privacy");
         }
 
-        void OlderParentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People frmInd = new People();
-            string inputAge = "50";
-            DialogResult result = DialogResult.Cancel;
-            int age = 0;
-            do
-            {
-                try
-                {
-                    result = InputBox.Show("Enter age between 13 and 90", "Please select minimum age to report on", ref inputAge);
-                    age = int.Parse(inputAge);
-                }
-                catch (Exception)
-                {
-                    if (result != DialogResult.Cancel)
-                        MessageBox.Show("Invalid Age entered", "FTAnalyzer");
-                }
-                if (age < 13 || age > 90)
-                    MessageBox.Show("Please enter an age between 13 and 90", "FTAnalyzer");
-            } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
-            if (result == DialogResult.OK)
-            {
-                if (frmInd.OlderParents(age))
-                {
-                    DisposeDuplicateForms(frmInd);
-                    frmInd.Show();
-                    Analytics.TrackAction(Analytics.MainFormAction, Analytics.OlderParentsEvent);
-                }
-            }
-            HourGlass(false);
-        }
-
         void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -863,95 +596,6 @@ namespace FTAnalyzer
             catch (Exception) // attempt to fix font issue
             { }
         }
-
-        void TabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                HourGlass(true);
-                Application.DoEvents();
-                TabPage current = tabCtrlLocations.SelectedTab;
-                Control control = current.Controls[0];
-                control.Focus();
-                if (control is DataGridView)
-                {
-                    DataGridView dg = control as DataGridView;
-                    tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name.Substring(2)}";
-                    mnuPrint.Enabled = true;
-                }
-                else
-                {
-                    tsCountLabel.Text = string.Empty;
-                    mnuPrint.Enabled = false;
-                }
-                tsHintsLabel.Text = Messages.Hints_Location;
-                HourGlass(false);
-            }
-            catch (Exception) // attempt to fix font issue
-            { }
-        }
-
-        #region CellFormatting
-        void FormatCellLocations(DataGridView grid, DataGridViewCellFormattingEventArgs e)
-        {
-            try
-            {
-                DataGridViewCell cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (e.ColumnIndex == 0)
-                {
-                    string country = (string)cell.Value;
-                    if (Countries.IsKnownCountry(country))
-                        e.CellStyle.Font = boldFont;
-                    else
-                        e.CellStyle.Font = normalFont;
-                }
-                else if (e.ColumnIndex == 1)
-                {
-                    string region = (string)cell.Value;
-                    if (region.Length > 0 && Regions.IsKnownRegion(region))
-                        e.CellStyle.Font = boldFont;
-                    else
-                        e.CellStyle.Font = normalFont;
-                }
-                else
-                {
-                    FactLocation loc = grid.Rows[e.RowIndex].DataBoundItem as FactLocation;
-                    cell.ToolTipText = $"Geocoding Status : {loc.Geocoded}";
-                }
-            }
-            catch (Exception) { }
-        }
-
-        void DgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
-                FormatCellLocations(dgCountries, e);
-        }
-
-        void DgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
-                FormatCellLocations(dgRegions, e);
-        }
-
-        void DgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
-                FormatCellLocations(dgSubRegions, e);
-        }
-
-        void DgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
-                FormatCellLocations(dgAddresses, e);
-        }
-
-        void DgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
-                FormatCellLocations(dgPlaces, e);
-        }
-        #endregion
 
         #region EventHandlers
         void Options_BaptismChanged(object sender, EventArgs e)
@@ -1005,25 +649,6 @@ namespace FTAnalyzer
 
         bool preventExpand;
 
-        void TreeViewLocations_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            HourGlass(true);
-            var location = e.Node.Tag as FactLocation;
-            if (location != null)
-            {
-                if (ft.CountPeopleAtLocation(location, e.Node.Level) == 0)
-                    UIHelpers.ShowMessage($"You have no one in your file at {location}.");
-                else
-                {
-                    var frmInd = new People();
-                    frmInd.SetLocation(location, e.Node.Level);
-                    DisposeDuplicateForms(frmInd);
-                    frmInd.Show();
-                }
-            }
-            HourGlass(false);
-        }
-
         void TreeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e) => e.Cancel = preventExpand && e.Action == TreeViewAction.Collapse;
 
         void TreeViewLocations_BeforeExpand(object sender, TreeViewCancelEventArgs e) => e.Cancel = preventExpand && e.Action == TreeViewAction.Expand;
@@ -1046,165 +671,6 @@ namespace FTAnalyzer
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WhatsNewEvent);
             SpecialMethods.VisitWebsite("http://ftanalyzer.com/Whats%20New%20in%20this%20Release");
-        }
-
-        void MnuShowTimeline_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            TimeLine tl = new TimeLine(new Progress<string>(value => { rtbOutput.AppendText(value); }));
-            DisposeDuplicateForms(tl);
-            tl.Show();
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MapsAction, Analytics.ShowTimelinesEvent);
-        }
-
-        enum GecodingType { Google = 1, OS = 2, Reverse = 3 }
-
-        void MnuGeocodeLocations_Click(object sender, EventArgs e)
-        {
-            StartGeocoding(GecodingType.Google);
-            Analytics.TrackAction(Analytics.GeocodingAction, Analytics.GoogleGeocodingEvent);
-        }
-
-        void MnuOSGeocoder_Click(object sender, EventArgs e)
-        {
-            StartGeocoding(GecodingType.OS);
-            Analytics.TrackAction(Analytics.GeocodingAction, Analytics.OSGeocodingEvent);
-        }
-
-        void MnuLookupBlankFoundLocations_Click(object sender, EventArgs e)
-        {
-            StartGeocoding(GecodingType.Reverse);
-            Analytics.TrackAction(Analytics.GeocodingAction, Analytics.ReverseGeocodingEvent);
-        }
-
-        void StartGeocoding(GecodingType type)
-        {
-            if (!ft.Geocoding) // don't geocode if another geocode session in progress
-            {
-                try
-                {
-                    HourGlass(true);
-                    GeocodeLocations geo = null;
-                    foreach (Form f in Application.OpenForms)
-                    {
-                        if (f is GeocodeLocations)
-                        {
-                            geo = f as GeocodeLocations;
-                            break;
-                        }
-                    }
-                    if (geo == null)
-                        geo = new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
-                    geo.Show();
-                    geo.Focus();
-                    Application.DoEvents();
-                    switch (type)
-                    {
-                        case GecodingType.Google:
-                            geo.StartGoogleGeoCoding(false);
-                            break;
-                        case GecodingType.OS:
-                            geo.StartOSGeoCoding();
-                            break;
-                        case GecodingType.Reverse:
-                            geo.StartReverseGeoCoding();
-                            break;
-                    }
-                    HourGlass(false);
-                }
-                catch (Exception) { }
-            }
-        }
-
-        void LocationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            GeocodeLocations geo = new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
-            DisposeDuplicateForms(geo);
-            geo.Show();
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MapsAction, Analytics.GeocodesEvent);
-        }
-
-        void TreeViewLocations_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            try
-            {
-                if (treeViewLocations.SelectedNode != e.Node && e.Button.Equals(MouseButtons.Right))
-                    treeViewLocations.SelectedNode = e.Node;
-            }
-            catch (Exception) { }
-        }
-
-        void TreeViewLocations_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            try
-            {
-                treeViewLocations.SelectedImageIndex = e.Node.ImageIndex;
-            }
-            catch (Exception) { }
-        }
-
-        void MnuLifelines_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            LifeLine l = new LifeLine(new Progress<string>(value => { rtbOutput.AppendText(value); }));
-            DisposeDuplicateForms(l);
-            l.Show();
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MapsAction, Analytics.LifelinesEvent);
-        }
-
-        void MnuPlaces_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Places p = new Places(new Progress<string>(value => { rtbOutput.AppendText(value); }));
-            DisposeDuplicateForms(p);
-            p.Show();
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MapsAction, Analytics.ShowPlacesEvent);
-        }
-
-        void DgSurnames_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                IDisplaySurnames stat = dgSurnames.CurrentRowDataBoundItem;
-                People frmInd = new People();
-                frmInd.SetSurnameStats(stat, chkSurnamesIgnoreCase.Checked);
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-                Analytics.TrackAction(Analytics.MainFormAction, Analytics.ViewAllSurnameEvent);
-            }
-        }
-
-        void DgSurnames_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0 && e.RowIndex >= 0)
-            {
-                DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells[nameof(IDisplaySurnames.Surname)];
-                if (cell.Value != null)
-                {
-                    Statistics.DisplayGOONSpage(cell.Value.ToString());
-                    Analytics.TrackAction(Analytics.MainFormAction, Analytics.GOONSEvent);
-                }
-            }
-        }
-
-        void PossibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            var predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
-            var censusNotes = ft.AllIndividuals.Filter(predicate).ToList<Individual>();
-            var people = new People();
-            people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
-            DisposeDuplicateForms(people);
-            people.Show();
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.PossibleCensusEvent);
         }
 
         #region Tab Control
@@ -1250,51 +716,6 @@ namespace FTAnalyzer
                             SetupDataErrors(); // select data errors tab if first time opening errors fixes tab
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.ErrorsFixesEvent);
                     }
-                    else if (tabSelector.SelectedTab == tabFacts)
-                    {
-                        // already cleared text don't need to do anything else
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.FactsTabEvent);
-                    }
-                    else if (tabSelector.SelectedTab == tabSurnames)
-                    {
-                        // show empty form click button to load
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.SurnamesTabEvent);
-                    }
-                    else if (tabSelector.SelectedTab == tabToday)
-                    {
-                        bool todaysMonth = Application.UserAppDataRegistry.GetValue("Todays Events Month", "False").Equals("True");
-                        int todaysStep = int.Parse(Application.UserAppDataRegistry.GetValue("Todays Events Step", "5").ToString());
-                        rbTodayMonth.Checked = todaysMonth;
-                        nudToday.Value = todaysStep;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayTabEvent);
-                    }
-                    else if (tabSelector.SelectedTab == tabLocations)
-                    {
-                        HourGlass(true);
-                        tabCtrlLocations.SelectedIndex = 0;
-                        tsCountLabel.Text = string.Empty;
-                        tsHintsLabel.Text = Messages.Hints_Location;
-                        tspbTabProgress.Visible = true;
-                        treeViewLocations.Nodes.Clear();
-                        Application.DoEvents();
-                        TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(treeViewLocations.Font, true, tspbTabProgress);
-                        try
-                        {
-                            treeViewLocations.Nodes.AddRange(nodes);
-                        }
-                        catch (ArgumentException fEx)
-                        {
-                            Console.WriteLine(fEx.Message); // typically font loading error
-                        }
-                        mnuPrint.Enabled = false;
-                        dgCountries.DataSource = ft.AllDisplayCountries;
-                        dgRegions.DataSource = ft.AllDisplayRegions;
-                        dgSubRegions.DataSource = ft.AllDisplaySubRegions;
-                        dgAddresses.DataSource = ft.AllDisplayAddresses;
-                        dgPlaces.DataSource = ft.AllDisplayPlaces;
-                        tspbTabProgress.Visible = false;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.LocationTabViewed);
-                    }
                     HourGlass(false);
                 }
             }
@@ -1329,30 +750,6 @@ namespace FTAnalyzer
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Sources;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.SourcesTabEvent);
-            }
-            else if (tabMainListsSelector.SelectedTab == tabOccupations)
-            {
-                SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
-                dgOccupations.DataSource = list;
-                dgOccupations.Sort(dgOccupations.Columns[nameof(IDisplayOccupation.Occupation)], ListSortDirection.Ascending);
-                dgOccupations.Focus();
-                mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
-                tsHintsLabel.Text = Messages.Hints_Occupation;
-                Analytics.TrackAction(Analytics.MainListsAction, Analytics.OccupationsTabEvent);
-            }
-            else if (tabMainListsSelector.SelectedTab == tabCustomFacts)
-            {
-                SortableBindingList<IDisplayCustomFact> list = ft.AllCustomFacts;
-                dgCustomFacts.DataSource = list;
-                dgCustomFacts.Sort(dgCustomFacts.Columns[nameof(IDisplayCustomFact.CustomFactName)], ListSortDirection.Ascending);
-                dgCustomFacts.Focus();
-                dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ReadOnly = false;
-                dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
-                mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
-                tsHintsLabel.Text = Messages.Hints_CustomFacts;
-                Analytics.TrackAction(Analytics.MainListsAction, Analytics.CustomFactTabEvent);
             }
         }
 
@@ -1401,34 +798,6 @@ namespace FTAnalyzer
             }
         }
 
-        #endregion
-
-        #region Filters
-        Predicate<ExportFact> CreateFactsFilter()
-        {
-            var filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
-            if (txtFactsSurname.Text.Length > 0)
-            {
-                var surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtFactsSurname.Text.Trim());
-                filter = FilterUtils.AndFilter(filter, surnameFilter);
-            }
-            return filter;
-        }
-
-        Predicate<Individual> CreateAliveatDateFilter(FactDate aliveDate, string surname)
-        {
-            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
-            var dateFilter = new Predicate<Individual>(x => x.IsPossiblyAlive(aliveDate));
-            Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
-            if (surname.Length > 0)
-            {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
-                filter = FilterUtils.AndFilter(filter, surnameFilter);
-            }
-            if (chkExcludeUnknownBirths.Checked)
-                filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
-            return filter;
-        }
         #endregion
 
         #region ToolStrip Clicks
@@ -1480,8 +849,6 @@ namespace FTAnalyzer
                         PrintDataGrid(Orientation.Landscape, dgFamilies, "List of Families");
                     else if (tabMainListsSelector.SelectedTab == tabSources)
                         PrintDataGrid(Orientation.Landscape, dgSources, "List of Sources");
-                    else if (tabMainListsSelector.SelectedTab == tabOccupations)
-                        PrintDataGrid(Orientation.Portrait, dgOccupations, "List of Occupations");
                 }
                 else if (tabSelector.SelectedTab == tabErrorsFixes)
                 {
@@ -1495,19 +862,6 @@ namespace FTAnalyzer
                         PrintDataGrid(Orientation.Landscape, dgLooseDeaths, "List of Loose Deaths");
                     else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
                         PrintDataGrid(Orientation.Landscape, dgLooseInfo, "List of Loose Births/Deaths");
-                }
-                else if (tabSelector.SelectedTab == tabLocations)
-                {
-                    if (tabCtrlLocations.SelectedTab == tabCountries)
-                        PrintDataGrid(Orientation.Portrait, dgCountries, "List of Countries");
-                    if (tabCtrlLocations.SelectedTab == tabRegions)
-                        PrintDataGrid(Orientation.Portrait, dgRegions, "List of Regions");
-                    if (tabCtrlLocations.SelectedTab == tabSubRegions)
-                        PrintDataGrid(Orientation.Portrait, dgSubRegions, "List of Sub Regions");
-                    if (tabCtrlLocations.SelectedTab == tabAddresses)
-                        PrintDataGrid(Orientation.Portrait, dgAddresses, "List of Addresses");
-                    if (tabCtrlLocations.SelectedTab == tabPlaces)
-                        PrintDataGrid(Orientation.Portrait, dgPlaces, "List of Places");
                 }
             }
             catch (Exception ex)
@@ -1837,17 +1191,6 @@ namespace FTAnalyzer
         }
 
         #region Facts Tab
-        void SetupFactsCheckboxes()
-        {
-            Predicate<ExportFact> filter = CreateFactsFilter();
-            SetFactTypeList(ckbFactSelect, ckbFactExclude, filter);
-            SetShowFactsButton();
-        }
-
-        void RelTypesFacts_RelationTypesChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
-
-        void TxtFactsSurname_TextChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
-
         void ShowFacts(string indID, bool offset = false)
         {
             Individual ind = ft.GetIndividual(indID);
@@ -1880,135 +1223,6 @@ namespace FTAnalyzer
             }
         }
 
-        void BtnShowFacts_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
-            if (txtFactsSurname.Text.Length > 0)
-            {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
-                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
-            }
-            Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true));
-            facts.Show();
-            HourGlass(false);
-        }
-
-        List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
-        {
-            List<string> result = new List<string>();
-            if (list == ckbFactExclude && ckbFactExclude.Visible == false)
-                return result; // if we aren't looking to exclude facts don't pass anything to list of exclusions
-            int index = 0;
-            foreach (string factType in list.Items)
-            {
-                if (list.GetItemChecked(index++))
-                {
-                    if (includeCreated)
-                        result.Add(factType);
-                    else
-                        if (factType != Fact.GetFactTypeDescription(Fact.PARENT) && factType != Fact.GetFactTypeDescription(Fact.CHILDREN))
-                        result.Add(factType);
-                }
-            }
-            return result;
-        }
-
-        void BtnSelectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, true, "Fact: ");
-
-        void BtnDeselectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, false, "Fact: ");
-
-        void SetFactTypes(CheckedListBox list, bool selected, string registryPrefix)
-        {
-            for (int index = 0; index < list.Items.Count; index++)
-            {
-                string factType = list.Items[index].ToString();
-                list.SetItemChecked(index, selected);
-                try
-                {
-                    Application.UserAppDataRegistry.SetValue(registryPrefix + factType, selected);
-                }
-                catch (IOException)
-                {
-                    UIHelpers.ShowMessage("Unable to save fact selection preferences. Please check App has permission to save user preferences to registry.");
-                }
-            }
-            SetShowFactsButton();
-        }
-
-        void CkbFactSelect_MouseClick(object sender, MouseEventArgs e)
-        {
-            int index = ckbFactSelect.IndexFromPoint(e.Location);
-            if (index >= 0)
-            {
-                string factType = ckbFactSelect.Items[index].ToString();
-                bool selected = ckbFactSelect.GetItemChecked(index);
-                ckbFactSelect.SetItemChecked(index, !selected);
-                try
-                {
-                    Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
-                }
-                catch (IOException)
-                {
-                    UIHelpers.ShowMessage("Unable to save fact selection preferences. Please check App has permission to save user preferences to registry.");
-                }
-                SetShowFactsButton();
-            }
-        }
-
-        void SetShowFactsButton()
-        {
-            if (ckbFactSelect.CheckedItems.Count == 0 && ckbFactExclude.CheckedItems.Count > 0)
-                btnShowFacts.Text = "Show all Facts for Individuals who are missing the selected excluded Fact Types";
-            else
-                btnShowFacts.Text = "Show only the selected Facts for Individuals" + (ckbFactExclude.Visible ? " who don't have any of the excluded Fact Types" : string.Empty);
-            btnShowFacts.Enabled = ckbFactSelect.CheckedItems.Count > 0 || (ckbFactExclude.Visible && ckbFactExclude.CheckedItems.Count > 0);
-        }
-
-        void BtnExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, true, "Exclude Fact: ");
-
-        void BtnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, false, "Exclude Fact: ");
-
-        void BtnShowExclusions_Click(object sender, EventArgs e)
-        {
-            bool visible = !ckbFactExclude.Visible;
-            ckbFactExclude.Visible = visible;
-            btnExcludeAllFactTypes.Visible = visible;
-            btnDeselectExcludeAllFactTypes.Visible = visible;
-            lblExclude.Visible = visible;
-            SetShowFactsButton();
-        }
-
-        void CkbFactExclude_MouseClick(object sender, MouseEventArgs e)
-        {
-            int index = ckbFactExclude.IndexFromPoint(e.Location);
-            string factType = ckbFactExclude.Items[index].ToString();
-            bool selected = ckbFactExclude.GetItemChecked(index);
-            ckbFactExclude.SetItemChecked(index, !selected);
-            try
-            {
-                Application.UserAppDataRegistry.SetValue("Exclude Fact: " + factType, !selected);
-            }
-            catch (IOException)
-            {
-                UIHelpers.ShowMessage("Unable to save fact exclusion preferences. Please check App has permission to save user preferences to registry.");
-            }
-            SetShowFactsButton();
-        }
-
-        void BtnDuplicateFacts_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
-            if (txtFactsSurname.Text.Length > 0)
-            {
-                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
-                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
-            }
-            Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, false));
-            facts.Show();
-            HourGlass(false);
-        }
         #endregion
 
         #region Form Drag Drop
@@ -2060,7 +1274,6 @@ namespace FTAnalyzer
         {
             try
             {
-                rtbToday.Top = dpToday.Top + 30;
                 splitGedcom.Height = 100;
                 SavePosition();
             }
@@ -2286,27 +1499,6 @@ namespace FTAnalyzer
             }
             HourGlass(false);
         }
-
-        void ShowViewNotesMenu(VirtualDataGridView<IDisplayIndividual> dg, MouseEventArgs e)
-        {
-            DataGridView.HitTestInfo hti = dg.HitTest(e.Location.X, e.Location.Y);
-            if (e.Button == MouseButtons.Right)
-            {
-                var ht = dg.HitTest(e.X, e.Y);
-                if (ht.Type != DataGridViewHitTestType.ColumnHeader)
-                {
-                    if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
-                    {
-                        dg.CurrentCell = dg.Rows[hti.RowIndex].Cells[hti.ColumnIndex];
-                        // Can leave these here - doesn't hurt
-                        dg.Rows[hti.RowIndex].Selected = true;
-                        dg.Focus();
-                        ctxViewNotes.Tag = dg.CurrentRowDataBoundItem;
-                        ctxViewNotes.Show(MousePosition);
-                    }
-                }
-            }
-        }
         #endregion
 
         #region Referrals
@@ -2336,207 +1528,6 @@ namespace FTAnalyzer
             }
         }
         #endregion
-
-        #region Export To Excel
-        void IndividualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IExportIndividual>((IEnumerable<IExportIndividual>)ft.AllIndividuals)))
-                ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
-            HourGlass(false);
-        }
-
-        void FamiliesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
-                ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);
-            HourGlass(false);
-        }
-
-        void FactsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
-                ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFactsEvent);
-            HourGlass(false);
-        }
-
-        void LooseBirthsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            try
-            {
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                List<IDisplayLooseBirth> list = ft.LooseBirths().ToList();
-                list.Sort(new LooseBirthComparer());
-                using (DataTable dt = convertor.ToDataTable(list))
-                    ExportToExcel.Export(dt);
-                Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLooseBirthsEvent);
-            }
-            catch (LooseDataException ex)
-            {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
-            }
-            HourGlass(false);
-        }
-
-        void LooseDeathsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            try
-            {
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList();
-                list.Sort(new LooseDeathComparer());
-                using (DataTable dt = convertor.ToDataTable(list))
-                    ExportToExcel.Export(dt);
-                Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLooseDeathsEvent);
-            }
-            catch (LooseDataException ex)
-            {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
-            }
-            HourGlass(false);
-        }
-
-        void MnuExportLocations_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
-                ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLocationsEvent);
-            HourGlass(false);
-        }
-
-        void MnuSourcesToExcel_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
-                ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
-            HourGlass(false);
-        }
-
-        void MnuDataErrorsToExcel_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
-                ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
-            HourGlass(false);
-        }
-
-        async void MnuSurnamesToExcel_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            SortableBindingList<IDisplaySurnames> stats;
-            if (dgSurnames.DataSource != null)
-                stats = dgSurnames.DataSource;
-            else
-            {
-                tspbTabProgress.Visible = true;
-                Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
-                Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
-                var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
-                stats = await Task.Run(() =>
-                    new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
-                tspbTabProgress.Visible = false;
-            }
-            List<IDisplaySurnames> list = new List<IDisplaySurnames>(stats);
-            using (DataTable dt = convertor.ToDataTable(list))
-                ExportToExcel. Export(dt);
-            await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
-            HourGlass(false);
-        }
-        #endregion
-
-        #region Today
-
-        async Task ShowTodaysEvents()
-        {
-            pbToday.Visible = true;
-            labToday.Visible = true;
-            rtbToday.ResetText();
-            Progress<int> progress = new Progress<int>(value => { pbToday.Value = value; });
-            Progress<string> outputText = new Progress<string>(text => { rtbToday.Rtf = text; });
-            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText)).ConfigureAwait(true);
-            labToday.Visible = false;
-            pbToday.Visible = false;
-            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(true);
-        }
-
-        void RbTodayMonth_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
-            }
-            catch (IOException)
-            {
-                UIHelpers.ShowMessage("Unable to save Today preference. Please check App has rights to save user preferences to registry.");
-            }
-        }
-
-        void RbTodaySingle_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
-            }
-            catch (IOException)
-            {
-                UIHelpers.ShowMessage("Unable to save Today preference. Please check App has rights to save user preferences to registry.");
-            }
-        }
-
-        async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents().ConfigureAwait(true);
-
-        void NudToday_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
-            }
-            catch (IOException)
-            {
-                UIHelpers.ShowMessage("Unable to save Today preference. Please check App has rights to save user preferences to registry.");
-            }
-        }
-        #endregion
-
-        public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
-        {
-            List<string> factTypes = ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList();
-            factTypes.Sort();
-            ckbFactSelect.Items.Clear();
-            ckbFactExclude.Items.Clear();
-            foreach (string factType in factTypes)
-            {
-                if (!ckbFactSelect.Items.Contains(factType))
-                {
-                    int index = ckbFactSelect.Items.Add(factType);
-                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Fact: " + factType, "True").Equals("True");
-                    ckbFactSelect.SetItemChecked(index, itemChecked);
-                }
-                if (!ckbFactExclude.Items.Contains(factType))
-                {
-                    int index = ckbFactExclude.Items.Add(factType);
-                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Exlude Fact: " + factType, "False").Equals("True");
-                    ckbFactExclude.SetItemChecked(index, itemChecked);
-                }
-            }
-        }
 
         void MnuLoadLocationsCSV_Click(object sender, EventArgs e) => LoadLocations(tspbTabProgress, tsStatusLabel, 1);
 
@@ -2649,150 +1640,8 @@ namespace FTAnalyzer
                 LoadLocationData(pb, label, defaultIndex);
         }
 
-        async void BtnShowSurnames_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            tsCountLabel.Text = string.Empty;
-            tsHintsLabel.Text = string.Empty;
-            tspbTabProgress.Visible = true;
-            Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
-            Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
-            var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
-            var list = await Task.Run(() =>
-                new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
-            tspbTabProgress.Visible = false;
-            dgSurnames.DataSource = list;
-            dgSurnames.Sort(dgSurnames.Columns[nameof(IDisplaySurnames.Surname)], ListSortDirection.Ascending);
-            dgSurnames.Focus();
-            tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
-            tsHintsLabel.Text = Messages.Hints_Surname;
-            HourGlass(false);
-            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent).ConfigureAwait(true);
-        }
-
-        void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.CousinCount);
-            DisposeDuplicateForms(f);
-            f.Show();
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.CousinCountEvent);
-        }
-
-        void HowManyDirectsReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.HowManyDirects);
-            DisposeDuplicateForms(f);
-            f.Show();
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.DirectsReportEvent);
-        }
-
-        void FacebookSupportGroupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpecialMethods.VisitWebsite("https://www.facebook.com/ftanalyzer");
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookSupportEvent);
-        }
-
-        void FacebookUserGroupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpecialMethods.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookUsersEvent);
-        }
-
-        void MnuDNA_GEDCOM_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            DNA_GEDCOM.Export();
-            HourGlass(false);
-        }
-
-        void GetGoogleAPIKeyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpecialMethods.VisitWebsite("https://developers.google.com/maps/documentation/embed/get-api-key");
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.GoogleAPIKey);
-        }
-
-        void GoogleAPISetupGuideToolStripMenuItem_Click(object sender, EventArgs e) => SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/GoogleAPI");
-
-        void BirthdayEffectReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.BirthdayEffect);
-            DisposeDuplicateForms(f);
-            f.Show();
-            HourGlass(false);
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthdayEffectEvent);
-        }
-
-        void PossiblyMissingChildReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SetupPossiblyMissingChildrenReport();
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.ReportsAction, Analytics.PossiblyMissingChildren);
-            HourGlass(false);
-        }
-
-        void MnuAgedOver99Report_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SetupAgedOver99Report();
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);
-            HourGlass(false);
-        }
-
-        void MnuSingleParentsReport_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            People people = new People();
-            people.SingleParents();
-            DisposeDuplicateForms(people);
-            people.Show();
-            Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);
-            HourGlass(false);
-        }
-
-        void MnuJSON_Click(object sender, EventArgs e)
-        {
-            HourGlass(true);
-            try
-            {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-                {
-                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("JSON Export Path");
-                    saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                    saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
-                    saveFileDialog.FilterIndex = 1;
-                    DialogResult dr = saveFileDialog.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                        Application.UserAppDataRegistry.SetValue("JSON Export Path", path);
-                        using (StreamWriter output = new StreamWriter(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), Encoding.UTF8))
-                        {
-                            var data = new JsonExport(filename);
-                            data.WriteJsonData(output);
-                        }
-                        UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
-            }
-            HourGlass(false);
-        }
-
         FactDate AliveDate { get; set; }
+
         void TxtAliveDates_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txtAliveDates.Text))
@@ -2825,21 +1674,6 @@ namespace FTAnalyzer
         {
             if (txtAliveDates.Text.StartsWith("Enter"))
                 txtAliveDates.Text = string.Empty;
-        }
-
-        void BtnAliveOnDate_Click(object sender, EventArgs e)
-        {
-            if (AliveDate != FactDate.UNKNOWN_DATE)
-            {
-                HourGlass(true);
-                People people = new People();
-                Predicate<Individual> filter = CreateAliveatDateFilter(AliveDate, txtCensusSurname.Text);
-                people.SetupAliveAtDate(AliveDate, filter);
-                DisposeDuplicateForms(people);
-                people.Show();
-                Analytics.TrackAction(Analytics.CensusTabAction, Analytics.AliveAtDate);
-                HourGlass(false);
-            }
         }
     }
 }

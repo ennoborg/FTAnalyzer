@@ -300,8 +300,6 @@ namespace FTAnalyzer.Forms
 
         void Facts_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = Text;
 
-        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayFact>();
-
         void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("FactsColumns.xml");
 
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
@@ -350,11 +348,6 @@ namespace FTAnalyzer.Forms
                 {
                     Facts person = new Facts(f.Ind);
                     person.Show();
-                }
-                else
-                {
-                    SourcesForm sourceForm = new SourcesForm(f);
-                    sourceForm.Show();
                 }
             }
         }

@@ -380,8 +380,6 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayColourBMD>();
-
         void MnuViewFacts_Click(object sender, EventArgs e)
         {
             if (dgBMDReportSheet.CurrentRow != null)

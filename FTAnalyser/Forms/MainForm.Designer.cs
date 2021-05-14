@@ -22,8 +22,6 @@ namespace FTAnalyzer
                     components.Dispose();
                 }
                 base.Dispose(disposing);
-                normalFont.Dispose();
-                boldFont.Dispose();
                 handwritingFont.Dispose();
                 fonts.Dispose();
                 rfhDuplicates.Dispose();
@@ -71,57 +69,16 @@ namespace FTAnalyzer
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCloseGEDCOM = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuChildAgeProfiles = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOlderParents = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPossibleCensusFacts = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCousinsCountReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHowManyGreats = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBirthdayEffect = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPossiblyMissingChildReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuAgedOver99Report = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuSingleParentsReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFactsToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuExportLocations = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSourcesToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuDataErrorsToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSurnamesToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuLooseBirthsToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuLooseDeathsToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuDNA_GEDCOM = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuJSON = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.displayOptionsOnLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToDefaultFormSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMaps = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuShowTimeline = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuLifelines = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPlaces = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuLocationsGeocodeReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOSGeocoder = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuLookupBlankFoundLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewOnlineManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportAnIssueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facebookSupportGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facebookUserGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.getGoogleAPIKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.googleAPISetupGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.privacyPolicyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whatsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,10 +93,6 @@ namespace FTAnalyzer
             this.tspbTabProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.tsStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.dgRegions = new System.Windows.Forms.DataGridView();
-            this.dgCountries = new System.Windows.Forms.DataGridView();
-            this.ckbFactExclude = new System.Windows.Forms.CheckedListBox();
-            this.btnShowExclusions = new System.Windows.Forms.Button();
             this.dgDataErrors = new FTAnalyzer.Forms.Controls.VirtualDGVDataErrors();
             this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
             this.dgCheckAncestors = new System.Windows.Forms.DataGridView();
@@ -167,7 +120,6 @@ namespace FTAnalyzer
             this.rtbCheckAncestors = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.btnCheckMyAncestors = new System.Windows.Forms.Button();
             this.lblCheckAncestors = new System.Windows.Forms.Label();
-            this.btnAliveOnDate = new System.Windows.Forms.Button();
             this.txtAliveDates = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.btnRandomSurnameEntered = new System.Windows.Forms.Button();
@@ -183,22 +135,7 @@ namespace FTAnalyzer
             this.btnNoChildrenStatus = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnReportUnrecognised = new System.Windows.Forms.Button();
-            this.tabLocations = new System.Windows.Forms.TabPage();
-            this.btnModernOSMap = new System.Windows.Forms.Button();
-            this.btnOldOSMap = new System.Windows.Forms.Button();
-            this.btnShowMap = new System.Windows.Forms.Button();
-            this.tabCtrlLocations = new System.Windows.Forms.TabControl();
-            this.tabTreeView = new System.Windows.Forms.TabPage();
-            this.treeViewLocations = new System.Windows.Forms.TreeView();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.tabCountries = new System.Windows.Forms.TabPage();
-            this.tabRegions = new System.Windows.Forms.TabPage();
-            this.tabSubRegions = new System.Windows.Forms.TabPage();
-            this.dgSubRegions = new System.Windows.Forms.DataGridView();
-            this.tabAddresses = new System.Windows.Forms.TabPage();
-            this.dgAddresses = new System.Windows.Forms.DataGridView();
-            this.tabPlaces = new System.Windows.Forms.TabPage();
-            this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
             this.splitGedcom = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -222,10 +159,6 @@ namespace FTAnalyzer
             this.dgFamilies = new FTAnalyzer.Forms.Controls.VirtualDGVFamily();
             this.tabSources = new System.Windows.Forms.TabPage();
             this.dgSources = new FTAnalyzer.Forms.Controls.VirtualDGVSources();
-            this.tabOccupations = new System.Windows.Forms.TabPage();
-            this.dgOccupations = new FTAnalyzer.Forms.Controls.VirtualDGVOccupations();
-            this.tabCustomFacts = new System.Windows.Forms.TabPage();
-            this.dgCustomFacts = new FTAnalyzer.Forms.Controls.VirtualDGVCustomFacts();
             this.tabErrorsFixes = new System.Windows.Forms.TabPage();
             this.tabErrorFixSelector = new System.Windows.Forms.TabControl();
             this.tabDataErrors = new System.Windows.Forms.TabPage();
@@ -248,40 +181,6 @@ namespace FTAnalyzer
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabLooseInfo = new System.Windows.Forms.TabPage();
             this.dgLooseInfo = new System.Windows.Forms.DataGridView();
-            this.tabSurnames = new System.Windows.Forms.TabPage();
-            this.chkSurnamesIgnoreCase = new System.Windows.Forms.CheckBox();
-            this.btnShowSurnames = new System.Windows.Forms.Button();
-            this.dgSurnames = new FTAnalyzer.Forms.Controls.VirtualDGVSurnames();
-            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.URI = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.Individuals = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Families = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marriages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reltypesSurnames = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.tabFacts = new System.Windows.Forms.TabPage();
-            this.btnDuplicateFacts = new System.Windows.Forms.Button();
-            this.lblExclude = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.btnDeselectExcludeAllFactTypes = new System.Windows.Forms.Button();
-            this.btnExcludeAllFactTypes = new System.Windows.Forms.Button();
-            this.btnDeselectAllFactTypes = new System.Windows.Forms.Button();
-            this.btnSelectAllFactTypes = new System.Windows.Forms.Button();
-            this.ckbFactSelect = new System.Windows.Forms.CheckedListBox();
-            this.btnShowFacts = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtFactsSurname = new System.Windows.Forms.TextBox();
-            this.relTypesFacts = new FTAnalyzer.Forms.Controls.RelationTypes();
-            this.tabToday = new System.Windows.Forms.TabPage();
-            this.label18 = new System.Windows.Forms.Label();
-            this.nudToday = new System.Windows.Forms.NumericUpDown();
-            this.btnUpdateTodaysEvents = new System.Windows.Forms.Button();
-            this.labToday = new System.Windows.Forms.Label();
-            this.pbToday = new System.Windows.Forms.ProgressBar();
-            this.rbTodayMonth = new System.Windows.Forms.RadioButton();
-            this.rbTodaySingle = new System.Windows.Forms.RadioButton();
-            this.label17 = new System.Windows.Forms.Label();
-            this.dpToday = new System.Windows.Forms.DateTimePicker();
-            this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.NonDuplicate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DuplicateIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -300,8 +199,6 @@ namespace FTAnalyzer
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCheckAncestors)).BeginInit();
@@ -310,17 +207,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.tabLocations.SuspendLayout();
-            this.tabCtrlLocations.SuspendLayout();
-            this.tabTreeView.SuspendLayout();
-            this.tabCountries.SuspendLayout();
-            this.tabRegions.SuspendLayout();
-            this.tabSubRegions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgSubRegions)).BeginInit();
-            this.tabAddresses.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
-            this.tabPlaces.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitGedcom)).BeginInit();
             this.splitGedcom.Panel1.SuspendLayout();
@@ -337,10 +223,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
             this.tabSources.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSources)).BeginInit();
-            this.tabOccupations.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).BeginInit();
-            this.tabCustomFacts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCustomFacts)).BeginInit();
             this.tabErrorsFixes.SuspendLayout();
             this.tabErrorFixSelector.SuspendLayout();
             this.tabDataErrors.SuspendLayout();
@@ -353,11 +235,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
             this.tabLooseInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).BeginInit();
-            this.tabSurnames.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).BeginInit();
-            this.tabFacts.SuspendLayout();
-            this.tabToday.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -369,10 +246,7 @@ namespace FTAnalyzer
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.mnuReports,
-            this.mnuExport,
             this.toolsToolStripMenuItem,
-            this.mnuMaps,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -559,214 +433,6 @@ namespace FTAnalyzer
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
-            // mnuReports
-            // 
-            this.mnuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuChildAgeProfiles,
-            this.mnuOlderParents,
-            this.mnuPossibleCensusFacts,
-            this.mnuCousinsCountReport,
-            this.mnuHowManyGreats,
-            this.mnuBirthdayEffect,
-            this.mnuPossiblyMissingChildReport,
-            this.MnuAgedOver99Report,
-            this.MnuSingleParentsReport});
-            this.mnuReports.Name = "mnuReports";
-            this.mnuReports.Size = new System.Drawing.Size(59, 22);
-            this.mnuReports.Text = "Reports";
-            // 
-            // mnuChildAgeProfiles
-            // 
-            this.mnuChildAgeProfiles.Name = "mnuChildAgeProfiles";
-            this.mnuChildAgeProfiles.Size = new System.Drawing.Size(230, 22);
-            this.mnuChildAgeProfiles.Text = "Parent Age Report";
-            this.mnuChildAgeProfiles.Click += new System.EventHandler(this.ChildAgeProfilesToolStripMenuItem_Click);
-            // 
-            // mnuOlderParents
-            // 
-            this.mnuOlderParents.Name = "mnuOlderParents";
-            this.mnuOlderParents.Size = new System.Drawing.Size(230, 22);
-            this.mnuOlderParents.Text = "Older Parents";
-            this.mnuOlderParents.Click += new System.EventHandler(this.OlderParentsToolStripMenuItem_Click);
-            // 
-            // mnuPossibleCensusFacts
-            // 
-            this.mnuPossibleCensusFacts.Name = "mnuPossibleCensusFacts";
-            this.mnuPossibleCensusFacts.Size = new System.Drawing.Size(230, 22);
-            this.mnuPossibleCensusFacts.Text = "Possible Census Facts";
-            this.mnuPossibleCensusFacts.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
-    "s";
-            this.mnuPossibleCensusFacts.Click += new System.EventHandler(this.PossibleCensusFactsToolStripMenuItem_Click);
-            // 
-            // mnuCousinsCountReport
-            // 
-            this.mnuCousinsCountReport.Name = "mnuCousinsCountReport";
-            this.mnuCousinsCountReport.Size = new System.Drawing.Size(230, 22);
-            this.mnuCousinsCountReport.Text = "Cousins Count Report";
-            this.mnuCousinsCountReport.Click += new System.EventHandler(this.CousinsCountReportToolStripMenuItem_Click);
-            // 
-            // mnuHowManyGreats
-            // 
-            this.mnuHowManyGreats.Name = "mnuHowManyGreats";
-            this.mnuHowManyGreats.Size = new System.Drawing.Size(230, 22);
-            this.mnuHowManyGreats.Text = "How Many Directs Report";
-            this.mnuHowManyGreats.Click += new System.EventHandler(this.HowManyDirectsReportToolStripMenuItem_Click);
-            // 
-            // mnuBirthdayEffect
-            // 
-            this.mnuBirthdayEffect.Name = "mnuBirthdayEffect";
-            this.mnuBirthdayEffect.Size = new System.Drawing.Size(230, 22);
-            this.mnuBirthdayEffect.Text = "Birthday Effect Report";
-            this.mnuBirthdayEffect.Click += new System.EventHandler(this.BirthdayEffectReportToolStripMenuItem_Click);
-            // 
-            // mnuPossiblyMissingChildReport
-            // 
-            this.mnuPossiblyMissingChildReport.Name = "mnuPossiblyMissingChildReport";
-            this.mnuPossiblyMissingChildReport.Size = new System.Drawing.Size(230, 22);
-            this.mnuPossiblyMissingChildReport.Text = "Possibly Missing Child Report";
-            this.mnuPossiblyMissingChildReport.Click += new System.EventHandler(this.PossiblyMissingChildReportToolStripMenuItem_Click);
-            // 
-            // MnuAgedOver99Report
-            // 
-            this.MnuAgedOver99Report.Name = "MnuAgedOver99Report";
-            this.MnuAgedOver99Report.Size = new System.Drawing.Size(230, 22);
-            this.MnuAgedOver99Report.Text = "Aged over 99 Report";
-            this.MnuAgedOver99Report.Click += new System.EventHandler(this.MnuAgedOver99Report_Click);
-            // 
-            // MnuSingleParentsReport
-            // 
-            this.MnuSingleParentsReport.Name = "MnuSingleParentsReport";
-            this.MnuSingleParentsReport.Size = new System.Drawing.Size(230, 22);
-            this.MnuSingleParentsReport.Text = "Single Parents Report";
-            this.MnuSingleParentsReport.Click += new System.EventHandler(this.MnuSingleParentsReport_Click);
-            // 
-            // mnuExport
-            // 
-            this.mnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuIndividualsToExcel,
-            this.mnuFamiliesToExcel,
-            this.mnuFactsToExcel,
-            this.MnuExportLocations,
-            this.mnuSourcesToExcel,
-            this.toolStripSeparator12,
-            this.mnuDataErrorsToExcel,
-            this.mnuSurnamesToExcel,
-            this.toolStripSeparator8,
-            this.mnuLooseBirthsToExcel,
-            this.mnuLooseDeathsToExcel,
-            this.toolStripSeparator9,
-            this.toolStripSeparator13,
-            this.mnuDNA_GEDCOM,
-            this.toolStripSeparator15,
-            this.mnuJSON});
-            this.mnuExport.Name = "mnuExport";
-            this.mnuExport.Size = new System.Drawing.Size(53, 22);
-            this.mnuExport.Text = "Export";
-            // 
-            // mnuIndividualsToExcel
-            // 
-            this.mnuIndividualsToExcel.Name = "mnuIndividualsToExcel";
-            this.mnuIndividualsToExcel.Size = new System.Drawing.Size(211, 22);
-            this.mnuIndividualsToExcel.Text = "Individuals to Excel";
-            this.mnuIndividualsToExcel.Click += new System.EventHandler(this.IndividualsToExcelToolStripMenuItem_Click);
-            // 
-            // mnuFamiliesToExcel
-            // 
-            this.mnuFamiliesToExcel.Name = "mnuFamiliesToExcel";
-            this.mnuFamiliesToExcel.Size = new System.Drawing.Size(211, 22);
-            this.mnuFamiliesToExcel.Text = "Families to Excel";
-            this.mnuFamiliesToExcel.Click += new System.EventHandler(this.FamiliesToExcelToolStripMenuItem_Click);
-            // 
-            // mnuFactsToExcel
-            // 
-            this.mnuFactsToExcel.Name = "mnuFactsToExcel";
-            this.mnuFactsToExcel.Size = new System.Drawing.Size(211, 22);
-            this.mnuFactsToExcel.Text = "Facts to Excel";
-            this.mnuFactsToExcel.Click += new System.EventHandler(this.FactsToExcelToolStripMenuItem_Click);
-            // 
-            // MnuExportLocations
-            // 
-            this.MnuExportLocations.Name = "MnuExportLocations";
-            this.MnuExportLocations.Size = new System.Drawing.Size(211, 22);
-            this.MnuExportLocations.Text = "Locations to Excel";
-            this.MnuExportLocations.Click += new System.EventHandler(this.MnuExportLocations_Click);
-            // 
-            // mnuSourcesToExcel
-            // 
-            this.mnuSourcesToExcel.Name = "mnuSourcesToExcel";
-            this.mnuSourcesToExcel.Size = new System.Drawing.Size(211, 22);
-            this.mnuSourcesToExcel.Text = "Sources to Excel";
-            this.mnuSourcesToExcel.Click += new System.EventHandler(this.MnuSourcesToExcel_Click);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(208, 6);
-            // 
-            // mnuDataErrorsToExcel
-            // 
-            this.mnuDataErrorsToExcel.Name = "mnuDataErrorsToExcel";
-            this.mnuDataErrorsToExcel.Size = new System.Drawing.Size(211, 22);
-            this.mnuDataErrorsToExcel.Text = "Data Errors to Excel";
-            this.mnuDataErrorsToExcel.Click += new System.EventHandler(this.MnuDataErrorsToExcel_Click);
-            // 
-            // mnuSurnamesToExcel
-            // 
-            this.mnuSurnamesToExcel.Name = "mnuSurnamesToExcel";
-            this.mnuSurnamesToExcel.Size = new System.Drawing.Size(211, 22);
-            this.mnuSurnamesToExcel.Text = "Surnames to Excel";
-            this.mnuSurnamesToExcel.Click += new System.EventHandler(this.MnuSurnamesToExcel_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(208, 6);
-            // 
-            // mnuLooseBirthsToExcel
-            // 
-            this.mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
-            this.mnuLooseBirthsToExcel.Size = new System.Drawing.Size(211, 22);
-            this.mnuLooseBirthsToExcel.Text = "Loose Births to Excel";
-            this.mnuLooseBirthsToExcel.Click += new System.EventHandler(this.LooseBirthsToExcelToolStripMenuItem_Click);
-            // 
-            // mnuLooseDeathsToExcel
-            // 
-            this.mnuLooseDeathsToExcel.Name = "mnuLooseDeathsToExcel";
-            this.mnuLooseDeathsToExcel.Size = new System.Drawing.Size(211, 22);
-            this.mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
-            this.mnuLooseDeathsToExcel.Click += new System.EventHandler(this.LooseDeathsToExcelToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(208, 6);
-            // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(208, 6);
-            // 
-            // mnuDNA_GEDCOM
-            // 
-            this.mnuDNA_GEDCOM.Name = "mnuDNA_GEDCOM";
-            this.mnuDNA_GEDCOM.Size = new System.Drawing.Size(211, 22);
-            this.mnuDNA_GEDCOM.Text = "Minimalist DNA GEDCOM";
-            this.mnuDNA_GEDCOM.Click += new System.EventHandler(this.MnuDNA_GEDCOM_Click);
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(208, 6);
-            this.toolStripSeparator15.Visible = false;
-            // 
-            // mnuJSON
-            // 
-            this.mnuJSON.Name = "mnuJSON";
-            this.mnuJSON.Size = new System.Drawing.Size(211, 22);
-            this.mnuJSON.Text = "JSON for Visualisations";
-            this.mnuJSON.Visible = false;
-            this.mnuJSON.Click += new System.EventHandler(this.MnuJSON_Click);
-            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -805,93 +471,13 @@ namespace FTAnalyzer
             this.resetToDefaultFormSizeToolStripMenuItem.Text = "Reset to Default form size";
             this.resetToDefaultFormSizeToolStripMenuItem.Click += new System.EventHandler(this.ResetToDefaultFormSizeToolStripMenuItem_Click);
             // 
-            // mnuMaps
-            // 
-            this.mnuMaps.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuShowTimeline,
-            this.mnuLifelines,
-            this.mnuPlaces,
-            this.toolStripSeparator4,
-            this.mnuLocationsGeocodeReport,
-            this.toolStripSeparator10,
-            this.mnuGeocodeLocations,
-            this.mnuOSGeocoder,
-            this.mnuLookupBlankFoundLocations});
-            this.mnuMaps.Name = "mnuMaps";
-            this.mnuMaps.Size = new System.Drawing.Size(48, 22);
-            this.mnuMaps.Text = "Maps";
-            // 
-            // mnuShowTimeline
-            // 
-            this.mnuShowTimeline.Name = "mnuShowTimeline";
-            this.mnuShowTimeline.Size = new System.Drawing.Size(284, 22);
-            this.mnuShowTimeline.Text = "Show Timeline";
-            this.mnuShowTimeline.Click += new System.EventHandler(this.MnuShowTimeline_Click);
-            // 
-            // mnuLifelines
-            // 
-            this.mnuLifelines.Name = "mnuLifelines";
-            this.mnuLifelines.Size = new System.Drawing.Size(284, 22);
-            this.mnuLifelines.Text = "Show Lifelines";
-            this.mnuLifelines.Click += new System.EventHandler(this.MnuLifelines_Click);
-            // 
-            // mnuPlaces
-            // 
-            this.mnuPlaces.Name = "mnuPlaces";
-            this.mnuPlaces.Size = new System.Drawing.Size(284, 22);
-            this.mnuPlaces.Text = "Show Places";
-            this.mnuPlaces.Click += new System.EventHandler(this.MnuPlaces_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(281, 6);
-            // 
-            // mnuLocationsGeocodeReport
-            // 
-            this.mnuLocationsGeocodeReport.Name = "mnuLocationsGeocodeReport";
-            this.mnuLocationsGeocodeReport.Size = new System.Drawing.Size(284, 22);
-            this.mnuLocationsGeocodeReport.Text = "Display Geocoded Locations";
-            this.mnuLocationsGeocodeReport.Click += new System.EventHandler(this.LocationsGeocodeReportToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(281, 6);
-            // 
-            // mnuGeocodeLocations
-            // 
-            this.mnuGeocodeLocations.Name = "mnuGeocodeLocations";
-            this.mnuGeocodeLocations.Size = new System.Drawing.Size(284, 22);
-            this.mnuGeocodeLocations.Text = "Run Google Geocoder to Find Locations";
-            this.mnuGeocodeLocations.Click += new System.EventHandler(this.MnuGeocodeLocations_Click);
-            // 
-            // mnuOSGeocoder
-            // 
-            this.mnuOSGeocoder.Name = "mnuOSGeocoder";
-            this.mnuOSGeocoder.Size = new System.Drawing.Size(284, 22);
-            this.mnuOSGeocoder.Text = "Run OS Geocoder to Find Locations";
-            this.mnuOSGeocoder.Click += new System.EventHandler(this.MnuOSGeocoder_Click);
-            // 
-            // mnuLookupBlankFoundLocations
-            // 
-            this.mnuLookupBlankFoundLocations.Name = "mnuLookupBlankFoundLocations";
-            this.mnuLookupBlankFoundLocations.Size = new System.Drawing.Size(284, 22);
-            this.mnuLookupBlankFoundLocations.Text = "Lookup Blank Google Locations";
-            this.mnuLookupBlankFoundLocations.Click += new System.EventHandler(this.MnuLookupBlankFoundLocations_Click);
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewOnlineManualToolStripMenuItem,
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem,
             this.reportAnIssueToolStripMenuItem,
-            this.facebookSupportGroupToolStripMenuItem,
-            this.facebookUserGroupToolStripMenuItem,
             this.toolStripSeparator1,
-            this.getGoogleAPIKeyToolStripMenuItem,
-            this.googleAPISetupGuideToolStripMenuItem,
-            this.toolStripSeparator14,
             this.privacyPolicyToolStripMenuItem,
             this.whatsNewToolStripMenuItem,
             this.aboutToolStripMenuItem});
@@ -902,84 +488,52 @@ namespace FTAnalyzer
             // viewOnlineManualToolStripMenuItem
             // 
             this.viewOnlineManualToolStripMenuItem.Name = "viewOnlineManualToolStripMenuItem";
-            this.viewOnlineManualToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.viewOnlineManualToolStripMenuItem.Size = new System.Drawing.Size(270, 38);
             this.viewOnlineManualToolStripMenuItem.Text = "View Online Manual";
             this.viewOnlineManualToolStripMenuItem.Click += new System.EventHandler(this.ViewOnlineManualToolStripMenuItem_Click);
             // 
             // onlineGuidesToUsingFTAnalyzerToolStripMenuItem
             // 
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Name = "onlineGuidesToUsingFTAnalyzerToolStripMenuItem";
-            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new System.Drawing.Size(270, 38);
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Text = "Online Guides to Using FTAnalyzer";
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Click += new System.EventHandler(this.OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click);
             // 
             // reportAnIssueToolStripMenuItem
             // 
             this.reportAnIssueToolStripMenuItem.Name = "reportAnIssueToolStripMenuItem";
-            this.reportAnIssueToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.reportAnIssueToolStripMenuItem.Size = new System.Drawing.Size(270, 38);
             this.reportAnIssueToolStripMenuItem.Text = "Report an Issue";
             this.reportAnIssueToolStripMenuItem.Click += new System.EventHandler(this.ReportAnIssueToolStripMenuItem_Click);
-            // 
-            // facebookSupportGroupToolStripMenuItem
-            // 
-            this.facebookSupportGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
-            this.facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
-            this.facebookSupportGroupToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
-            this.facebookSupportGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookSupportGroupToolStripMenuItem_Click);
-            // 
-            // facebookUserGroupToolStripMenuItem
-            // 
-            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
-            this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
-            this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
-            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookUserGroupToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(251, 6);
-            // 
-            // getGoogleAPIKeyToolStripMenuItem
-            // 
-            this.getGoogleAPIKeyToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
-            this.getGoogleAPIKeyToolStripMenuItem.Name = "getGoogleAPIKeyToolStripMenuItem";
-            this.getGoogleAPIKeyToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.getGoogleAPIKeyToolStripMenuItem.Text = "Get Google API Key";
-            this.getGoogleAPIKeyToolStripMenuItem.Click += new System.EventHandler(this.GetGoogleAPIKeyToolStripMenuItem_Click);
-            // 
-            // googleAPISetupGuideToolStripMenuItem
-            // 
-            this.googleAPISetupGuideToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
-            this.googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
-            this.googleAPISetupGuideToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
-            this.googleAPISetupGuideToolStripMenuItem.Click += new System.EventHandler(this.GoogleAPISetupGuideToolStripMenuItem_Click);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(251, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(267, 6);
             // 
             // privacyPolicyToolStripMenuItem
             // 
             this.privacyPolicyToolStripMenuItem.Name = "privacyPolicyToolStripMenuItem";
-            this.privacyPolicyToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.privacyPolicyToolStripMenuItem.Size = new System.Drawing.Size(270, 38);
             this.privacyPolicyToolStripMenuItem.Text = "Privacy Policy";
             this.privacyPolicyToolStripMenuItem.Click += new System.EventHandler(this.PrivacyPolicyToolStripMenuItem_Click);
             // 
             // whatsNewToolStripMenuItem
             // 
             this.whatsNewToolStripMenuItem.Name = "whatsNewToolStripMenuItem";
-            this.whatsNewToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.whatsNewToolStripMenuItem.Size = new System.Drawing.Size(270, 38);
             this.whatsNewToolStripMenuItem.Text = "What\'s New";
             this.whatsNewToolStripMenuItem.Click += new System.EventHandler(this.WhatsNewToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(270, 38);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -1047,73 +601,6 @@ namespace FTAnalyzer
             // 
             this.tsStatusLabel.Name = "tsStatusLabel";
             this.tsStatusLabel.Size = new System.Drawing.Size(0, 17);
-            // 
-            // dgRegions
-            // 
-            this.dgRegions.AllowUserToAddRows = false;
-            this.dgRegions.AllowUserToDeleteRows = false;
-            this.dgRegions.AllowUserToResizeRows = false;
-            this.dgRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRegions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgRegions.Location = new System.Drawing.Point(3, 3);
-            this.dgRegions.MultiSelect = false;
-            this.dgRegions.Name = "dgRegions";
-            this.dgRegions.RowHeadersVisible = false;
-            this.dgRegions.RowHeadersWidth = 82;
-            this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRegions.Size = new System.Drawing.Size(1068, 422);
-            this.dgRegions.TabIndex = 1;
-            this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
-            this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgRegions_CellDoubleClick);
-            this.dgRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgRegions_CellFormatting);
-            // 
-            // dgCountries
-            // 
-            this.dgCountries.AllowUserToAddRows = false;
-            this.dgCountries.AllowUserToDeleteRows = false;
-            this.dgCountries.AllowUserToResizeRows = false;
-            this.dgCountries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCountries.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCountries.Location = new System.Drawing.Point(3, 3);
-            this.dgCountries.MultiSelect = false;
-            this.dgCountries.Name = "dgCountries";
-            this.dgCountries.RowHeadersVisible = false;
-            this.dgCountries.RowHeadersWidth = 82;
-            this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCountries.Size = new System.Drawing.Size(1068, 422);
-            this.dgCountries.TabIndex = 0;
-            this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
-            this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCountries_CellDoubleClick);
-            this.dgCountries.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgCountries_CellFormatting);
-            // 
-            // ckbFactExclude
-            // 
-            this.ckbFactExclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ckbFactExclude.FormattingEnabled = true;
-            this.ckbFactExclude.Location = new System.Drawing.Point(361, 137);
-            this.ckbFactExclude.Name = "ckbFactExclude";
-            this.ckbFactExclude.ScrollAlwaysVisible = true;
-            this.ckbFactExclude.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.ckbFactExclude.Size = new System.Drawing.Size(313, 214);
-            this.ckbFactExclude.TabIndex = 28;
-            this.toolTips.SetToolTip(this.ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from " +
-        "report");
-            this.ckbFactExclude.Visible = false;
-            this.ckbFactExclude.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CkbFactExclude_MouseClick);
-            // 
-            // btnShowExclusions
-            // 
-            this.btnShowExclusions.Location = new System.Drawing.Point(327, 238);
-            this.btnShowExclusions.Name = "btnShowExclusions";
-            this.btnShowExclusions.Size = new System.Drawing.Size(28, 51);
-            this.btnShowExclusions.TabIndex = 33;
-            this.btnShowExclusions.Text = "=>";
-            this.toolTips.SetToolTip(this.btnShowExclusions, "Show Exclusions");
-            this.btnShowExclusions.UseVisualStyleBackColor = true;
-            this.btnShowExclusions.Click += new System.EventHandler(this.BtnShowExclusions_Click);
             // 
             // dgDataErrors
             // 
@@ -1415,16 +902,6 @@ namespace FTAnalyzer
             this.lblCheckAncestors.TabIndex = 0;
             this.lblCheckAncestors.Text = "Not Currently Logged in Use Updates Page to Login";
             // 
-            // btnAliveOnDate
-            // 
-            this.btnAliveOnDate.Location = new System.Drawing.Point(643, 124);
-            this.btnAliveOnDate.Name = "btnAliveOnDate";
-            this.btnAliveOnDate.Size = new System.Drawing.Size(300, 25);
-            this.btnAliveOnDate.TabIndex = 41;
-            this.btnAliveOnDate.Text = "Show Individuals possibly alive on above date(s)";
-            this.btnAliveOnDate.UseVisualStyleBackColor = true;
-            this.btnAliveOnDate.Click += new System.EventHandler(this.BtnAliveOnDate_Click);
-            // 
             // txtAliveDates
             // 
             this.txtAliveDates.Location = new System.Drawing.Point(711, 84);
@@ -1567,102 +1044,6 @@ namespace FTAnalyzer
             this.btnReportUnrecognised.Size = new System.Drawing.Size(75, 23);
             this.btnReportUnrecognised.TabIndex = 0;
             // 
-            // tabLocations
-            // 
-            this.tabLocations.Controls.Add(this.btnModernOSMap);
-            this.tabLocations.Controls.Add(this.btnOldOSMap);
-            this.tabLocations.Controls.Add(this.btnShowMap);
-            this.tabLocations.Controls.Add(this.tabCtrlLocations);
-            this.tabLocations.Location = new System.Drawing.Point(4, 22);
-            this.tabLocations.Name = "tabLocations";
-            this.tabLocations.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLocations.Size = new System.Drawing.Size(1088, 460);
-            this.tabLocations.TabIndex = 4;
-            this.tabLocations.Text = "Locations";
-            this.tabLocations.UseVisualStyleBackColor = true;
-            // 
-            // btnModernOSMap
-            // 
-            this.btnModernOSMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModernOSMap.Location = new System.Drawing.Point(709, 2);
-            this.btnModernOSMap.Name = "btnModernOSMap";
-            this.btnModernOSMap.Size = new System.Drawing.Size(125, 22);
-            this.btnModernOSMap.TabIndex = 5;
-            this.btnModernOSMap.Text = "Show Modern OS Map";
-            this.btnModernOSMap.UseVisualStyleBackColor = true;
-            this.btnModernOSMap.Visible = false;
-            this.btnModernOSMap.Click += new System.EventHandler(this.BtnOSMap_Click);
-            // 
-            // btnOldOSMap
-            // 
-            this.btnOldOSMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOldOSMap.Location = new System.Drawing.Point(850, 2);
-            this.btnOldOSMap.Name = "btnOldOSMap";
-            this.btnOldOSMap.Size = new System.Drawing.Size(104, 22);
-            this.btnOldOSMap.TabIndex = 3;
-            this.btnOldOSMap.Text = "Show Old OS Map";
-            this.btnOldOSMap.UseVisualStyleBackColor = true;
-            this.btnOldOSMap.Click += new System.EventHandler(this.BtnOSMap_Click);
-            // 
-            // btnShowMap
-            // 
-            this.btnShowMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowMap.Location = new System.Drawing.Point(970, 2);
-            this.btnShowMap.Name = "btnShowMap";
-            this.btnShowMap.Size = new System.Drawing.Size(104, 22);
-            this.btnShowMap.TabIndex = 2;
-            this.btnShowMap.Text = "Show Google Map";
-            this.btnShowMap.UseVisualStyleBackColor = true;
-            this.btnShowMap.Click += new System.EventHandler(this.BtnShowMap_Click);
-            // 
-            // tabCtrlLocations
-            // 
-            this.tabCtrlLocations.Controls.Add(this.tabTreeView);
-            this.tabCtrlLocations.Controls.Add(this.tabCountries);
-            this.tabCtrlLocations.Controls.Add(this.tabRegions);
-            this.tabCtrlLocations.Controls.Add(this.tabSubRegions);
-            this.tabCtrlLocations.Controls.Add(this.tabAddresses);
-            this.tabCtrlLocations.Controls.Add(this.tabPlaces);
-            this.tabCtrlLocations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabCtrlLocations.Location = new System.Drawing.Point(3, 3);
-            this.tabCtrlLocations.Name = "tabCtrlLocations";
-            this.tabCtrlLocations.SelectedIndex = 0;
-            this.tabCtrlLocations.Size = new System.Drawing.Size(1082, 454);
-            this.tabCtrlLocations.TabIndex = 0;
-            this.tabCtrlLocations.SelectedIndexChanged += new System.EventHandler(this.TabCtrlLocations_SelectedIndexChanged);
-            this.tabCtrlLocations.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabCtrlLocations_Selecting);
-            // 
-            // tabTreeView
-            // 
-            this.tabTreeView.Controls.Add(this.treeViewLocations);
-            this.tabTreeView.Location = new System.Drawing.Point(4, 22);
-            this.tabTreeView.Name = "tabTreeView";
-            this.tabTreeView.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTreeView.Size = new System.Drawing.Size(1074, 428);
-            this.tabTreeView.TabIndex = 5;
-            this.tabTreeView.Text = "Tree View";
-            this.tabTreeView.UseVisualStyleBackColor = true;
-            // 
-            // treeViewLocations
-            // 
-            this.treeViewLocations.CausesValidation = false;
-            this.treeViewLocations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewLocations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeViewLocations.ImageIndex = 0;
-            this.treeViewLocations.ImageList = this.imageList;
-            this.treeViewLocations.Location = new System.Drawing.Point(3, 3);
-            this.treeViewLocations.Name = "treeViewLocations";
-            this.treeViewLocations.SelectedImageIndex = 0;
-            this.treeViewLocations.ShowNodeToolTips = true;
-            this.treeViewLocations.Size = new System.Drawing.Size(1068, 422);
-            this.treeViewLocations.TabIndex = 0;
-            this.treeViewLocations.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeCollapse);
-            this.treeViewLocations.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeExpand);
-            this.treeViewLocations.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewLocations_AfterSelect);
-            this.treeViewLocations.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLocations_NodeMouseClick);
-            this.treeViewLocations.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLocations_NodeMouseDoubleClick);
-            this.treeViewLocations.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TreeViewLocations_MouseDown);
-            // 
             // imageList
             // 
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
@@ -1675,123 +1056,6 @@ namespace FTAnalyzer
             this.imageList.Images.SetKeyName(5, "Flagged.png");
             this.imageList.Images.SetKeyName(6, "OutOfBounds.png");
             this.imageList.Images.SetKeyName(7, "Warning.png");
-            // 
-            // tabCountries
-            // 
-            this.tabCountries.Controls.Add(this.dgCountries);
-            this.tabCountries.Location = new System.Drawing.Point(4, 22);
-            this.tabCountries.Name = "tabCountries";
-            this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(1074, 428);
-            this.tabCountries.TabIndex = 0;
-            this.tabCountries.Text = "Countries";
-            this.tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
-            this.tabCountries.UseVisualStyleBackColor = true;
-            // 
-            // tabRegions
-            // 
-            this.tabRegions.Controls.Add(this.dgRegions);
-            this.tabRegions.Location = new System.Drawing.Point(4, 22);
-            this.tabRegions.Name = "tabRegions";
-            this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(1074, 428);
-            this.tabRegions.TabIndex = 1;
-            this.tabRegions.Text = "Regions";
-            this.tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
-            this.tabRegions.UseVisualStyleBackColor = true;
-            // 
-            // tabSubRegions
-            // 
-            this.tabSubRegions.Controls.Add(this.dgSubRegions);
-            this.tabSubRegions.Location = new System.Drawing.Point(4, 22);
-            this.tabSubRegions.Name = "tabSubRegions";
-            this.tabSubRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSubRegions.Size = new System.Drawing.Size(1074, 428);
-            this.tabSubRegions.TabIndex = 2;
-            this.tabSubRegions.Text = "SubRegions";
-            this.tabSubRegions.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
-            this.tabSubRegions.UseVisualStyleBackColor = true;
-            // 
-            // dgSubRegions
-            // 
-            this.dgSubRegions.AllowUserToAddRows = false;
-            this.dgSubRegions.AllowUserToDeleteRows = false;
-            this.dgSubRegions.AllowUserToResizeRows = false;
-            this.dgSubRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgSubRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSubRegions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgSubRegions.Location = new System.Drawing.Point(3, 3);
-            this.dgSubRegions.MultiSelect = false;
-            this.dgSubRegions.Name = "dgSubRegions";
-            this.dgSubRegions.RowHeadersVisible = false;
-            this.dgSubRegions.RowHeadersWidth = 82;
-            this.dgSubRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSubRegions.Size = new System.Drawing.Size(1068, 422);
-            this.dgSubRegions.TabIndex = 1;
-            this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSubRegions_CellDoubleClick);
-            this.dgSubRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSubRegions_CellFormatting);
-            // 
-            // tabAddresses
-            // 
-            this.tabAddresses.Controls.Add(this.dgAddresses);
-            this.tabAddresses.Location = new System.Drawing.Point(4, 22);
-            this.tabAddresses.Name = "tabAddresses";
-            this.tabAddresses.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddresses.Size = new System.Drawing.Size(1074, 428);
-            this.tabAddresses.TabIndex = 3;
-            this.tabAddresses.Text = "Addresses";
-            this.tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
-            this.tabAddresses.UseVisualStyleBackColor = true;
-            // 
-            // dgAddresses
-            // 
-            this.dgAddresses.AllowUserToAddRows = false;
-            this.dgAddresses.AllowUserToDeleteRows = false;
-            this.dgAddresses.AllowUserToResizeRows = false;
-            this.dgAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAddresses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgAddresses.Location = new System.Drawing.Point(3, 3);
-            this.dgAddresses.MultiSelect = false;
-            this.dgAddresses.Name = "dgAddresses";
-            this.dgAddresses.RowHeadersVisible = false;
-            this.dgAddresses.RowHeadersWidth = 82;
-            this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAddresses.Size = new System.Drawing.Size(1068, 422);
-            this.dgAddresses.TabIndex = 1;
-            this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgAddresses_CellDoubleClick);
-            this.dgAddresses.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgAddresses_CellFormatting);
-            // 
-            // tabPlaces
-            // 
-            this.tabPlaces.Controls.Add(this.dgPlaces);
-            this.tabPlaces.Location = new System.Drawing.Point(4, 22);
-            this.tabPlaces.Name = "tabPlaces";
-            this.tabPlaces.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaces.Size = new System.Drawing.Size(1074, 428);
-            this.tabPlaces.TabIndex = 4;
-            this.tabPlaces.Text = "Places";
-            this.tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
-            this.tabPlaces.UseVisualStyleBackColor = true;
-            // 
-            // dgPlaces
-            // 
-            this.dgPlaces.AllowUserToAddRows = false;
-            this.dgPlaces.AllowUserToDeleteRows = false;
-            this.dgPlaces.AllowUserToResizeRows = false;
-            this.dgPlaces.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgPlaces.Location = new System.Drawing.Point(3, 3);
-            this.dgPlaces.MultiSelect = false;
-            this.dgPlaces.Name = "dgPlaces";
-            this.dgPlaces.RowHeadersVisible = false;
-            this.dgPlaces.RowHeadersWidth = 82;
-            this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPlaces.Size = new System.Drawing.Size(1068, 422);
-            this.dgPlaces.TabIndex = 2;
-            this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgPlaces_CellDoubleClick);
-            this.dgPlaces.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgPlaces_CellFormatting);
             // 
             // tabDisplayProgress
             // 
@@ -1945,10 +1209,6 @@ namespace FTAnalyzer
             this.tabSelector.Controls.Add(this.tabDisplayProgress);
             this.tabSelector.Controls.Add(this.tabMainLists);
             this.tabSelector.Controls.Add(this.tabErrorsFixes);
-            this.tabSelector.Controls.Add(this.tabSurnames);
-            this.tabSelector.Controls.Add(this.tabLocations);
-            this.tabSelector.Controls.Add(this.tabFacts);
-            this.tabSelector.Controls.Add(this.tabToday);
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
@@ -1972,8 +1232,6 @@ namespace FTAnalyzer
             this.tabMainListsSelector.Controls.Add(this.tabIndividuals);
             this.tabMainListsSelector.Controls.Add(this.tabFamilies);
             this.tabMainListsSelector.Controls.Add(this.tabSources);
-            this.tabMainListsSelector.Controls.Add(this.tabOccupations);
-            this.tabMainListsSelector.Controls.Add(this.tabCustomFacts);
             this.tabMainListsSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMainListsSelector.Location = new System.Drawing.Point(3, 3);
             this.tabMainListsSelector.Name = "tabMainListsSelector";
@@ -2071,65 +1329,6 @@ namespace FTAnalyzer
             this.dgSources.TabIndex = 2;
             this.dgSources.VirtualMode = true;
             this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSources_CellDoubleClick);
-            // 
-            // tabOccupations
-            // 
-            this.tabOccupations.Controls.Add(this.dgOccupations);
-            this.tabOccupations.Location = new System.Drawing.Point(4, 22);
-            this.tabOccupations.Name = "tabOccupations";
-            this.tabOccupations.Size = new System.Drawing.Size(1074, 428);
-            this.tabOccupations.TabIndex = 3;
-            this.tabOccupations.Text = "Occupations";
-            this.tabOccupations.UseVisualStyleBackColor = true;
-            // 
-            // dgOccupations
-            // 
-            this.dgOccupations.AllowUserToAddRows = false;
-            this.dgOccupations.AllowUserToDeleteRows = false;
-            this.dgOccupations.AllowUserToOrderColumns = true;
-            this.dgOccupations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgOccupations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgOccupations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgOccupations.Location = new System.Drawing.Point(0, 0);
-            this.dgOccupations.MultiSelect = false;
-            this.dgOccupations.Name = "dgOccupations";
-            this.dgOccupations.ReadOnly = true;
-            this.dgOccupations.RowHeadersWidth = 50;
-            this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgOccupations.Size = new System.Drawing.Size(1074, 428);
-            this.dgOccupations.TabIndex = 3;
-            this.dgOccupations.VirtualMode = true;
-            this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgOccupations_CellDoubleClick);
-            // 
-            // tabCustomFacts
-            // 
-            this.tabCustomFacts.Controls.Add(this.dgCustomFacts);
-            this.tabCustomFacts.Location = new System.Drawing.Point(4, 22);
-            this.tabCustomFacts.Name = "tabCustomFacts";
-            this.tabCustomFacts.Size = new System.Drawing.Size(1074, 428);
-            this.tabCustomFacts.TabIndex = 4;
-            this.tabCustomFacts.Text = "Custom Facts";
-            this.tabCustomFacts.UseVisualStyleBackColor = true;
-            // 
-            // dgCustomFacts
-            // 
-            this.dgCustomFacts.AllowUserToAddRows = false;
-            this.dgCustomFacts.AllowUserToDeleteRows = false;
-            this.dgCustomFacts.AllowUserToOrderColumns = true;
-            this.dgCustomFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgCustomFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCustomFacts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCustomFacts.Location = new System.Drawing.Point(0, 0);
-            this.dgCustomFacts.MultiSelect = false;
-            this.dgCustomFacts.Name = "dgCustomFacts";
-            this.dgCustomFacts.ReadOnly = true;
-            this.dgCustomFacts.RowHeadersWidth = 50;
-            this.dgCustomFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCustomFacts.Size = new System.Drawing.Size(1074, 428);
-            this.dgCustomFacts.TabIndex = 4;
-            this.dgCustomFacts.VirtualMode = true;
-            this.dgCustomFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellDoubleClick);
-            this.dgCustomFacts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellValueChanged);
             // 
             // tabErrorsFixes
             // 
@@ -2413,403 +1612,6 @@ namespace FTAnalyzer
             this.dgLooseInfo.TabIndex = 4;
             this.dgLooseInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseInfo_CellDoubleClick);
             // 
-            // tabSurnames
-            // 
-            this.tabSurnames.Controls.Add(this.chkSurnamesIgnoreCase);
-            this.tabSurnames.Controls.Add(this.btnShowSurnames);
-            this.tabSurnames.Controls.Add(this.dgSurnames);
-            this.tabSurnames.Controls.Add(this.reltypesSurnames);
-            this.tabSurnames.Location = new System.Drawing.Point(4, 22);
-            this.tabSurnames.Name = "tabSurnames";
-            this.tabSurnames.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSurnames.Size = new System.Drawing.Size(1088, 460);
-            this.tabSurnames.TabIndex = 14;
-            this.tabSurnames.Text = "Surnames";
-            this.tabSurnames.UseVisualStyleBackColor = true;
-            // 
-            // chkSurnamesIgnoreCase
-            // 
-            this.chkSurnamesIgnoreCase.AutoSize = true;
-            this.chkSurnamesIgnoreCase.Checked = true;
-            this.chkSurnamesIgnoreCase.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSurnamesIgnoreCase.Location = new System.Drawing.Point(497, 78);
-            this.chkSurnamesIgnoreCase.Name = "chkSurnamesIgnoreCase";
-            this.chkSurnamesIgnoreCase.Size = new System.Drawing.Size(83, 17);
-            this.chkSurnamesIgnoreCase.TabIndex = 24;
-            this.chkSurnamesIgnoreCase.Text = "Ignore Case";
-            this.chkSurnamesIgnoreCase.UseVisualStyleBackColor = true;
-            // 
-            // btnShowSurnames
-            // 
-            this.btnShowSurnames.Location = new System.Drawing.Point(337, 74);
-            this.btnShowSurnames.Name = "btnShowSurnames";
-            this.btnShowSurnames.Size = new System.Drawing.Size(154, 23);
-            this.btnShowSurnames.TabIndex = 23;
-            this.btnShowSurnames.Text = "Show Surnames";
-            this.btnShowSurnames.UseVisualStyleBackColor = true;
-            this.btnShowSurnames.Click += new System.EventHandler(this.BtnShowSurnames_Click);
-            // 
-            // dgSurnames
-            // 
-            this.dgSurnames.AllowUserToAddRows = false;
-            this.dgSurnames.AllowUserToDeleteRows = false;
-            this.dgSurnames.AllowUserToOrderColumns = true;
-            this.dgSurnames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgSurnames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSurnames.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Surname,
-            this.URI,
-            this.Individuals,
-            this.Families,
-            this.Marriages});
-            this.dgSurnames.Location = new System.Drawing.Point(3, 103);
-            this.dgSurnames.MultiSelect = false;
-            this.dgSurnames.Name = "dgSurnames";
-            this.dgSurnames.ReadOnly = true;
-            this.dgSurnames.RowHeadersWidth = 20;
-            this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSurnames.Size = new System.Drawing.Size(1079, 337);
-            this.dgSurnames.TabIndex = 1;
-            this.dgSurnames.VirtualMode = true;
-            this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
-            this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellDoubleClick);
-            // 
-            // Surname
-            // 
-            this.Surname.DataPropertyName = "Surname";
-            this.Surname.HeaderText = "Surname";
-            this.Surname.MinimumWidth = 10;
-            this.Surname.Name = "Surname";
-            this.Surname.ReadOnly = true;
-            this.Surname.Width = 200;
-            // 
-            // URI
-            // 
-            this.URI.DataPropertyName = "URI";
-            this.URI.HeaderText = "Link";
-            this.URI.MinimumWidth = 100;
-            this.URI.Name = "URI";
-            this.URI.ReadOnly = true;
-            this.URI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.URI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.URI.Visible = false;
-            this.URI.Width = 200;
-            // 
-            // Individuals
-            // 
-            this.Individuals.DataPropertyName = "Individuals";
-            this.Individuals.HeaderText = "Individuals";
-            this.Individuals.MinimumWidth = 10;
-            this.Individuals.Name = "Individuals";
-            this.Individuals.ReadOnly = true;
-            this.Individuals.Width = 200;
-            // 
-            // Families
-            // 
-            this.Families.DataPropertyName = "Families";
-            this.Families.HeaderText = "Families";
-            this.Families.MinimumWidth = 10;
-            this.Families.Name = "Families";
-            this.Families.ReadOnly = true;
-            this.Families.Width = 200;
-            // 
-            // Marriages
-            // 
-            this.Marriages.DataPropertyName = "Marriages";
-            this.Marriages.HeaderText = "Marriages";
-            this.Marriages.MinimumWidth = 10;
-            this.Marriages.Name = "Marriages";
-            this.Marriages.ReadOnly = true;
-            this.Marriages.Width = 200;
-            // 
-            // reltypesSurnames
-            // 
-            this.reltypesSurnames.Location = new System.Drawing.Point(6, 3);
-            this.reltypesSurnames.Margin = new System.Windows.Forms.Padding(6);
-            this.reltypesSurnames.MarriedToDB = true;
-            this.reltypesSurnames.Name = "reltypesSurnames";
-            this.reltypesSurnames.Size = new System.Drawing.Size(325, 99);
-            this.reltypesSurnames.TabIndex = 22;
-            // 
-            // tabFacts
-            // 
-            this.tabFacts.Controls.Add(this.btnDuplicateFacts);
-            this.tabFacts.Controls.Add(this.btnShowExclusions);
-            this.tabFacts.Controls.Add(this.lblExclude);
-            this.tabFacts.Controls.Add(this.label15);
-            this.tabFacts.Controls.Add(this.btnDeselectExcludeAllFactTypes);
-            this.tabFacts.Controls.Add(this.btnExcludeAllFactTypes);
-            this.tabFacts.Controls.Add(this.ckbFactExclude);
-            this.tabFacts.Controls.Add(this.btnDeselectAllFactTypes);
-            this.tabFacts.Controls.Add(this.btnSelectAllFactTypes);
-            this.tabFacts.Controls.Add(this.ckbFactSelect);
-            this.tabFacts.Controls.Add(this.btnShowFacts);
-            this.tabFacts.Controls.Add(this.label3);
-            this.tabFacts.Controls.Add(this.txtFactsSurname);
-            this.tabFacts.Controls.Add(this.relTypesFacts);
-            this.tabFacts.Location = new System.Drawing.Point(4, 22);
-            this.tabFacts.Name = "tabFacts";
-            this.tabFacts.Size = new System.Drawing.Size(1088, 460);
-            this.tabFacts.TabIndex = 13;
-            this.tabFacts.Text = "Facts";
-            this.tabFacts.UseVisualStyleBackColor = true;
-            // 
-            // btnDuplicateFacts
-            // 
-            this.btnDuplicateFacts.Location = new System.Drawing.Point(681, 42);
-            this.btnDuplicateFacts.Name = "btnDuplicateFacts";
-            this.btnDuplicateFacts.Size = new System.Drawing.Size(162, 38);
-            this.btnDuplicateFacts.TabIndex = 34;
-            this.btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
-            this.btnDuplicateFacts.UseVisualStyleBackColor = true;
-            this.btnDuplicateFacts.Click += new System.EventHandler(this.BtnDuplicateFacts_Click);
-            // 
-            // lblExclude
-            // 
-            this.lblExclude.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblExclude.Location = new System.Drawing.Point(358, 427);
-            this.lblExclude.Name = "lblExclude";
-            this.lblExclude.Size = new System.Drawing.Size(293, 13);
-            this.lblExclude.TabIndex = 32;
-            this.lblExclude.Text = "Select Facts to Exclude from Report";
-            this.lblExclude.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblExclude.Visible = false;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label15.Location = new System.Drawing.Point(8, 427);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(293, 13);
-            this.label15.TabIndex = 31;
-            this.label15.Text = "Select Facts to Include in Report";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // btnDeselectExcludeAllFactTypes
-            // 
-            this.btnDeselectExcludeAllFactTypes.Location = new System.Drawing.Point(538, 109);
-            this.btnDeselectExcludeAllFactTypes.Name = "btnDeselectExcludeAllFactTypes";
-            this.btnDeselectExcludeAllFactTypes.Size = new System.Drawing.Size(136, 23);
-            this.btnDeselectExcludeAllFactTypes.TabIndex = 30;
-            this.btnDeselectExcludeAllFactTypes.Text = "De-select all Fact Types";
-            this.btnDeselectExcludeAllFactTypes.UseVisualStyleBackColor = true;
-            this.btnDeselectExcludeAllFactTypes.Visible = false;
-            this.btnDeselectExcludeAllFactTypes.Click += new System.EventHandler(this.BtnDeselectExcludeAllFactTypes_Click);
-            // 
-            // btnExcludeAllFactTypes
-            // 
-            this.btnExcludeAllFactTypes.Location = new System.Drawing.Point(361, 108);
-            this.btnExcludeAllFactTypes.Name = "btnExcludeAllFactTypes";
-            this.btnExcludeAllFactTypes.Size = new System.Drawing.Size(136, 23);
-            this.btnExcludeAllFactTypes.TabIndex = 29;
-            this.btnExcludeAllFactTypes.Text = "Select all Fact Types";
-            this.btnExcludeAllFactTypes.UseVisualStyleBackColor = true;
-            this.btnExcludeAllFactTypes.Visible = false;
-            this.btnExcludeAllFactTypes.Click += new System.EventHandler(this.BtnExcludeAllFactTypes_Click);
-            // 
-            // btnDeselectAllFactTypes
-            // 
-            this.btnDeselectAllFactTypes.Location = new System.Drawing.Point(185, 109);
-            this.btnDeselectAllFactTypes.Name = "btnDeselectAllFactTypes";
-            this.btnDeselectAllFactTypes.Size = new System.Drawing.Size(136, 23);
-            this.btnDeselectAllFactTypes.TabIndex = 27;
-            this.btnDeselectAllFactTypes.Text = "De-select all Fact Types";
-            this.btnDeselectAllFactTypes.UseVisualStyleBackColor = true;
-            this.btnDeselectAllFactTypes.Click += new System.EventHandler(this.BtnDeselectAllFactTypes_Click);
-            // 
-            // btnSelectAllFactTypes
-            // 
-            this.btnSelectAllFactTypes.Location = new System.Drawing.Point(8, 108);
-            this.btnSelectAllFactTypes.Name = "btnSelectAllFactTypes";
-            this.btnSelectAllFactTypes.Size = new System.Drawing.Size(136, 23);
-            this.btnSelectAllFactTypes.TabIndex = 26;
-            this.btnSelectAllFactTypes.Text = "Select all Fact Types";
-            this.btnSelectAllFactTypes.UseVisualStyleBackColor = true;
-            this.btnSelectAllFactTypes.Click += new System.EventHandler(this.BtnSelectAllFactTypes_Click);
-            // 
-            // ckbFactSelect
-            // 
-            this.ckbFactSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ckbFactSelect.FormattingEnabled = true;
-            this.ckbFactSelect.Location = new System.Drawing.Point(8, 137);
-            this.ckbFactSelect.Name = "ckbFactSelect";
-            this.ckbFactSelect.ScrollAlwaysVisible = true;
-            this.ckbFactSelect.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.ckbFactSelect.Size = new System.Drawing.Size(313, 214);
-            this.ckbFactSelect.TabIndex = 25;
-            this.ckbFactSelect.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CkbFactSelect_MouseClick);
-            // 
-            // btnShowFacts
-            // 
-            this.btnShowFacts.Location = new System.Drawing.Point(361, 42);
-            this.btnShowFacts.Name = "btnShowFacts";
-            this.btnShowFacts.Size = new System.Drawing.Size(313, 38);
-            this.btnShowFacts.TabIndex = 24;
-            this.btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
-            this.btnShowFacts.UseVisualStyleBackColor = true;
-            this.btnShowFacts.Click += new System.EventHandler(this.BtnShowFacts_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(363, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "Surname";
-            // 
-            // txtFactsSurname
-            // 
-            this.txtFactsSurname.Location = new System.Drawing.Point(418, 16);
-            this.txtFactsSurname.Name = "txtFactsSurname";
-            this.txtFactsSurname.Size = new System.Drawing.Size(256, 20);
-            this.txtFactsSurname.TabIndex = 22;
-            this.txtFactsSurname.TextChanged += new System.EventHandler(this.TxtFactsSurname_TextChanged);
-            // 
-            // relTypesFacts
-            // 
-            this.relTypesFacts.Location = new System.Drawing.Point(8, 3);
-            this.relTypesFacts.Margin = new System.Windows.Forms.Padding(6);
-            this.relTypesFacts.MarriedToDB = true;
-            this.relTypesFacts.Name = "relTypesFacts";
-            this.relTypesFacts.Size = new System.Drawing.Size(325, 100);
-            this.relTypesFacts.TabIndex = 21;
-            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
-            // 
-            // tabToday
-            // 
-            this.tabToday.Controls.Add(this.label18);
-            this.tabToday.Controls.Add(this.nudToday);
-            this.tabToday.Controls.Add(this.btnUpdateTodaysEvents);
-            this.tabToday.Controls.Add(this.labToday);
-            this.tabToday.Controls.Add(this.pbToday);
-            this.tabToday.Controls.Add(this.rbTodayMonth);
-            this.tabToday.Controls.Add(this.rbTodaySingle);
-            this.tabToday.Controls.Add(this.label17);
-            this.tabToday.Controls.Add(this.dpToday);
-            this.tabToday.Controls.Add(this.rtbToday);
-            this.tabToday.Location = new System.Drawing.Point(4, 22);
-            this.tabToday.Name = "tabToday";
-            this.tabToday.Padding = new System.Windows.Forms.Padding(3);
-            this.tabToday.Size = new System.Drawing.Size(1088, 460);
-            this.tabToday.TabIndex = 17;
-            this.tabToday.Text = "On This Day";
-            this.tabToday.UseVisualStyleBackColor = true;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(553, 23);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(60, 13);
-            this.label18.TabIndex = 16;
-            this.label18.Text = "Year Step :";
-            // 
-            // nudToday
-            // 
-            this.nudToday.Location = new System.Drawing.Point(619, 21);
-            this.nudToday.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.nudToday.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudToday.Name = "nudToday";
-            this.nudToday.Size = new System.Drawing.Size(42, 20);
-            this.nudToday.TabIndex = 15;
-            this.nudToday.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.nudToday.ValueChanged += new System.EventHandler(this.NudToday_ValueChanged);
-            // 
-            // btnUpdateTodaysEvents
-            // 
-            this.btnUpdateTodaysEvents.Location = new System.Drawing.Point(255, 18);
-            this.btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
-            this.btnUpdateTodaysEvents.Size = new System.Drawing.Size(115, 23);
-            this.btnUpdateTodaysEvents.TabIndex = 14;
-            this.btnUpdateTodaysEvents.Text = "Update list of Events";
-            this.btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
-            this.btnUpdateTodaysEvents.Click += new System.EventHandler(this.BtnUpdateTodaysEvents_Click);
-            // 
-            // labToday
-            // 
-            this.labToday.AutoSize = true;
-            this.labToday.Location = new System.Drawing.Point(681, 23);
-            this.labToday.Name = "labToday";
-            this.labToday.Size = new System.Drawing.Size(112, 13);
-            this.labToday.TabIndex = 13;
-            this.labToday.Text = "Loading World Events";
-            // 
-            // pbToday
-            // 
-            this.pbToday.Location = new System.Drawing.Point(799, 21);
-            this.pbToday.Name = "pbToday";
-            this.pbToday.Size = new System.Drawing.Size(230, 20);
-            this.pbToday.TabIndex = 12;
-            // 
-            // rbTodayMonth
-            // 
-            this.rbTodayMonth.AutoSize = true;
-            this.rbTodayMonth.Location = new System.Drawing.Point(458, 21);
-            this.rbTodayMonth.Name = "rbTodayMonth";
-            this.rbTodayMonth.Size = new System.Drawing.Size(89, 17);
-            this.rbTodayMonth.TabIndex = 11;
-            this.rbTodayMonth.Text = "Whole Month";
-            this.rbTodayMonth.UseVisualStyleBackColor = true;
-            this.rbTodayMonth.CheckedChanged += new System.EventHandler(this.RbTodayMonth_CheckedChanged);
-            // 
-            // rbTodaySingle
-            // 
-            this.rbTodaySingle.AutoSize = true;
-            this.rbTodaySingle.Checked = true;
-            this.rbTodaySingle.Location = new System.Drawing.Point(376, 21);
-            this.rbTodaySingle.Name = "rbTodaySingle";
-            this.rbTodaySingle.Size = new System.Drawing.Size(76, 17);
-            this.rbTodaySingle.TabIndex = 10;
-            this.rbTodaySingle.TabStop = true;
-            this.rbTodaySingle.Text = "Single Day";
-            this.rbTodaySingle.UseVisualStyleBackColor = true;
-            this.rbTodaySingle.CheckedChanged += new System.EventHandler(this.RbTodaySingle_CheckedChanged);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 23);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(69, 13);
-            this.label17.TabIndex = 9;
-            this.label17.Text = "Select Date :";
-            // 
-            // dpToday
-            // 
-            this.dpToday.Location = new System.Drawing.Point(78, 21);
-            this.dpToday.Name = "dpToday";
-            this.dpToday.Size = new System.Drawing.Size(171, 20);
-            this.dpToday.TabIndex = 8;
-            // 
-            // rtbToday
-            // 
-            this.rtbToday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbToday.Location = new System.Drawing.Point(0, 59);
-            this.rtbToday.Name = "rtbToday";
-            this.rtbToday.ReadOnly = true;
-            this.rtbToday.Size = new System.Drawing.Size(1079, 388);
-            this.rtbToday.TabIndex = 7;
-            this.rtbToday.Text = "";
-            // 
             // NonDuplicate
             // 
             this.NonDuplicate.DataPropertyName = "IgnoreNonDuplicate";
@@ -2963,8 +1765,6 @@ namespace FTAnalyzer
             this.mnuSetRoot.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCheckAncestors)).EndInit();
@@ -2974,17 +1774,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            this.tabLocations.ResumeLayout(false);
-            this.tabCtrlLocations.ResumeLayout(false);
-            this.tabTreeView.ResumeLayout(false);
-            this.tabCountries.ResumeLayout(false);
-            this.tabRegions.ResumeLayout(false);
-            this.tabSubRegions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgSubRegions)).EndInit();
-            this.tabAddresses.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
-            this.tabPlaces.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).EndInit();
             this.tabDisplayProgress.ResumeLayout(false);
             this.splitGedcom.Panel1.ResumeLayout(false);
             this.splitGedcom.Panel2.ResumeLayout(false);
@@ -3002,10 +1791,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
             this.tabSources.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgSources)).EndInit();
-            this.tabOccupations.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).EndInit();
-            this.tabCustomFacts.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgCustomFacts)).EndInit();
             this.tabErrorsFixes.ResumeLayout(false);
             this.tabErrorFixSelector.ResumeLayout(false);
             this.tabDataErrors.ResumeLayout(false);
@@ -3019,14 +1804,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
             this.tabLooseInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).EndInit();
-            this.tabSurnames.ResumeLayout(false);
-            this.tabSurnames.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).EndInit();
-            this.tabFacts.ResumeLayout(false);
-            this.tabFacts.PerformLayout();
-            this.tabToday.ResumeLayout(false);
-            this.tabToday.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3047,7 +1824,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTips;
-        private System.Windows.Forms.ToolStripMenuItem mnuReports;
         //private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.ToolStripMenuItem mnuPrint;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
@@ -3055,13 +1831,7 @@ namespace FTAnalyzer
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.ContextMenuStrip mnuSetRoot;
         private System.Windows.Forms.ToolStripMenuItem setAsRootToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuChildAgeProfiles;
         private System.Windows.Forms.ToolStripMenuItem viewOnlineManualToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuOlderParents;
-        private System.Windows.Forms.ToolStripMenuItem mnuExport;
-        private System.Windows.Forms.ToolStripMenuItem mnuIndividualsToExcel;
-        private System.Windows.Forms.ToolStripMenuItem mnuFamiliesToExcel;
-        private System.Windows.Forms.ToolStripMenuItem mnuFactsToExcel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -3072,31 +1842,10 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtTreetopsSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes treetopsRelation;
-        private System.Windows.Forms.TabPage tabLocations;
-        private System.Windows.Forms.Button btnShowMap;
-        private System.Windows.Forms.TabControl tabCtrlLocations;
-        private System.Windows.Forms.TabPage tabTreeView;
-        private System.Windows.Forms.TreeView treeViewLocations;
-        private System.Windows.Forms.TabPage tabCountries;
-        private System.Windows.Forms.DataGridView dgCountries;
-        private System.Windows.Forms.TabPage tabRegions;
-        private System.Windows.Forms.DataGridView dgRegions;
-        private System.Windows.Forms.TabPage tabSubRegions;
-        private System.Windows.Forms.DataGridView dgSubRegions;
-        private System.Windows.Forms.TabPage tabAddresses;
-        private System.Windows.Forms.DataGridView dgAddresses;
-        private System.Windows.Forms.TabPage tabPlaces;
-        private System.Windows.Forms.DataGridView dgPlaces;
         private System.Windows.Forms.TabPage tabDisplayProgress;
         private System.Windows.Forms.TabControl tabSelector;
-        private System.Windows.Forms.ToolStripMenuItem mnuMaps;
-        private System.Windows.Forms.Button btnOldOSMap;
-        private System.Windows.Forms.ToolStripMenuItem mnuShowTimeline;
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ToolStripMenuItem whatsNewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem mnuLocationsGeocodeReport;
-        private System.Windows.Forms.ToolStripMenuItem mnuGeocodeLocations;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuRestore;
@@ -3112,33 +1861,10 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuRecent3;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent4;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent5;
-        private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabFacts;
-        private System.Windows.Forms.Button btnShowFacts;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtFactsSurname;
-        private FTAnalyzer.Forms.Controls.RelationTypes relTypesFacts;
-        private System.Windows.Forms.ToolStripMenuItem mnuPlaces;
-        private System.Windows.Forms.TabPage tabSurnames;
-        private FTAnalyzer.Forms.Controls.VirtualDGVSurnames dgSurnames;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
-        private System.Windows.Forms.DataGridViewLinkColumn URI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Individuals;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Families;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Marriages;
-        private System.Windows.Forms.CheckedListBox ckbFactSelect;
-        private System.Windows.Forms.Button btnDeselectAllFactTypes;
-        private System.Windows.Forms.Button btnSelectAllFactTypes;
-        private System.Windows.Forms.ToolStripMenuItem mnuPossibleCensusFacts;
         private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip ctxViewNotes;
         private System.Windows.Forms.ToolStripMenuItem mnuViewNotes;
-        private System.Windows.Forms.ToolStripMenuItem mnuLooseBirthsToExcel;
-        private System.Windows.Forms.ToolStripMenuItem mnuLooseDeathsToExcel;
-        private System.Windows.Forms.ToolStripMenuItem mnuSourcesToExcel;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.CheckBox chkExcludeUnknownBirths;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCensusSurname;
@@ -3147,35 +1873,11 @@ namespace FTAnalyzer
         private FTAnalyzer.Forms.Controls.RelationTypes relTypesCensus;
         private System.Windows.Forms.ToolStripMenuItem onlineGuidesToUsingFTAnalyzerToolStripMenuItem;
         private System.Windows.Forms.ToolStripProgressBar tspbTabProgress;
-        private System.Windows.Forms.ToolStripMenuItem mnuOSGeocoder;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem mnuLookupBlankFoundLocations;
-        private System.Windows.Forms.CheckedListBox ckbFactExclude;
-        private System.Windows.Forms.Button btnShowExclusions;
-        private System.Windows.Forms.Label lblExclude;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button btnDeselectExcludeAllFactTypes;
-        private System.Windows.Forms.Button btnExcludeAllFactTypes;
         private System.Windows.Forms.ToolStripMenuItem mnuCloseGEDCOM;
-        private System.Windows.Forms.Button btnDuplicateFacts;
-        private System.Windows.Forms.TabPage tabToday;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.DateTimePicker dpToday;
-        private Utilities.ScrollingRichTextBox rtbToday;
-        private System.Windows.Forms.RadioButton rbTodayMonth;
-        private System.Windows.Forms.RadioButton rbTodaySingle;
-        private System.Windows.Forms.Label labToday;
-        private System.Windows.Forms.ProgressBar pbToday;
-        private System.Windows.Forms.Button btnUpdateTodaysEvents;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.NumericUpDown nudToday;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsCSV;
         private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsTNG;
         private System.Windows.Forms.ToolStripStatusLabel tsStatusLabel;
-        private System.Windows.Forms.Button btnShowSurnames;
-        private FTAnalyzer.Forms.Controls.RelationTypes reltypesSurnames;
-        private System.Windows.Forms.ToolStripMenuItem mnuCousinsCountReport;
         private System.Windows.Forms.TabPage tabMainLists;
         private System.Windows.Forms.TabControl tabMainListsSelector;
         private System.Windows.Forms.TabPage tabIndividuals;
@@ -3183,8 +1885,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.TabPage tabFamilies;
         private FTAnalyzer.Forms.Controls.VirtualDGVFamily dgFamilies;
         private System.Windows.Forms.TabPage tabSources;
-        private System.Windows.Forms.TabPage tabOccupations;
-        private FTAnalyzer.Forms.Controls.VirtualDGVOccupations dgOccupations;
         private FTAnalyzer.Forms.Controls.VirtualDGVSources dgSources;
         private System.Windows.Forms.TabPage tabErrorsFixes;
         private System.Windows.Forms.TabControl tabErrorFixSelector;
@@ -3210,18 +1910,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.DataGridView dgLooseDeaths;
         private System.Windows.Forms.CheckBox ckbTTIncludeOnlyOneParent;
         private System.Windows.Forms.ToolStripMenuItem privacyPolicyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuHowManyGreats;
-        private System.Windows.Forms.ToolStripMenuItem facebookSupportGroupToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem facebookUserGroupToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripMenuItem mnuDataErrorsToExcel;
-        private System.Windows.Forms.Button btnModernOSMap;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private System.Windows.Forms.ToolStripMenuItem mnuDNA_GEDCOM;
-        private System.Windows.Forms.ToolStripMenuItem MnuExportLocations;
-        private System.Windows.Forms.ToolStripMenuItem getGoogleAPIKeyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
-        private System.Windows.Forms.ToolStripMenuItem googleAPISetupGuideToolStripMenuItem;
         private System.Windows.Forms.GroupBox Referrals;
         private System.Windows.Forms.CheckBox ckbReferralInCommon;
         private System.Windows.Forms.Button btnReferrals;
@@ -3244,7 +1933,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ProgressBar pbSources;
         private Utilities.ScrollingRichTextBox rtbOutput;
-        private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;
         private System.Windows.Forms.Button btnViewInvalidRefs;
         private System.Windows.Forms.TabPage tabLooseInfo;
         private System.Windows.Forms.DataGridView dgLooseInfo;
@@ -3259,19 +1947,9 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnCheckMyAncestors;
         private System.Windows.Forms.Label lblCheckAncestors;
         private Utilities.ScrollingRichTextBox rtbCheckAncestors;
-        private System.Windows.Forms.ToolStripMenuItem mnuBirthdayEffect;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripMenuItem mnuJSON;
-        private System.Windows.Forms.ToolStripMenuItem mnuPossiblyMissingChildReport;
-        private System.Windows.Forms.ToolStripMenuItem MnuAgedOver99Report;
-        private System.Windows.Forms.ToolStripMenuItem MnuSingleParentsReport;
-        private System.Windows.Forms.TabPage tabCustomFacts;
-        private FTAnalyzer.Forms.Controls.VirtualDGVCustomFacts dgCustomFacts;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TextBox txtAliveDates;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Button btnAliveOnDate;
-        private System.Windows.Forms.ToolStripMenuItem mnuSurnamesToExcel;
         private System.Windows.Forms.Label labCompletion;
         private System.Windows.Forms.Label labDuplicateSlider;
         private System.Windows.Forms.DataGridViewCheckBoxColumn NonDuplicate;

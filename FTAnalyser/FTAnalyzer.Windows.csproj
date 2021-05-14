@@ -341,35 +341,11 @@
     <Compile Include="Forms\Notes.Designer.cs">
       <DependentUpon>Notes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Sources.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Sources.Designer.cs">
-      <DependentUpon>Sources.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Places.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Places.Designer.cs">
-      <DependentUpon>Places.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LifeLine.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LifeLine.Designer.cs">
-      <DependentUpon>LifeLine.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Progress.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Progress.Designer.cs">
       <DependentUpon>Progress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\StatisticsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\StatisticsForm.Designer.cs">
-      <DependentUpon>StatisticsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Controls\MapToolStripMenuItem.cs">
       <SubType>Component</SubType>
@@ -443,24 +419,6 @@
     <Compile Include="UserControls\MappingSettingsUI.designer.cs">
       <DependentUpon>MappingSettingsUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditLocation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EditLocation.Designer.cs">
-      <DependentUpon>EditLocation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\GeocodeLocations.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\GeocodeLocations.Designer.cs">
-      <DependentUpon>GeocodeLocations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\MapIndividals.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MapIndividals.Designer.cs">
-      <DependentUpon>MapIndividals.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ColourBMD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -484,34 +442,16 @@
     <Compile Include="Utilities\FooterPrintBlock.cs" />
     <Compile Include="Utilities\NativeMethods.cs" />
     <Compile Include="Utilities\ReportFormHelper.cs" />
-    <Compile Include="Forms\TimeLine.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\TimeLine.Designer.cs">
-      <DependentUpon>TimeLine.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessages.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\BingOSMap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BingOSMap.Designer.cs">
-      <DependentUpon>BingOSMap.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Chart.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Chart.Designer.cs">
       <DependentUpon>Chart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\GoogleMap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\GoogleMap.Designer.cs">
-      <DependentUpon>GoogleMap.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -700,24 +640,6 @@
     <EmbeddedResource Include="Forms\Notes.resx">
       <DependentUpon>Notes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Sources.resx">
-      <DependentUpon>Sources.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Places.resx">
-      <DependentUpon>Places.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditLocation.resx">
-      <DependentUpon>EditLocation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GeocodeLocations.resx">
-      <DependentUpon>GeocodeLocations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LifeLine.resx">
-      <DependentUpon>LifeLine.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MapIndividals.resx">
-      <DependentUpon>MapIndividals.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Facts.resx">
       <DependentUpon>Facts.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -725,30 +647,15 @@
     <EmbeddedResource Include="Forms\Progress.resx">
       <DependentUpon>Progress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StatisticsForm.resx">
-      <DependentUpon>StatisticsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TimeLine.resx">
-      <DependentUpon>TimeLine.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\ErrorMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BingOSMap.resx">
-      <DependentUpon>BingOSMap.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Chart.resx">
       <DependentUpon>Chart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GoogleMap.resx">
-      <DependentUpon>GoogleMap.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\People.resx">
-      <DependentUpon>People.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -808,12 +715,6 @@
     </Compile>
     <Compile Include="Forms\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\People.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\People.Designer.cs">
-      <DependentUpon>People.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ExtendedToolTipLabel.cs">
       <SubType>Component</SubType>

@@ -47,7 +47,6 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
             this.sep1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnShowHideFacts = new System.Windows.Forms.ToolStripButton();
             this.dgFacts = new System.Windows.Forms.DataGridView();
@@ -84,7 +83,6 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton,
             this.printPreviewToolStripButton,
             this.toolStripSeparator,
-            this.mnuExportToExcel,
             this.sep1,
             this.btnShowHideFacts});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -142,16 +140,6 @@ namespace FTAnalyzer.Forms
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // mnuExportToExcel
-            // 
-            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
-            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
-            this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // sep1
             // 
@@ -431,7 +419,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripButton mnuExportToExcel;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsRecords;
         private System.Windows.Forms.ToolStripSeparator sep1;
