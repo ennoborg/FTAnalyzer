@@ -1,6 +1,4 @@
-﻿using FTAnalyzer.Forms.Controls;
-using FTAnalyzer.Exports;
-using FTAnalyzer.Filters;
+﻿using FTAnalyzer.Exports;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
@@ -11,13 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,6 +22,7 @@ using System.Net;
 using System.Diagnostics;
 using GeneGenie.Gedcom;
 using GeneGenie.Gedcom.Parser;
+using System.Xml.Linq;
 
 namespace FTAnalyzer
 {
@@ -1674,6 +1671,30 @@ namespace FTAnalyzer
         {
             if (txtAliveDates.Text.StartsWith("Enter"))
                 txtAliveDates.Text = string.Empty;
+        }
+
+        private void ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var openGramps = new OpenFileDialog();
+            XDocument doc;
+
+            if (string.IsNullOrEmpty(Settings.Default.LoadLocation))
+                openGramps.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            else
+                openGramps.InitialDirectory = Settings.Default.LoadLocation;
+            openGramps.FileName = "*.gramps";
+            openGramps.Filter = "Gramps files (*.gramps)|*.gramps|All files (*.*)|*.*";
+            openGramps.FilterIndex = 1;
+            openGramps.RestoreDirectory = true;
+
+            if (openGramps.ShowDialog() == DialogResult.OK)
+            {
+                var grampsParser = new GrampsProject.GrampsXML();
+
+                doc = grampsParser.Load(openGramps.FileName);
+                Settings.Default.LoadLocation = Path.GetFullPath(openGramps.FileName);
+                Settings.Default.Save();
+            }
         }
     }
 }

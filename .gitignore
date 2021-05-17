@@ -268,3 +268,5 @@ __pycache__/
 /FTAnalyser/Performance*.psess
 
 *.bak
+
+*.gramps

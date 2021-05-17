@@ -285,6 +285,7 @@
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +353,7 @@
     </Compile>
     <Compile Include="GdalConfiguration.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="GrampsXML.cs" />
     <Compile Include="Graphics\FactImage.cs" />
     <Compile Include="Graphics\FactLocationImage.cs" />
     <Compile Include="Mapping\ClusterLayer.cs" />
