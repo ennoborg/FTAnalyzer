@@ -33,6 +33,8 @@ namespace GrampsProject
                     }
 
                     // Trim alle dubbele komma's uit plaatsnamen.
+                    int plaatsen = 0;
+
                     foreach (XElement cell in doc.Element(gr + "database").Element(gr + "places").Elements(gr + "placeobj"))
                     {
                         string plaats = cell.Element(gr + "ptitle").Value;
@@ -109,14 +111,24 @@ namespace GrampsProject
 
                             // Schrijf nieuwe plaats terug in doc:
                             cell.Element(gr + "ptitle").Value = nieuw;
+                            plaatsen++;
                         }
                     }
 
                     var sources = doc.Element(gr + "database").Element(gr + "sources").Elements(gr + "source");
+                    int bronnen = 0;
+                    int afkos = 0;
 
                     foreach (XElement cell in sources)
                     {
                         string title = cell.Element(gr + "stitle").Value;
+                        var abbrev = cell.Element(gr + "sabbrev");
+
+                        if (abbrev != null && abbrev.Value == title)
+                        {
+                            abbrev.Remove();
+                            afkos++;
+                        }
 
                         string clean = title.Replace(";", "");
 
@@ -133,9 +145,26 @@ namespace GrampsProject
                                     // Gevonden!
                                     Debug.WriteLine("Dubbele titel: " + clean);
                                     cell.Element(gr + "stitle").Value = clean;
+
+                                    bronnen++;
                                 }
                             }
                         }
+                    }
+
+                    if (plaatsen > 0)
+                    {
+                        Debug.WriteLine("Aantal aangepaste plaatsen = " + plaatsen);
+                    }
+
+                    if (bronnen > 0)
+                    {
+                        Debug.WriteLine("Aantal aangepaste bronnen = " + bronnen);
+                    }
+
+                    if (afkos > 0)
+                    {
+                        Debug.WriteLine("Aantal redundante/verwijderde afkos = " + afkos);
                     }
 
                     // Save new XML
