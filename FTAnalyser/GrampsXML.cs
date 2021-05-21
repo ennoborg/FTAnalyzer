@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Xml.Linq;
@@ -119,8 +120,12 @@ namespace GrampsProject
                     int bronnen = 0;
                     int afkos = 0;
 
+                    var sourceList = new List<XElement>();
+
                     foreach (XElement cell in sources)
                     {
+                        sourceList.Add(cell);
+
                         string title = cell.Element(gr + "stitle").Value;
                         var abbrev = cell.Element(gr + "sabbrev");
 
@@ -151,6 +156,32 @@ namespace GrampsProject
                             }
                         }
                     }
+
+                    var duplicateTitles = new List<string>();
+
+                    for (var i = 0; i < sourceList.Count; i++)
+                    {
+                        for (var j = i + 1; j < sourceList.Count; j++)
+                        {
+                            var t1 = sourceList[i].Element(gr + "stitle").Value;
+                            var t2 = sourceList[j].Element(gr + "stitle").Value;
+
+                            var a1 = sourceList[i].Element(gr + "sauthor")?.Value;
+                            var a2 = sourceList[j].Element(gr + "sauthor")?.Value;
+
+                            if (t1 == t2 && a1 == a2)
+                            {
+                                var i1 = sourceList[i].Attribute("id").Value;
+
+                                Debug.WriteLine(i1);
+                                Debug.WriteLine("Dubbele brontitel : " + t1);
+
+                                duplicateTitles.Add(t1);
+                            }
+                        }
+                    }
+
+                    duplicateTitles.Sort();
 
                     if (plaatsen > 0)
                     {
