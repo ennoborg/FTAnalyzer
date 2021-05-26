@@ -54,7 +54,6 @@ namespace FTAnalyzer
                 log.Info($"Started FTAnalyzer version {VERSION}");
                 int pos = VERSION.IndexOf('-');
                 string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
-                DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
                 CheckSystemVersion();
                 if (!Application.ExecutablePath.Contains("WindowsApps"))
                     CheckWebVersion(); // check for web version if not windows store app
@@ -273,9 +272,6 @@ namespace FTAnalyzer
         void EnableLoadMenus()
         {
             openToolStripMenuItem.Enabled = true;
-            databaseToolStripMenuItem.Enabled = true;
-            mnuRestore.Enabled = false;
-            mnuLoadLocationsCSV.Enabled = false;
         }
 
         void CloseGEDCOM(bool keepOutput)
@@ -299,7 +295,6 @@ namespace FTAnalyzer
             Statistics.Instance.Clear();
             btnReferrals.Enabled = false;
             openToolStripMenuItem.Enabled = false;
-            databaseToolStripMenuItem.Enabled = false;
             mnuRecent.Enabled = false;
             tabMainListsSelector.SelectedTab = tabIndividuals; // force back to first tab
             tabErrorFixSelector.SelectedTab = tabDataErrors; //force tab back to data errors tab
@@ -371,8 +366,6 @@ namespace FTAnalyzer
             CloseGEDCOM(retainText);
             ft.ResetData();
             EnableLoadMenus();
-            mnuRestore.Enabled = true;
-            mnuLoadLocationsCSV.Enabled = true;
             mnuCloseGEDCOM.Enabled = false;
             BuildRecentList();
         }
@@ -690,8 +683,6 @@ namespace FTAnalyzer
                         if (tabSelector.SelectedTab != tabDisplayProgress)
                         {
                             tabSelector.SelectedTab = tabDisplayProgress;
-                            mnuRestore.Enabled = true;
-                            mnuLoadLocationsCSV.Enabled = true;
                             MessageBox.Show(ErrorMessages.FTA_0002, "FTAnalyzer Error : FTA_0002");
                         }
                         return;
@@ -933,68 +924,6 @@ namespace FTAnalyzer
                 }
             }
             catch (Exception) { }
-        }
-        #endregion
-
-        #region Backup/Restore Database
-        void BackupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ft.Geocoding)
-                MessageBox.Show("You need to stop Geocoding before you can export the database", "FTAnalyzer");
-            else
-            {
-                DatabaseHelper.Instance.BackupDatabase(saveDatabase, $"FTAnalyzer zip file created by v{VERSION}");
-                Analytics.TrackAction(Analytics.MainFormAction, Analytics.DBBackupEvent);
-            }
-        }
-
-        void RestoreToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ft.Geocoding)
-                MessageBox.Show("You need to stop Geocoding before you can import the database", "FTAnalyzer");
-            else
-            {
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
-                restoreDatabase.FileName = "*.zip";
-                restoreDatabase.InitialDirectory = directory;
-                DialogResult result = restoreDatabase.ShowDialog();
-                if (result == DialogResult.OK && File.Exists(restoreDatabase.FileName))
-                {
-                    HourGlass(true);
-                    bool failed = false;
-                    using (ZipFile zip = new ZipFile(restoreDatabase.FileName))
-                    {
-                        if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
-                        {
-                            DatabaseHelper dbh = DatabaseHelper.Instance;
-                            if (DatabaseHelper.StartBackupRestoreDatabase())
-                            {
-                                File.Copy(dbh.DatabaseFile, dbh.CurrentFilename, true); // copy exisiting file to safety
-                                zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
-                                if (dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })))
-                                    MessageBox.Show("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
-                                else
-                                {
-                                    File.Copy(dbh.CurrentFilename, dbh.DatabaseFile, true);
-                                    dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })); // restore original database
-                                    failed = true;
-                                }
-                            }
-                            else
-                                MessageBox.Show("Database file could not be extracted", "FTAnalyzer Database Restore Error");
-                        }
-                        else
-                        {
-                            failed = true;
-                        }
-                        if (failed)
-                            MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
-                        else
-                            Analytics.TrackAction(Analytics.MainFormAction, Analytics.DBRestoreEvent);
-                    }
-                    HourGlass(false);
-                }
-            }
         }
         #endregion
 
@@ -1525,117 +1454,6 @@ namespace FTAnalyzer
             }
         }
         #endregion
-
-        void MnuLoadLocationsCSV_Click(object sender, EventArgs e) => LoadLocations(tspbTabProgress, tsStatusLabel, 1);
-
-        void MnuLoadLocationsTNG_Click(object sender, EventArgs e) => LoadLocations(tspbTabProgress, tsStatusLabel, 2);
-
-        #region Load CSV Location Data
-
-        public static void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
-        {
-            string csvFilename = string.Empty;
-            pb.Visible = true;
-            try
-            {
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                {
-                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
-                    openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                    openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
-                    openFileDialog.FilterIndex = defaultIndex;
-
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        csvFilename = openFileDialog.FileName;
-                        label.Text = "Loading " + csvFilename;
-                        string path = Path.GetDirectoryName(csvFilename);
-                        Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
-                        if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
-                            ReadTNGdata(pb, csvFilename);
-                        else
-                            ReadCSVdata(pb, csvFilename);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading CSV location data from {csvFilename}\nError was {ex.Message}", "FTAnalyzer");
-            }
-            pb.Visible = false;
-            label.Text = string.Empty;
-        }
-
-        public static void ReadTNGdata(ToolStripProgressBar pb, string tngFilename)
-        {
-            int rowCount = 0;
-            int lineCount = File.ReadLines(tngFilename).Count();
-            pb.Maximum = lineCount;
-            pb.Minimum = 0;
-            pb.Value = rowCount;
-            using (CsvFileReader reader = new CsvFileReader(tngFilename, ';'))
-            {
-                CsvRow row = new CsvRow();
-                while (reader.ReadRow(row))
-                {
-                    if (row.Count == 4)
-                    {
-                        FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
-                        rowCount++;
-                    }
-                    pb.Value++;
-                    if (pb.Value % 10 == 0)
-                        Application.DoEvents();
-                }
-                MessageBox.Show($"Loaded {rowCount} locations from TNG file {tngFilename}", "FTAnalyzer");
-            }
-        }
-
-        public static void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
-        {
-            int rowCount = 0;
-            int lineCount = File.ReadLines(csvFilename).Count();
-            pb.Maximum = lineCount;
-            pb.Minimum = 0;
-            pb.Value = rowCount;
-            using (CsvFileReader reader = new CsvFileReader(csvFilename))
-            {
-                CsvRow headerRow = new CsvRow();
-                CsvRow row = new CsvRow();
-
-                reader.ReadRow(headerRow);
-                if (headerRow.Count != 3)
-                    throw new InvalidLocationCSVFileException("Location file should have 3 values per line.");
-                if (!headerRow[0].Trim().ToUpper().Equals("LOCATION"))
-                    throw new InvalidLocationCSVFileException("No Location header record. Header should be Location, Latitude, Longitude");
-                if (!headerRow[1].Trim().ToUpper().Equals("LATITUDE"))
-                    throw new InvalidLocationCSVFileException("No Latitude header record. Header should be Location, Latitude, Longitude");
-                if (!headerRow[2].Trim().ToUpper().Equals("LONGITUDE"))
-                    throw new InvalidLocationCSVFileException("No Longitude header record. Header should be Location, Latitude, Longitude");
-                while (reader.ReadRow(row))
-                {
-                    if (row.Count == 3)
-                    {
-                        FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
-                        rowCount++;
-                    }
-                    pb.Value++;
-                    if (pb.Value % 10 == 0)
-                        Application.DoEvents();
-                }
-            }
-            MessageBox.Show($"Loaded {rowCount} locations from file {csvFilename}", "FTAnalyzer");
-        }
-        #endregion
-
-        void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
-        {
-            DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Yes)
-                DatabaseHelper.Instance.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
-            if (result != DialogResult.Cancel)
-                LoadLocationData(pb, label, defaultIndex);
-        }
 
         FactDate AliveDate { get; set; }
 

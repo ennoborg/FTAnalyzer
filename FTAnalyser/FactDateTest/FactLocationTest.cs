@@ -63,36 +63,6 @@ namespace Testing
 //            factLocation = FactLocation.GetLocation("Aberdeen, Scotland");
 //            Assert.IsTrue(factLocation.ToString().Equals("Aberdeen, Aberdeenshire, Scotland"));
 
-            factLocation = FactLocation.GetLocation("America");
-            Assert.IsTrue(factLocation.ToString().Equals("United States"));
-
-            // check for default strip empty locations
-            FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations = false;
-            factLocation = FactLocation.GetLocation("Parish Church of St Mary, , South Stoneham, Hampshire, ENG");
-            Assert.IsTrue(factLocation.ToString().Equals("Parish Church of St Mary, South Stoneham, Hampshire, England"));
-
-            factLocation = FactLocation.GetLocation(", , West End, Hampshire, ENG");
-            Assert.IsTrue(factLocation.ToString().Equals("West End, Hampshire, England"));
-
-            factLocation = FactLocation.GetLocation(", Fareham Registration District, , Hampshire, ENG");
-            Assert.IsTrue(factLocation.ToString().Equals("Fareham Registration District, Hampshire, England"));
-
-            // check when allowing empty locations
-            FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations = true;
-            factLocation = FactLocation.GetLocation("Parish Church of St Mary, , South Stoneham, Hampshire, ENG");
-            Assert.IsTrue(factLocation.ToString().Equals("Parish Church of St Mary, , South Stoneham, Hampshire, England"));
-
-            factLocation = FactLocation.GetLocation(", , West End, Hampshire, ENG");
-            Assert.IsTrue(factLocation.ToString().Equals("West End, Hampshire, England"));
-
-            factLocation = FactLocation.GetLocation(", Fareham Registration District, , Hampshire, ENG");
-            Assert.IsTrue(factLocation.ToString().Equals("Fareham Registration District, , Hampshire, England"));
-
-            factLocation = FactLocation.GetLocation("U.S.A.");
-            Assert.IsTrue(factLocation.ToString().Equals("United States"));
-
-            factLocation = FactLocation.GetLocation("4 Old Grey Street, Sunderland, Co Durham");
-            Assert.IsTrue(factLocation.ToString().Equals("4 Old Grey Street, Sunderland, County Durham, England"));
         }
     }
 }

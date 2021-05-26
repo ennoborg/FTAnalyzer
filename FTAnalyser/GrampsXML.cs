@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -169,10 +170,7 @@ namespace GrampsProject
                             var a1 = sourceList[i].Element(gr + "sauthor")?.Value;
                             var a2 = sourceList[j].Element(gr + "sauthor")?.Value;
 
-                            var c1 = t1.Replace(" ", "").Replace(":", "").Replace(".", "").Replace(";", "");
-                            var c2 = t2.Replace(" ", "").Replace(":", "").Replace(".", "").Replace(";", "");
-
-                            if (c1 == c2 && a1 == a2)
+                            if (CleanText(t1) == CleanText(t2) && a1 == a2)
                             {
                                 var i1 = sourceList[i].Attribute("id").Value;
                                 var i2 = sourceList[j].Attribute("id").Value;
@@ -208,6 +206,22 @@ namespace GrampsProject
                     return doc;
                 }
             }
+        }
+
+        private string CleanText(string t)
+        {
+            // return t.Replace(" ", "").Replace(":", "").Replace(".", "").Replace(";", "");
+            var s = string.Empty;
+
+            foreach (var c in t)
+            {
+                if (c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c >= '0' && c <= '9')
+                {
+                    s += c;
+                }
+            }
+
+            return s.ToUpper();
         }
     }
 }

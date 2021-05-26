@@ -60,12 +60,7 @@ namespace FTAnalyzer
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.clearRecentFileListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuLoadLocationsCSV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuLoadLocationsTNG = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCloseGEDCOM = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -266,7 +261,6 @@ namespace FTAnalyzer
             this.toolStripSeparator6,
             this.mnuRecent,
             this.toolStripSeparator3,
-            this.databaseToolStripMenuItem,
             this.toolStripSeparator5,
             this.mnuCloseGEDCOM,
             this.exitToolStripMenuItem});
@@ -370,51 +364,10 @@ namespace FTAnalyzer
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(181, 6);
             // 
-            // databaseToolStripMenuItem
-            // 
-            this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backupToolStripMenuItem,
-            this.mnuRestore,
-            this.toolStripSeparator11,
-            this.mnuLoadLocationsCSV,
-            this.mnuLoadLocationsTNG});
-            this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.databaseToolStripMenuItem.Text = "Geocode Database";
-            // 
-            // backupToolStripMenuItem
-            // 
-            this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.backupToolStripMenuItem.Text = "Backup";
-            this.backupToolStripMenuItem.Click += new System.EventHandler(this.BackupToolStripMenuItem_Click);
-            // 
-            // mnuRestore
-            // 
-            this.mnuRestore.Name = "mnuRestore";
-            this.mnuRestore.Size = new System.Drawing.Size(237, 22);
-            this.mnuRestore.Text = "Restore";
-            this.mnuRestore.ToolTipText = "Restore is only available prior to loading GEDCOM";
-            this.mnuRestore.Click += new System.EventHandler(this.RestoreToolStripMenuItem_Click);
-            // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(234, 6);
-            // 
-            // mnuLoadLocationsCSV
-            // 
-            this.mnuLoadLocationsCSV.Name = "mnuLoadLocationsCSV";
-            this.mnuLoadLocationsCSV.Size = new System.Drawing.Size(237, 22);
-            this.mnuLoadLocationsCSV.Text = "Load Geocoded Locations CSV";
-            this.mnuLoadLocationsCSV.Click += new System.EventHandler(this.MnuLoadLocationsCSV_Click);
-            // 
-            // mnuLoadLocationsTNG
-            // 
-            this.mnuLoadLocationsTNG.Name = "mnuLoadLocationsTNG";
-            this.mnuLoadLocationsTNG.Size = new System.Drawing.Size(237, 22);
-            this.mnuLoadLocationsTNG.Text = "Load Geocoded Locations TNG";
-            this.mnuLoadLocationsTNG.Click += new System.EventHandler(this.MnuLoadLocationsTNG_Click);
             // 
             // toolStripSeparator5
             // 
@@ -1855,9 +1808,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.TabControl tabSelector;
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ToolStripMenuItem whatsNewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuRestore;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.SaveFileDialog saveDatabase;
         private System.Windows.Forms.OpenFileDialog restoreDatabase;
@@ -1884,8 +1834,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripProgressBar tspbTabProgress;
         private System.Windows.Forms.ToolStripMenuItem mnuCloseGEDCOM;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsCSV;
-        private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsTNG;
         private System.Windows.Forms.ToolStripStatusLabel tsStatusLabel;
         private System.Windows.Forms.TabPage tabMainLists;
         private System.Windows.Forms.TabControl tabMainListsSelector;

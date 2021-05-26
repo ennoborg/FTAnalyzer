@@ -320,9 +320,6 @@
     <Compile Include="Forms\Controls\VirtualDGVIndividuals.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Forms\Controls\TreeViewHandler.cs" />
     <Compile Include="Forms\Controls\VirtualDGVDuplicates.cs">
       <SubType>Component</SubType>
@@ -348,26 +345,11 @@
     <Compile Include="Forms\Progress.Designer.cs">
       <DependentUpon>Progress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Controls\MapToolStripMenuItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="GdalConfiguration.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GrampsXML.cs" />
     <Compile Include="Graphics\FactImage.cs" />
     <Compile Include="Graphics\FactLocationImage.cs" />
-    <Compile Include="Mapping\ClusterLayer.cs" />
-    <Compile Include="Mapping\GeoResponse.cs" />
-    <Compile Include="Mapping\GoogleAPIKey.cs" />
-    <Compile Include="Mapping\MapCluster.cs" />
-    <Compile Include="Mapping\MapHelper.cs" />
-    <Compile Include="Mapping\MapLifeLine.cs" />
-    <Compile Include="Mapping\MapLocation.cs" />
-    <Compile Include="Mapping\MapTransforms.cs" />
-    <Compile Include="Mapping\MarkerClusterer.cs" />
-    <Compile Include="Mapping\OS50kGazetteer.cs" />
-    <Compile Include="Mapping\TearDropLayer.cs" />
-    <Compile Include="Mapping\TileSourceFactory.cs" />
     <Compile Include="Properties\FileHandling.Designer.cs">
       <DependentUpon>FileHandling.settings</DependentUpon>
       <AutoGen>True</AutoGen>
