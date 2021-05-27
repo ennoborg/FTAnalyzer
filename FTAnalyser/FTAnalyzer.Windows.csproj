@@ -320,7 +320,6 @@
     <Compile Include="Forms\Controls\VirtualDGVIndividuals.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\TreeViewHandler.cs" />
     <Compile Include="Forms\Controls\VirtualDGVDuplicates.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -390,12 +389,6 @@
     </Compile>
     <Compile Include="UserControls\FontSettingsUI.Designer.cs">
       <DependentUpon>FontSettingsUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ColourBMD.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ColourBMD.Designer.cs">
-      <DependentUpon>ColourBMD.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Facts.cs">
       <SubType>Form</SubType>
@@ -593,9 +586,6 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Forms\ColourBMD.resx">
-      <DependentUpon>ColourBMD.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\DateSliders.resx">
       <DependentUpon>DateSliders.cs</DependentUpon>
     </EmbeddedResource>

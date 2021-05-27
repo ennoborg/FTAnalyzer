@@ -18,8 +18,6 @@
                     return fam.Wife;
                 case nameof(IDisplayFamily.Marriage):
                     return fam.Marriage;
-                case nameof(IDisplayFamily.Location):
-                    return fam.Location;
                 case nameof(IDisplayFamily.Children):
                     return fam.Children;
                 case nameof(IDisplayFamily.FamilySize):
