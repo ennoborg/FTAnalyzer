@@ -30,49 +30,6 @@ namespace FTAnalyzer.Forms.Controls
         }
 
         #region Location Tree Building
-        static void SetTreeNodeImage(FactLocation location, TreeNode child)
-        {
-            if (child == null)
-                return;
-            switch (location.GeocodeStatus)
-            {
-                case FactLocation.Geocode.NOT_SEARCHED:
-                    child.ImageIndex = 0;
-                    child.ToolTipText += "\nUse 'Run Google Geocoder' option under Maps menu to search Google for location.";
-                    break;
-                case FactLocation.Geocode.MATCHED:
-                    child.ImageIndex = 1;
-                    break;
-                case FactLocation.Geocode.PARTIAL_MATCH:
-                    child.ImageIndex = 2;
-                    break;
-                case FactLocation.Geocode.GEDCOM_USER:
-                    child.ImageIndex = 3;
-                    break;
-                case FactLocation.Geocode.NO_MATCH:
-                    child.ImageIndex = 4;
-                    break;
-                case FactLocation.Geocode.INCORRECT:
-                    child.ImageIndex = 5;
-                    break;
-                case FactLocation.Geocode.OUT_OF_BOUNDS:
-                    child.ImageIndex = 6;
-                    break;
-                case FactLocation.Geocode.LEVEL_MISMATCH:
-                    child.ImageIndex = 7;
-                    break;
-                case FactLocation.Geocode.OS_50KMATCH:
-                    child.ImageIndex = 8;
-                    break;
-                case FactLocation.Geocode.OS_50KPARTIAL:
-                    child.ImageIndex = 9;
-                    break;
-                case FactLocation.Geocode.OS_50KFUZZY:
-                    child.ImageIndex = 10;
-                    break;
-            }
-        }
-
         TreeNode[] BuildTreeNodeArray(bool mainForm)
         {
             TreeNodeCollection nodes;
@@ -105,11 +62,6 @@ namespace FTAnalyzer.Forms.Controls
                     currentP = childP;
                 }
             }
-            // we should now have nodes to update   
-            if (mainformTreeRootNode != null && currentM != null)
-                SetTreeNodeImage(location, currentM);
-            if (placesTreeRootNode != null && currentP != null)
-                SetTreeNodeImage(location, currentP);
         }
         #endregion
     }

@@ -349,7 +349,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GrampsXML.cs" />
     <Compile Include="Graphics\FactImage.cs" />
-    <Compile Include="Graphics\FactLocationImage.cs" />
     <Compile Include="Properties\FileHandling.Designer.cs">
       <DependentUpon>FileHandling.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -362,11 +361,6 @@
     </Compile>
     <Compile Include="Properties\GeneralSettings.Designer.cs">
       <DependentUpon>GeneralSettings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\MappingSettings.Designer.cs">
-      <DependentUpon>MappingSettings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
@@ -396,12 +390,6 @@
     </Compile>
     <Compile Include="UserControls\FontSettingsUI.Designer.cs">
       <DependentUpon>FontSettingsUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\MappingSettingsUI.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\MappingSettingsUI.designer.cs">
-      <DependentUpon>MappingSettingsUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ColourBMD.cs">
       <SubType>Form</SubType>
@@ -478,10 +466,6 @@
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Properties\MappingSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Properties\NonGedcomDate.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>NonGedcomDate.Designer.cs</LastGenOutput>
@@ -529,9 +513,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\FTAnalyzer.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\GoogleMapsAPI.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\GoogleMatch.png">
@@ -655,9 +636,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\FontSettingsUI.resx">
       <DependentUpon>FontSettingsUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\MappingSettingsUI.resx">
-      <DependentUpon>MappingSettingsUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GeneralSettingsUI.resx">
       <DependentUpon>GeneralSettingsUI.cs</DependentUpon>
@@ -798,22 +776,6 @@
     <ProjectReference Include="..\GeneGenie.Gedcom\GeneGenie.Gedcom.csproj">
       <Project>{B7091B49-BB2B-44F0-8617-014A7486BC3A}</Project>
       <Name>GeneGenie.Gedcom</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpMap.Extensions\SharpMap.Extensions.csproj">
-      <Project>{a4140c12-53f5-438c-8d24-9e48c504fecf}</Project>
-      <Name>SharpMap.Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpMap.Layers.BruTile\SharpMap.Layers.BruTile.csproj">
-      <Project>{d84f31ed-3d81-42f2-9190-3d021d6038a0}</Project>
-      <Name>SharpMap.Layers.BruTile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpMap.UI\SharpMap.UI.csproj">
-      <Project>{dd1cc1db-4bf9-4c88-a100-733d84795f3a}</Project>
-      <Name>SharpMap.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpMap\SharpMap.csproj">
-      <Project>{c83777fc-aabb-47d9-911f-d76255d4d541}</Project>
-      <Name>SharpMap</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems" Label="Shared" />

@@ -1,5 +1,4 @@
 ﻿using FTAnalyzer.Utilities;
-using SharpMap;
 using System;
 using System.Windows.Forms;
 
@@ -15,7 +14,6 @@ namespace FTAnalyzer
 
         {
             if (Environment.OSVersion.Version.Major >= 10) NativeMethods.SetProcessDPIAware();
-            SharpMapUtility.Configure();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
