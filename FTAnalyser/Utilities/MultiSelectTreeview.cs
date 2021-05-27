@@ -93,7 +93,7 @@ namespace FTAnalyzer.Utilities
                 HandleException(ex);
             }
         }
-        
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             // If the user clicks on a node that was not
@@ -433,7 +433,7 @@ namespace FTAnalyzer.Utilities
                 node.ForeColor = this.ForeColor;
             }
         }
-        
+
         void SelectNode(TreeNode node)
         {
             try

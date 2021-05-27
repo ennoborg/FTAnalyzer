@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
-using System.Drawing;
 
 namespace FTAnalyzer.Utilities
 {
@@ -9,7 +9,7 @@ namespace FTAnalyzer.Utilities
     {
         readonly ScrollingRichTextBox rtb;
         readonly StringReader reader;
-        
+
         public Printing(ScrollingRichTextBox rtb)
         {
             this.rtb = rtb;

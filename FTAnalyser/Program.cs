@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using FTAnalyzer.Utilities;
+﻿using FTAnalyzer.Utilities;
 using SharpMap;
+using System;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -12,7 +12,7 @@ namespace FTAnalyzer
         /// </summary>
         [STAThread]
         static void Main()
-        
+
         {
             if (Environment.OSVersion.Version.Major >= 10) NativeMethods.SetProcessDPIAware();
             SharpMapUtility.Configure();

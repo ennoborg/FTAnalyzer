@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Text;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
     public static class InputBox
     {
-         public static DialogResult Show(string title, string promptText, ref string value)
+        public static DialogResult Show(string title, string promptText, ref string value)
         {
             Form form = new Form();
             Label label = new Label();

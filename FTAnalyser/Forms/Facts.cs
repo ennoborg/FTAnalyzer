@@ -1,5 +1,4 @@
-﻿using FTAnalyzer.Filters;
-using FTAnalyzer.Utilities;
+﻿using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -153,7 +152,7 @@ namespace FTAnalyzer.Forms
                     formatter.Serialize(stream, IgnoreList);
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 //log.Error("Error " + e.Message + " writing IgnoreList.xml");
             }
@@ -175,9 +174,9 @@ namespace FTAnalyzer.Forms
                     }
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
-               //log.Error("Error " + e.Message + " reading IgnoreList.xml");
+                //log.Error("Error " + e.Message + " reading IgnoreList.xml");
             }
         }
 

@@ -373,7 +373,7 @@ namespace FTAnalyzer.Forms
                     colour = BMDColours.NO_MARRIAGE;
                     break;
             }
-            if (cbFilter.SelectedIndex >0)
+            if (cbFilter.SelectedIndex > 0)
                 dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(types, colour));
             dgBMDReportSheet.Focus();
             tsRecords.Text = $"{Properties.Messages.Count}{dgBMDReportSheet.RowCount} records listed.";

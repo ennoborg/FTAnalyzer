@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Printing.DataGridViewPrint;
+using System;
 using System.Collections.Generic;
-using Printing.DataGridViewPrint;
 using System.Drawing;
 
 namespace FTAnalyzer.Utilities
@@ -39,7 +39,7 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception) { }
         }
-         
+
         public void Dispose()
         {
             Dispose(true);

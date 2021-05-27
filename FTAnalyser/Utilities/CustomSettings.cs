@@ -18,7 +18,7 @@ namespace FTAnalyzer.Utilities
             _NonGEDCOMDateSettings.UseNonGedcomDates = true;
             _NonGEDCOMDateSettings.FormatSelected = (int)formatSelected;
             _NonGEDCOMDateSettings.DateFormat = dateformat;
-            _NonGEDCOMDateSettings.Regex = SetRegex(formatSelected,separator);
+            _NonGEDCOMDateSettings.Regex = SetRegex(formatSelected, separator);
             _NonGEDCOMDateSettings.Separator = separator;
             Save();
         }
@@ -37,7 +37,7 @@ namespace FTAnalyzer.Utilities
 
         string SetRegex(NonGEDCOMFormatSelected formatSelected, string regexSeparator)
         {
-            switch(formatSelected)
+            switch (formatSelected)
             {
                 case NonGEDCOMFormatSelected.DD_MM_YYYY:
                     return @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";

@@ -8,7 +8,7 @@ namespace FTAnalyzer.Utilities
         {
             DialogResult result = MessageBox.Show(message, "Continue Loading?", MessageBoxButtons.YesNo);
             return (int)result;
-         }
+        }
 
         public static int ShowMessage(string message) => ShowMessage(message, "FTAnalyzer");
         public static int ShowMessage(string message, string title)

@@ -1,27 +1,25 @@
-﻿using FTAnalyzer.Exports;
-using FTAnalyzer.Forms;
+﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using Ionic.Zip;
+using GeneGenie.Gedcom;
+using GeneGenie.Gedcom.Parser;
+using HtmlAgilityPack;
 using Printing.DataGridViewPrint.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HtmlAgilityPack;
-using System.Net;
-using System.Diagnostics;
-using GeneGenie.Gedcom;
-using GeneGenie.Gedcom.Parser;
 using System.Xml.Linq;
 
 namespace FTAnalyzer
@@ -59,7 +57,8 @@ namespace FTAnalyzer
                     CheckWebVersion(); // check for web version if not windows store app
                 SetSavePath();
                 BuildRecentList();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 UIHelpers.ShowMessage($"Problem starting up error was : {e.Message}");
             }

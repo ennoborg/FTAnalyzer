@@ -1,9 +1,5 @@
-﻿using FTAnalyzer.Forms;
-using NetTopologySuite.Geometries;
-using Ionic.Zip;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
@@ -102,7 +98,7 @@ namespace FTAnalyzer.Utilities
                 using (SQLiteCommand cmd = new SQLiteCommand("select Database from versions where platform='PC'", InstanceConnection))
                 {
                     db = (string)cmd.ExecuteScalar();
-                }   
+                }
             }
             catch (Exception)
             {  // use old method if current method fails
@@ -164,16 +160,16 @@ namespace FTAnalyzer.Utilities
                 param = cmd.CreateParameter();
                 cmd.Prepare();
                 cmd.Parameters[0].Value = factType;
-                cmd.Parameters[1].Value = ignore; 
+                cmd.Parameters[1].Value = ignore;
                 int rowsaffected = cmd.ExecuteNonQuery();
             }
         }
 
-            #endregion
+        #endregion
 
         #region Cursor Queries
 
-            public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
+        public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
             if (queue is null) return;
             if (InstanceConnection.State != ConnectionState.Open)

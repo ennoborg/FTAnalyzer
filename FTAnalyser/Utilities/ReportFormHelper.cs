@@ -1,7 +1,6 @@
 ﻿using FTAnalyzer.Utilities;
 using Printing.DataGridViewPrint.Tools;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -172,7 +171,7 @@ namespace FTAnalyzer
             for (int i = 0; i < ReportGrid.Columns.Count; i++)
             {
                 ReportGrid.Columns[i].DisplayIndex = i;
-               // ReportGrid.Columns[i].Width = ReportGrid.Columns[i].MinimumWidth;
+                // ReportGrid.Columns[i].Width = ReportGrid.Columns[i].MinimumWidth;
             }
             SaveColumnLayout(filename);
         }
