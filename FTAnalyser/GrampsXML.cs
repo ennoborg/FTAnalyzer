@@ -47,12 +47,30 @@ namespace GrampsProject
 
                         string nieuw = "";
 
+                        if (namen.Length == 2)
+                        {
+                            // Zoek naar omgekeerde plaatsvolgorde.
+                            var stad = namen[0].Trim();
+                            if (stad == "Amstelveen" ||
+                                stad == "Amsterdam" ||
+                                stad == "Zaandam")
+                            {
+                                // Wissel namen om.
+                                namen[0] = namen[1];
+                                namen[1] = stad;
+                            }
+                        }
+
                         foreach (string naam in namen)
                         {
                             var w = naam.Trim();
                             // We kunnen hier ook namen vertalen
                             switch (w)
                             {
+                                case "Belgium":
+                                    w = "België";
+                                    break;
+
                                 case "Eng.":
                                 case "Engeland":
                                     w = "England";
@@ -70,10 +88,12 @@ namespace GrampsProject
                                 case "Netherland":
                                 case "Netherlands":
                                 case "NL":
+                                case "NLD":
                                 case "The Netherlands":
                                     w = "Nederland";
                                     break;
 
+                                case "GE":
                                 case "Gldrl":
                                     w = "Gelderland";
                                     break;
@@ -81,6 +101,15 @@ namespace GrampsProject
                                 case "Holland (North)":
                                 case "North Holland":
                                     w = "Noord-Holland";
+                                    break;
+
+                                case "LI":
+                                    w = "Limburg";
+                                    break;
+
+                                case "NB":
+                                case "North Brabant":
+                                    w = "Noord-Brabant";
                                     break;
 
                                 case "Overijsel":
@@ -106,6 +135,10 @@ namespace GrampsProject
                             }
                         }
 
+                        // Verwijder redundante informatie.
+                        nieuw = nieuw.Replace("England, United Kingdom", "England");
+                        nieuw = nieuw.Replace("Scotland, United Kingdom", "Scotland");
+
                         if (plaats != nieuw)
                         {
                             Debug.WriteLine(plaats + " -> " + nieuw);
@@ -116,88 +149,88 @@ namespace GrampsProject
                         }
                     }
 
-                    var sources = doc.Element(gr + "database").Element(gr + "sources").Elements(gr + "source");
-                    int bronnen = 0;
-                    int afkos = 0;
+                    //var sources = doc.Element(gr + "database").Element(gr + "sources").Elements(gr + "source");
+                    //int bronnen = 0;
+                    //int afkos = 0;
 
-                    var sourceList = new List<XElement>();
+                    //var sourceList = new List<XElement>();
 
-                    foreach (XElement cell in sources)
-                    {
-                        sourceList.Add(cell);
+                    //foreach (XElement cell in sources)
+                    //{
+                    //    sourceList.Add(cell);
 
-                        string title = cell.Element(gr + "stitle").Value;
-                        var abbrev = cell.Element(gr + "sabbrev");
+                    //    string title = cell.Element(gr + "stitle").Value;
+                    //    var abbrev = cell.Element(gr + "sabbrev");
 
-                        if (abbrev != null && abbrev.Value == title)
-                        {
-                            abbrev.Remove();
-                            afkos++;
-                        }
+                    //    if (abbrev != null && abbrev.Value == title)
+                    //    {
+                    //        abbrev.Remove();
+                    //        afkos++;
+                    //    }
 
-                        string clean = title.Replace(";", "");
+                    //    string clean = title.Replace(";", "");
 
-                        if (clean != title)
-                        {
-                            // Titel met ; erin.
-                            // Kijk of deze ook bestaat.
-                            foreach (var zoek in sources)
-                            {
-                                var zoekTitel = zoek.Element(gr + "stitle").Value;
+                    //    if (clean != title)
+                    //    {
+                    //        // Titel met ; erin.
+                    //        // Kijk of deze ook bestaat.
+                    //        foreach (var zoek in sources)
+                    //        {
+                    //            var zoekTitel = zoek.Element(gr + "stitle").Value;
 
-                                if (zoekTitel == clean)
-                                {
-                                    // Gevonden!
-                                    Debug.WriteLine("Dubbele titel: " + clean);
-                                    cell.Element(gr + "stitle").Value = clean;
+                    //            if (zoekTitel == clean)
+                    //            {
+                    //                // Gevonden!
+                    //                Debug.WriteLine("Dubbele titel: " + clean);
+                    //                cell.Element(gr + "stitle").Value = clean;
 
-                                    bronnen++;
-                                }
-                            }
-                        }
-                    }
+                    //                bronnen++;
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
-                    var duplicateTitles = new List<string>();
+                    //var duplicateTitles = new List<string>();
 
-                    for (var i = 0; i < sourceList.Count; i++)
-                    {
-                        for (var j = i + 1; j < sourceList.Count; j++)
-                        {
-                            var t1 = sourceList[i].Element(gr + "stitle").Value;
-                            var t2 = sourceList[j].Element(gr + "stitle").Value;
+                    //for (var i = 0; i < sourceList.Count; i++)
+                    //{
+                    //    for (var j = i + 1; j < sourceList.Count; j++)
+                    //    {
+                    //        var t1 = sourceList[i].Element(gr + "stitle").Value;
+                    //        var t2 = sourceList[j].Element(gr + "stitle").Value;
 
-                            var a1 = sourceList[i].Element(gr + "sauthor")?.Value;
-                            var a2 = sourceList[j].Element(gr + "sauthor")?.Value;
+                    //        var a1 = sourceList[i].Element(gr + "sauthor")?.Value;
+                    //        var a2 = sourceList[j].Element(gr + "sauthor")?.Value;
 
-                            if (CleanText(t1) == CleanText(t2) && a1 == a2)
-                            {
-                                var i1 = sourceList[i].Attribute("id").Value;
-                                var i2 = sourceList[j].Attribute("id").Value;
+                    //        if (CleanText(t1) == CleanText(t2) && a1 == a2)
+                    //        {
+                    //            var i1 = sourceList[i].Attribute("id").Value;
+                    //            var i2 = sourceList[j].Attribute("id").Value;
 
-                                Debug.WriteLine(i1 + " = " + i2);
-                                Debug.WriteLine("Titel 1 : " + t1);
-                                Debug.WriteLine("Titel 2 : " + t2);
+                    //            Debug.WriteLine(i1 + " = " + i2);
+                    //            Debug.WriteLine("Titel 1 : " + t1);
+                    //            Debug.WriteLine("Titel 2 : " + t2);
 
-                                duplicateTitles.Add(t1);
-                            }
-                        }
-                    }
+                    //            duplicateTitles.Add(t1);
+                    //        }
+                    //    }
+                    //}
 
-                    duplicateTitles.Sort();
+                    //duplicateTitles.Sort();
+
+                    //if (bronnen > 0)
+                    //{
+                    //    Debug.WriteLine("Aantal aangepaste bronnen = " + bronnen);
+                    //}
+
+                    //if (afkos > 0)
+                    //{
+                    //    Debug.WriteLine("Aantal redundante/verwijderde afkos = " + afkos);
+                    //}
 
                     if (plaatsen > 0)
                     {
                         Debug.WriteLine("Aantal aangepaste plaatsen = " + plaatsen);
-                    }
-
-                    if (bronnen > 0)
-                    {
-                        Debug.WriteLine("Aantal aangepaste bronnen = " + bronnen);
-                    }
-
-                    if (afkos > 0)
-                    {
-                        Debug.WriteLine("Aantal redundante/verwijderde afkos = " + afkos);
                     }
 
                     // Save new XML
